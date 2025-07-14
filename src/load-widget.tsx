@@ -16,7 +16,7 @@ const theme = createTheme({
   },
 });
 
-function initWidget(containerId: string, engineId = "UNKNOWN") {
+function initWidget(containerId: string, engineId: string) {
   const container = document.getElementById(containerId);
   if (!container || container.shadowRoot) return;
 
@@ -50,15 +50,15 @@ if (container) {
   const scripts = document.querySelectorAll(
     "script[type='module'][src*='load-widget']"
   );
-  let engineId = "UNKNOWN";
+  let idEngine = "UNKNOWN";
 
   scripts.forEach((script) => {
     if (script instanceof HTMLScriptElement && script.hasAttribute("data-id")) {
-      engineId = script.getAttribute("data-id")!;
+      idEngine = script.getAttribute("data-id")!;
     }
   });
 
-  initWidget("bookini-ibe-widget", engineId);
+  initWidget("bookini-ibe-widget", idEngine);
 }
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
