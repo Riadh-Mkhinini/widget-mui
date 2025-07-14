@@ -62,4 +62,12 @@ scripts.forEach((script) => {
   }
 });
 
-mountWidget({ engineId });
+const check = () => {
+  const container = document.getElementById("bookini-ibe-widget");
+  if (container) {
+    mountWidget({ engineId });
+  } else {
+    setTimeout(check, 100); // Retry in 100ms
+  }
+};
+check();
