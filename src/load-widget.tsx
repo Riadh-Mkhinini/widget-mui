@@ -5,10 +5,8 @@ window.process = { env: { NODE_ENV: "production" } };
 import ReactDOM from "react-dom/client";
 import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
-import Widget from "./widget/widget";
-
-// Optional: use ThemeProvider if needed
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+import Widget from "./widget/widget";
 
 const theme = createTheme({
   palette: {
@@ -18,10 +16,25 @@ const theme = createTheme({
   },
 });
 
-function mountWidget(config: { engineId: string }) {
-  const container = document.getElementById("bookini-ibe-widget");
-  if (!container) return;
+function mountWidget() {
+  // Auto-mount when script loads
+  const scripts = document.querySelectorAll(
+    "script[type='module'][src*='load-widget']"
+  );
+  let engineId = "UNKNOWN";
 
+  scripts.forEach((script) => {
+    if (script instanceof HTMLScriptElement && script.hasAttribute("data-id")) {
+      engineId = script.getAttribute("data-id")!;
+    }
+  });
+
+  const container = document.getElementById("bookini-ibe-widget");
+  if (!container) {
+    setTimeout(mountWidget, 100);
+  }
+
+  if (!container) return;
   // Attach Shadow DOM
   const shadowRoot = container.attachShadow({ mode: "open" });
   const mountNode = document.createElement("div");
@@ -30,13 +43,13 @@ function mountWidget(config: { engineId: string }) {
   // Inject Roboto (MUI default font)
   const fontLink = document.createElement("link");
   fontLink.href =
-    "https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap";
+    "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap&family=Noto+Kufi+Arabic:wght@400;500;600;700";
   fontLink.rel = "stylesheet";
   shadowRoot.appendChild(fontLink);
 
   // Emotion cache that targets the shadow root
   const emotionCache = createCache({
-    key: "mui-widget",
+    key: "engine-widget",
     container: shadowRoot,
   });
 
@@ -44,30 +57,10 @@ function mountWidget(config: { engineId: string }) {
   root.render(
     <CacheProvider value={emotionCache}>
       <ThemeProvider theme={theme}>
-        <Widget engineId={config.engineId} />
+        <Widget engineId={engineId} />
       </ThemeProvider>
     </CacheProvider>
   );
 }
 
-// Auto-mount when script loads
-const scripts = document.querySelectorAll(
-  "script[type='module'][src*='load-widget']"
-);
-let engineId = "UNKNOWN";
-
-scripts.forEach((script) => {
-  if (script instanceof HTMLScriptElement && script.hasAttribute("data-id")) {
-    engineId = script.getAttribute("data-id")!;
-  }
-});
-
-const check = () => {
-  const container = document.getElementById("bookini-ibe-widget");
-  if (container) {
-    mountWidget({ engineId });
-  } else {
-    setTimeout(check, 100); // Retry in 100ms
-  }
-};
-check();
+mountWidget();
