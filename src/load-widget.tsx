@@ -16,25 +16,10 @@ const theme = createTheme({
   },
 });
 
-function initEngine(containerId: string, engineId?: string) {
+function initEngine(containerId: string, engineId: string) {
+  console.log("MOUNTING WITH engineId:", engineId);
   const container = document.getElementById(containerId);
   if (!container || container.shadowRoot) return;
-
-  const scripts = document.querySelectorAll(
-    "script[type='module'][src*='load-widget']"
-  );
-  let idEngine = "UNKNOWN";
-
-  scripts.forEach((script) => {
-    if (script instanceof HTMLScriptElement && script.hasAttribute("data-id")) {
-      idEngine = script.getAttribute("data-id")!;
-    }
-  });
-
-  if (engineId) {
-    idEngine = engineId;
-  }
-  console.log("MOUNTING WITH engineId:", idEngine);
 
   const shadowRoot = container.attachShadow({ mode: "open" });
   const mountNode = document.createElement("div");
@@ -55,7 +40,7 @@ function initEngine(containerId: string, engineId?: string) {
   root.render(
     <CacheProvider value={emotionCache}>
       <ThemeProvider theme={theme}>
-        <Widget engineId={idEngine} />
+        <Widget engineId={engineId} />
       </ThemeProvider>
     </CacheProvider>
   );
@@ -76,7 +61,6 @@ function initEngine(containerId: string, engineId?: string) {
 
 //   initEngine("bookini-ibe-widget", idEngine);
 // }
-initEngine("bookini-ibe-widget");
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 //@ts-ignore
