@@ -1,3 +1,5 @@
+(window as any).process = { env: { NODE_ENV: "production" } };
+
 import ReactDOM from "react-dom/client";
 import Widget from "./widget/widget";
 
