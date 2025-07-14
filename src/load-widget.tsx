@@ -16,7 +16,7 @@ const theme = createTheme({
   },
 });
 
-function initWidget(containerId: string, engineId: string) {
+function initEngineWidget(containerId: string, engineId: string) {
   const container = document.getElementById(containerId);
   if (!container || container.shadowRoot) return;
 
@@ -58,11 +58,11 @@ if (container) {
     }
   });
 
-  initWidget("bookini-ibe-widget", idEngine);
+  initEngineWidget("bookini-ibe-widget", idEngine);
 }
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 //@ts-ignore
 window.BookiniWidget = {
-  mount: initWidget,
+  initEngineWidget: initEngineWidget,
 };
