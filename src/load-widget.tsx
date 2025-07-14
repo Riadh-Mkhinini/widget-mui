@@ -16,24 +16,9 @@ const theme = createTheme({
   },
 });
 
-function initWidget() {
-  // Auto-mount when script loads
-  const scripts = document.querySelectorAll(
-    "script[type='module'][src*='load-widget']"
-  );
-  let engineId = "UNKNOWN";
-
-  scripts.forEach((script) => {
-    if (script instanceof HTMLScriptElement && script.hasAttribute("data-id")) {
-      engineId = script.getAttribute("data-id")!;
-    }
-  });
-
-  const container = document.getElementById("bookini-ibe-widget");
-  if (!container) {
-    setTimeout(initWidget, 300);
-    return;
-  }
+function initWidget(containerId: string, engineId = "UNKNOWN") {
+  const container = document.getElementById(containerId);
+  if (!container) return;
 
   // Attach Shadow DOM
   const shadowRoot = container.attachShadow({ mode: "open" });
@@ -63,7 +48,19 @@ function initWidget() {
   );
 }
 
-initWidget();
+// Auto-mount when script loads
+const scripts = document.querySelectorAll(
+  "script[type='module'][src*='load-widget']"
+);
+let engineId = "UNKNOWN";
+
+scripts.forEach((script) => {
+  if (script instanceof HTMLScriptElement && script.hasAttribute("data-id")) {
+    engineId = script.getAttribute("data-id")!;
+  }
+});
+
+initWidget("bookini-ibe-widget", engineId);
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 //@ts-ignore
