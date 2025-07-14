@@ -17,61 +17,37 @@ const theme = createTheme({
 });
 
 function initWidget() {
-  const engineId = (() => {
-    const scripts = document.querySelectorAll(
-      "script[type='module'][src*='load-widget']"
-    );
-    for (const script of scripts) {
-      if (
-        script instanceof HTMLScriptElement &&
-        script.hasAttribute("data-id")
-      ) {
-        return script.getAttribute("data-id")!;
-      }
-    }
-    return "UNKNOWN";
-  })();
+  // Auto-mount when script loads
+  const scripts = document.querySelectorAll(
+    "script[type='module'][src*='load-widget']"
+  );
+  let engineId = "UNKNOWN";
 
-  const tryMount = () => {
-    const container = document.getElementById("bookini-ibe-widget");
-    if (container && !container.shadowRoot) {
-      mountInto(container, engineId);
+  scripts.forEach((script) => {
+    if (script instanceof HTMLScriptElement && script.hasAttribute("data-id")) {
+      engineId = script.getAttribute("data-id")!;
     }
-  };
+  });
 
-  // Check if it's already there
-  if (
-    document.readyState === "complete" ||
-    document.readyState === "interactive"
-  ) {
-    tryMount();
+  const container = document.getElementById("bookini-ibe-widget");
+  if (!container) {
+    setTimeout(initWidget, 300);
+    return;
   }
 
-  // Watch for DOM additions
-  const observer = new MutationObserver(() => tryMount());
-  observer.observe(document.body, { childList: true, subtree: true });
-
-  // Also poll as fallback
-  const interval = setInterval(() => {
-    tryMount();
-    if (document.getElementById("bookini-ibe-widget")?.shadowRoot) {
-      clearInterval(interval);
-      observer.disconnect();
-    }
-  }, 100);
-}
-
-function mountInto(container: HTMLElement, engineId: string) {
+  // Attach Shadow DOM
   const shadowRoot = container.attachShadow({ mode: "open" });
   const mountNode = document.createElement("div");
   shadowRoot.appendChild(mountNode);
 
+  // Inject Roboto (MUI default font)
   const fontLink = document.createElement("link");
   fontLink.href =
     "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap&family=Noto+Kufi+Arabic:wght@400;500;600;700";
   fontLink.rel = "stylesheet";
   shadowRoot.appendChild(fontLink);
 
+  // Emotion cache that targets the shadow root
   const emotionCache = createCache({
     key: "engine-widget",
     container: shadowRoot,
@@ -88,3 +64,39 @@ function mountInto(container: HTMLElement, engineId: string) {
 }
 
 initWidget();
+
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+//@ts-ignore
+window.BookiniWidget = {
+  mount: (containerId: string, engineId: string) => {
+    const container = document.getElementById(containerId);
+    if (!container || container.shadowRoot) return;
+
+    // Attach Shadow DOM
+    const shadowRoot = container.attachShadow({ mode: "open" });
+    const mountNode = document.createElement("div");
+    shadowRoot.appendChild(mountNode);
+
+    // Inject Roboto (MUI default font)
+    const fontLink = document.createElement("link");
+    fontLink.href =
+      "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap&family=Noto+Kufi+Arabic:wght@400;500;600;700";
+    fontLink.rel = "stylesheet";
+    shadowRoot.appendChild(fontLink);
+
+    // Emotion cache that targets the shadow root
+    const emotionCache = createCache({
+      key: "engine-widget",
+      container: shadowRoot,
+    });
+
+    const root = ReactDOM.createRoot(mountNode);
+    root.render(
+      <CacheProvider value={emotionCache}>
+        <ThemeProvider theme={theme}>
+          <Widget engineId={engineId} />
+        </ThemeProvider>
+      </CacheProvider>
+    );
+  },
+};
