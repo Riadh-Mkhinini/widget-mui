@@ -68,35 +68,5 @@ initWidget();
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 //@ts-ignore
 window.BookiniWidget = {
-  mount: (containerId: string, engineId: string) => {
-    const container = document.getElementById(containerId);
-    if (!container || container.shadowRoot) return;
-
-    // Attach Shadow DOM
-    const shadowRoot = container.attachShadow({ mode: "open" });
-    const mountNode = document.createElement("div");
-    shadowRoot.appendChild(mountNode);
-
-    // Inject Roboto (MUI default font)
-    const fontLink = document.createElement("link");
-    fontLink.href =
-      "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap&family=Noto+Kufi+Arabic:wght@400;500;600;700";
-    fontLink.rel = "stylesheet";
-    shadowRoot.appendChild(fontLink);
-
-    // Emotion cache that targets the shadow root
-    const emotionCache = createCache({
-      key: "engine-widget",
-      container: shadowRoot,
-    });
-
-    const root = ReactDOM.createRoot(mountNode);
-    root.render(
-      <CacheProvider value={emotionCache}>
-        <ThemeProvider theme={theme}>
-          <Widget engineId={engineId} />
-        </ThemeProvider>
-      </CacheProvider>
-    );
-  },
+  mount: initWidget,
 };
