@@ -10,7 +10,7 @@ export default defineConfig({
       fileName: () => `load-widget.js`,
     },
     rollupOptions: {
-      external: ["react", "react-dom"],
+      // external: ["react", "react-dom"],
     },
   },
 });
