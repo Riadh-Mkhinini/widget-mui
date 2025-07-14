@@ -16,38 +16,62 @@ const theme = createTheme({
   },
 });
 
-function mountWidget() {
-  // Auto-mount when script loads
-  const scripts = document.querySelectorAll(
-    "script[type='module'][src*='load-widget']"
-  );
-  let engineId = "UNKNOWN";
-
-  scripts.forEach((script) => {
-    if (script instanceof HTMLScriptElement && script.hasAttribute("data-id")) {
-      engineId = script.getAttribute("data-id")!;
+function initWidget() {
+  const engineId = (() => {
+    const scripts = document.querySelectorAll(
+      "script[type='module'][src*='load-widget']"
+    );
+    for (const script of scripts) {
+      if (
+        script instanceof HTMLScriptElement &&
+        script.hasAttribute("data-id")
+      ) {
+        return script.getAttribute("data-id")!;
+      }
     }
-  });
+    return "UNKNOWN";
+  })();
 
-  const container = document.getElementById("bookini-ibe-widget");
-  if (!container) {
-    setTimeout(mountWidget, 100);
+  const tryMount = () => {
+    const container = document.getElementById("bookini-ibe-widget");
+    if (container && !container.shadowRoot) {
+      mountInto(container, engineId);
+    }
+  };
+
+  // Check if it's already there
+  if (
+    document.readyState === "complete" ||
+    document.readyState === "interactive"
+  ) {
+    tryMount();
   }
 
-  if (!container) return;
-  // Attach Shadow DOM
+  // Watch for DOM additions
+  const observer = new MutationObserver(() => tryMount());
+  observer.observe(document.body, { childList: true, subtree: true });
+
+  // Also poll as fallback
+  const interval = setInterval(() => {
+    tryMount();
+    if (document.getElementById("bookini-ibe-widget")?.shadowRoot) {
+      clearInterval(interval);
+      observer.disconnect();
+    }
+  }, 100);
+}
+
+function mountInto(container: HTMLElement, engineId: string) {
   const shadowRoot = container.attachShadow({ mode: "open" });
   const mountNode = document.createElement("div");
   shadowRoot.appendChild(mountNode);
 
-  // Inject Roboto (MUI default font)
   const fontLink = document.createElement("link");
   fontLink.href =
     "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap&family=Noto+Kufi+Arabic:wght@400;500;600;700";
   fontLink.rel = "stylesheet";
   shadowRoot.appendChild(fontLink);
 
-  // Emotion cache that targets the shadow root
   const emotionCache = createCache({
     key: "engine-widget",
     container: shadowRoot,
@@ -63,4 +87,4 @@ function mountWidget() {
   );
 }
 
-mountWidget();
+initWidget();
