@@ -51,6 +51,15 @@ function mountWidget(config: { engineId: string }) {
 }
 
 // Auto-mount when script loads
-const script = document.currentScript as HTMLScriptElement;
-const engineId = script?.getAttribute("data-id") || "UNKNOWN";
+const scripts = document.querySelectorAll(
+  "script[type='module'][src*='load-widget']"
+);
+let engineId = "UNKNOWN";
+
+scripts.forEach((script) => {
+  if (script instanceof HTMLScriptElement && script.hasAttribute("data-id")) {
+    engineId = script.getAttribute("data-id")!;
+  }
+});
+
 mountWidget({ engineId });
