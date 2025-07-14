@@ -1,5 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-//@ts-expect-error
+// @ts-expect-error
 window.process = { env: { NODE_ENV: "production" } };
 
 import ReactDOM from "react-dom/client";
@@ -17,7 +17,6 @@ const theme = createTheme({
 });
 
 function initEngine(containerId: string, engineId: string) {
-  console.log("MOUNTING WITH engineId:", engineId);
   const container = document.getElementById(containerId);
   if (!container || container.shadowRoot) return;
 
@@ -46,24 +45,20 @@ function initEngine(containerId: string, engineId: string) {
   );
 }
 
-// const container = document.getElementById("bookini-ibe-widget");
-// if (container) {
-//   const scripts = document.querySelectorAll(
-//     "script[type='module'][src*='load-widget']"
-//   );
-//   let idEngine = "UNKNOWN";
-
-//   scripts.forEach((script) => {
-//     if (script instanceof HTMLScriptElement && script.hasAttribute("data-id")) {
-//       idEngine = script.getAttribute("data-id")!;
-//     }
-//   });
-
-//   initEngine("bookini-ibe-widget", idEngine);
-// }
-
+// ✅ Expose for manual usage
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-//@ts-ignore
+// @ts-ignore
 window.BookiniWidget = {
-  initEngine: initEngine,
+  initEngine,
 };
+
+// ✅ Support auto-init only if script has `data-id`
+const container = document.getElementById("bookini-ibe-widget");
+if (container && !container.shadowRoot) {
+  const script = document.currentScript as HTMLScriptElement;
+  const engineId = script?.getAttribute("data-id");
+
+  if (engineId) {
+    initEngine("bookini-ibe-widget", engineId);
+  }
+}
