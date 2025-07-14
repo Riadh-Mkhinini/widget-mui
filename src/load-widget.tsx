@@ -1,32 +1,56 @@
-(window as any).process = { env: { NODE_ENV: "production" } };
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+//@ts-expect-error
+window.process = { env: { NODE_ENV: "production" } };
 
 import ReactDOM from "react-dom/client";
+import { CacheProvider } from "@emotion/react";
+import createCache from "@emotion/cache";
 import Widget from "./widget/widget";
+
+// Optional: use ThemeProvider if needed
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#1976d2",
+    },
+  },
+});
 
 function mountWidget(config: { engineId: string }) {
   const container = document.getElementById("bookini-ibe-widget");
+  if (!container) return;
 
-  if (!container)
-    return console.error("bookini-ibe-widget container not found");
+  // Attach Shadow DOM
+  const shadowRoot = container.attachShadow({ mode: "open" });
+  const mountNode = document.createElement("div");
+  shadowRoot.appendChild(mountNode);
 
-  // Use Shadow DOM to isolate styles
-  const shadow = container.attachShadow({ mode: "open" });
-  const mountPoint = document.createElement("div");
-  shadow.appendChild(mountPoint);
-
-  // Optional: inject MUI fonts (Roboto)
-  const link = document.createElement("link");
-  link.href =
+  // Inject Roboto (MUI default font)
+  const fontLink = document.createElement("link");
+  fontLink.href =
     "https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap";
-  link.rel = "stylesheet";
-  shadow.appendChild(link);
+  fontLink.rel = "stylesheet";
+  shadowRoot.appendChild(fontLink);
 
-  const root = ReactDOM.createRoot(mountPoint);
-  root.render(<Widget engineId={config.engineId} />);
+  // Emotion cache that targets the shadow root
+  const emotionCache = createCache({
+    key: "mui-widget",
+    container: shadowRoot,
+  });
+
+  const root = ReactDOM.createRoot(mountNode);
+  root.render(
+    <CacheProvider value={emotionCache}>
+      <ThemeProvider theme={theme}>
+        <Widget engineId={config.engineId} />
+      </ThemeProvider>
+    </CacheProvider>
+  );
 }
 
-// Auto-run when script is loaded
-const scriptTag = document.currentScript as HTMLScriptElement;
-const engineId = scriptTag?.getAttribute("data-id") || "Unknown";
-
+// Auto-mount when script loads
+const script = document.currentScript as HTMLScriptElement;
+const engineId = script?.getAttribute("data-id") || "UNKNOWN";
 mountWidget({ engineId });
