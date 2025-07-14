@@ -17,6 +17,7 @@ const theme = createTheme({
 });
 
 function initEngine(containerId: string, engineId: string) {
+  console.log("MOUNTING WITH engineId:", engineId);
   const container = document.getElementById(containerId);
   if (!container || container.shadowRoot) return;
 
@@ -64,6 +65,5 @@ if (container) {
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 //@ts-ignore
 window.BookiniWidget = {
-  initEngine: (containerId: string, engineId: string) =>
-    initEngine(containerId, engineId),
+  initEngine: initEngine,
 };
