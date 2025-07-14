@@ -18,21 +18,18 @@ const theme = createTheme({
 
 function initWidget(containerId: string, engineId = "UNKNOWN") {
   const container = document.getElementById(containerId);
-  if (!container) return;
+  if (!container || container.shadowRoot) return;
 
-  // Attach Shadow DOM
   const shadowRoot = container.attachShadow({ mode: "open" });
   const mountNode = document.createElement("div");
   shadowRoot.appendChild(mountNode);
 
-  // Inject Roboto (MUI default font)
   const fontLink = document.createElement("link");
   fontLink.href =
     "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap&family=Noto+Kufi+Arabic:wght@400;500;600;700";
   fontLink.rel = "stylesheet";
   shadowRoot.appendChild(fontLink);
 
-  // Emotion cache that targets the shadow root
   const emotionCache = createCache({
     key: "engine-widget",
     container: shadowRoot,
@@ -48,19 +45,21 @@ function initWidget(containerId: string, engineId = "UNKNOWN") {
   );
 }
 
-// Auto-mount when script loads
-const scripts = document.querySelectorAll(
-  "script[type='module'][src*='load-widget']"
-);
-let engineId = "UNKNOWN";
+const container = document.getElementById("bookini-ibe-widget");
+if (container) {
+  const scripts = document.querySelectorAll(
+    "script[type='module'][src*='load-widget']"
+  );
+  let engineId = "UNKNOWN";
 
-scripts.forEach((script) => {
-  if (script instanceof HTMLScriptElement && script.hasAttribute("data-id")) {
-    engineId = script.getAttribute("data-id")!;
-  }
-});
+  scripts.forEach((script) => {
+    if (script instanceof HTMLScriptElement && script.hasAttribute("data-id")) {
+      engineId = script.getAttribute("data-id")!;
+    }
+  });
 
-initWidget("bookini-ibe-widget", engineId);
+  initWidget("bookini-ibe-widget", engineId);
+}
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 //@ts-ignore
