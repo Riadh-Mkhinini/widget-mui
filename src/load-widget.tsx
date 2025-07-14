@@ -16,10 +16,25 @@ const theme = createTheme({
   },
 });
 
-function initEngine(containerId: string, engineId: string) {
-  console.log("MOUNTING WITH engineId:", engineId);
+function initEngine(containerId: string, engineId?: string) {
   const container = document.getElementById(containerId);
   if (!container || container.shadowRoot) return;
+
+  const scripts = document.querySelectorAll(
+    "script[type='module'][src*='load-widget']"
+  );
+  let idEngine = "UNKNOWN";
+
+  scripts.forEach((script) => {
+    if (script instanceof HTMLScriptElement && script.hasAttribute("data-id")) {
+      idEngine = script.getAttribute("data-id")!;
+    }
+  });
+
+  if (engineId) {
+    idEngine = engineId;
+  }
+  console.log("MOUNTING WITH engineId:", idEngine);
 
   const shadowRoot = container.attachShadow({ mode: "open" });
   const mountNode = document.createElement("div");
@@ -40,27 +55,28 @@ function initEngine(containerId: string, engineId: string) {
   root.render(
     <CacheProvider value={emotionCache}>
       <ThemeProvider theme={theme}>
-        <Widget engineId={engineId} />
+        <Widget engineId={idEngine} />
       </ThemeProvider>
     </CacheProvider>
   );
 }
 
-const container = document.getElementById("bookini-ibe-widget");
-if (container) {
-  const scripts = document.querySelectorAll(
-    "script[type='module'][src*='load-widget']"
-  );
-  let idEngine = "UNKNOWN";
+// const container = document.getElementById("bookini-ibe-widget");
+// if (container) {
+//   const scripts = document.querySelectorAll(
+//     "script[type='module'][src*='load-widget']"
+//   );
+//   let idEngine = "UNKNOWN";
 
-  scripts.forEach((script) => {
-    if (script instanceof HTMLScriptElement && script.hasAttribute("data-id")) {
-      idEngine = script.getAttribute("data-id")!;
-    }
-  });
+//   scripts.forEach((script) => {
+//     if (script instanceof HTMLScriptElement && script.hasAttribute("data-id")) {
+//       idEngine = script.getAttribute("data-id")!;
+//     }
+//   });
 
-  initEngine("bookini-ibe-widget", idEngine);
-}
+//   initEngine("bookini-ibe-widget", idEngine);
+// }
+initEngine("bookini-ibe-widget");
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 //@ts-ignore
