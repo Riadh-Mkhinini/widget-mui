@@ -21,6 +21,9 @@ function initEngine(containerId: string, engineId: string) {
   if (!container || container.shadowRoot) return;
 
   const shadowRoot = container.attachShadow({ mode: "open" });
+  // Make the Shadow Root globally accessible for use in MUI Popover, Modal, etc.
+  (window as any).__BOOKINI_WIDGET_SHADOW__ = shadowRoot;
+
   const mountNode = document.createElement("div");
   shadowRoot.appendChild(mountNode);
 

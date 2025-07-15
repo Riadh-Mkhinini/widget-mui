@@ -6,6 +6,8 @@ import { CustomPopover, CustomDialog } from "./popover.styles";
 //types
 import type { PopoverProps } from "./popover.types";
 
+const shadowRoot = (window as any).__BOOKINI_WIDGET_SHADOW__ as ShadowRoot;
+
 const Transition = forwardRef(function Transition(
   props: TransitionProps & {
     children: React.ReactElement<any, any>;
@@ -30,6 +32,7 @@ const Popover: FC<PopoverProps> = (props) => {
         open={props.open}
         slots={{ transition: Transition }}
         onClose={props.onClose}
+        container={shadowRoot as unknown as Element}
       >
         {children}
       </CustomDialog>
@@ -41,6 +44,7 @@ const Popover: FC<PopoverProps> = (props) => {
       marginThreshold={0}
       slots={{ transition: fullScreen ? Transition : undefined }}
       anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+      container={shadowRoot as unknown as Element}
     >
       {children}
     </CustomPopover>
