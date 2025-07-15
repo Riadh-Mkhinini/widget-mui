@@ -6,8 +6,6 @@ import { CustomPopover, CustomDialog } from "./popover.styles";
 //types
 import type { PopoverProps } from "./popover.types";
 
-const shadowRoot = (window as any).__BOOKINI_WIDGET_SHADOW__ as ShadowRoot;
-
 const Transition = forwardRef(function Transition(
   props: TransitionProps & {
     children: React.ReactElement<any, any>;
@@ -21,7 +19,10 @@ const Popover: FC<PopoverProps> = (props) => {
   const { children, mode, maxWidth = "xl", ...rest } = props;
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
-  console.log(shadowRoot);
+
+  const shadowRoot = (window as any).__BOOKINI_WIDGET_SHADOW__ as
+    | ShadowRoot
+    | undefined;
 
   if (mode === "pop-up") {
     return (
