@@ -5,7 +5,7 @@ window.process = { env: { NODE_ENV: "production" } };
 import ReactDOM from "react-dom/client";
 import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
-import Widget from "./engine/engine";
+import Engine from "./engine/engine";
 
 function initEngine(containerId: string, engineId: string) {
   const container = document.getElementById(containerId);
@@ -45,7 +45,7 @@ function initEngine(containerId: string, engineId: string) {
   const root = ReactDOM.createRoot(mountNode);
   root.render(
     <CacheProvider value={emotionCache}>
-      <Widget engineId={engineId} />
+      <Engine engineId={engineId} />
     </CacheProvider>
   );
 }
