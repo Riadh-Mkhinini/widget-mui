@@ -5,16 +5,7 @@ window.process = { env: { NODE_ENV: "production" } };
 import ReactDOM from "react-dom/client";
 import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
-import Widget from "./widget/widget";
-
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: "#1976d2",
-    },
-  },
-});
+import Widget from "./engine/engine";
 
 function initEngine(containerId: string, engineId: string) {
   const container = document.getElementById(containerId);
@@ -54,9 +45,7 @@ function initEngine(containerId: string, engineId: string) {
   const root = ReactDOM.createRoot(mountNode);
   root.render(
     <CacheProvider value={emotionCache}>
-      <ThemeProvider theme={theme}>
-        <Widget engineId={engineId} />
-      </ThemeProvider>
+      <Widget engineId={engineId} />
     </CacheProvider>
   );
 }

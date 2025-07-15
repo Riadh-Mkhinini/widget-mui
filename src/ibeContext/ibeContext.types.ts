@@ -3,7 +3,7 @@ import type {
   EngineSize,
   LocaleText,
   ParamsSize,
-} from "@/widget/widget.types";
+} from "@/engine/engine.types";
 
 export type IbeContextProps = {
   localeText?: LocaleText;

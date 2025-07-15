@@ -15,7 +15,7 @@ import { Popover } from "@/components/commons";
 import Month from "./month/month";
 import Header from "./header/header";
 //styles
-import { Content, Footer, Row, Tag, List } from "./calendar.styles";
+import { Content, Footer, Row, List } from "./calendar.styles";
 //types
 import type { CalendarProps, DayProps } from "./calendar.types";
 
@@ -30,7 +30,6 @@ const Calendar: FC<CalendarProps> = (props) => {
     id,
     open,
     anchorEl,
-    tags,
   } = props;
   const theme = useTheme();
   //states
@@ -115,6 +114,9 @@ const Calendar: FC<CalendarProps> = (props) => {
 
   const onClickDay = useCallback(
     (day: DayProps) => {
+      if (startDate && startDate.date === day.date) {
+        return;
+      }
       if (!startDate || (startDate && endDate) || day.date < startDate.date) {
         setStartDate(day);
         setEndDate(null);
@@ -150,9 +152,7 @@ const Calendar: FC<CalendarProps> = (props) => {
       setStartDate(null);
       setEndDate(null);
     }
-    if (props.onClickDone) {
-      props.onClickDone({ startDate, endDate });
-    }
+    props.onClickDone?.({ startDate, endDate });
   };
   //render
   const renderMonths = () => {
@@ -178,18 +178,18 @@ const Calendar: FC<CalendarProps> = (props) => {
     [config.monthNumberDisplays]
   );
 
-  const renderTags = () => {
-    return tags?.map((tag, index) => {
-      return (
-        <Tag
-          key={index}
-          label={tag.label}
-          textcolor={tag.textColor}
-          background={tag.background}
-        />
-      );
-    });
-  };
+  // const renderTags = () => {
+  //   return tags?.map((tag, index) => {
+  //     return (
+  //       <Tag
+  //         key={index}
+  //         label={tag.label}
+  //         textcolor={tag.textColor}
+  //         background={tag.background}
+  //       />
+  //     );
+  //   });
+  // };
   return (
     <Popover
       mode={calendarConfig?.popUpMode}
@@ -214,7 +214,7 @@ const Calendar: FC<CalendarProps> = (props) => {
         </List>
       </Content>
       <Footer>
-        <Row>{renderTags()}</Row>
+        <Row>{/* {renderTags()} */}</Row>
         <Button variant="contained" onClick={onClickDone}>
           {popUpButtonDone}
         </Button>

@@ -1,4 +1,4 @@
-import type { EngineSize } from "@/widget/widget.types";
+import type { EngineSize } from "@/engine/engine.types";
 import { type Theme, alpha, styled } from "@mui/material";
 
 export const Grid = styled("div")<{

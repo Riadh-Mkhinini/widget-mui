@@ -25,7 +25,7 @@
     "baseUrl": "./",
     "paths": {
       "@constants": ["./src/constants/index"],
-      "@widget": ["./src/widget/widget"],
+      "@engine": ["src/engine/engine"],
       "@components": ["./src/components/index"],
       "@helpers": ["./src/helpers/index"],
       "@contextAPI": ["./src/ibeContext/index"],

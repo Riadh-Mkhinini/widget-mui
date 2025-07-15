@@ -10,16 +10,10 @@ import { Calendar } from "./calendar/calendar";
 import { getDayOfWeek } from "@helpers";
 //types
 import type { CalendarRangeProps } from "./calendarRange.types";
-import type { DayProps, EngineState } from "@/widget/widget.types";
+import type { DayProps, EngineState } from "@/engine/engine.types";
 
 const CalendarRange: FC<CalendarRangeProps> = (props) => {
-  const {
-    disabled,
-    disabledWithoutColor,
-    defaultStartDate,
-    defaultEndDate,
-    locale,
-  } = props;
+  const { disabled, defaultStartDate, defaultEndDate, locale } = props;
   const { localeText, engineConfig } = useIBE();
   //
   const methods = useFormContext<EngineState>();
@@ -71,7 +65,6 @@ const CalendarRange: FC<CalendarRangeProps> = (props) => {
       <Stack>
         <Preview
           type="rangeDate"
-          disabledWithoutColor={disabledWithoutColor}
           id={id}
           disabled={disabled}
           open={open}
@@ -80,10 +73,7 @@ const CalendarRange: FC<CalendarRangeProps> = (props) => {
           layout={engineConfig?.global?.layout}
           labelStartDate={localeText?.calendar?.previewCheckInLabel}
           labelEndDate={localeText?.calendar?.previewCheckOutLabel}
-          getLabelNights={(days) =>
-            localeText?.calendar?.previewNightsLabel &&
-            localeText?.calendar?.previewNightsLabel(days)
-          }
+          getLabelNights={localeText?.calendar?.previewNightsLabel}
           onClickOpen={onClickOpen}
         />
         <Calendar

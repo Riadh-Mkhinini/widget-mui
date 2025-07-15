@@ -1,11 +1,10 @@
-import type { DayProps, LayoutConfig, ParamsSize } from "@/widget/widget.types";
+import type { DayProps, LayoutConfig, ParamsSize } from "@/engine/engine.types";
 import type { SxProps, Theme } from "@mui/material";
 
 export type PreviewProps = {
   id?: string;
   open?: boolean;
   disabled?: boolean;
-  disabledWithoutColor?: boolean;
   icon?: React.ReactNode;
   showIconSelect?: boolean;
   sizes?: ParamsSize;

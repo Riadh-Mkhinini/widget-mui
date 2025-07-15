@@ -1,4 +1,4 @@
-import type { DayProps } from "@/widget/widget.types";
+import type { DayProps } from "@/engine/engine.types";
 
 export type TableBodyProps = {
   daysOfMonth: Array<DayProps>;

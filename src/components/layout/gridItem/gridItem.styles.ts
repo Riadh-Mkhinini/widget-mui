@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import type { EngineSize, LayoutConfig } from "@/widget/widget.types";
+import type { EngineSize, LayoutConfig } from "@/engine/engine.types";
 import { Box, type Theme, styled } from "@mui/material";
 
 export const ContainerFixed = styled(Box)<{

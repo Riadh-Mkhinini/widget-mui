@@ -78,7 +78,7 @@ const TableBody: FC<TableBodyProps> = (props) => {
                   <Typography
                     fontWeight="600"
                     fontsizelarge={14}
-                    fontsizesmall={14}
+                    fontsizesmall={12}
                     color={theme.palette.primary.contrastText}
                   >
                     {day.date.getDate()}
@@ -137,7 +137,7 @@ const TableBody: FC<TableBodyProps> = (props) => {
                 <Typography
                   color={color}
                   fontsizelarge={14}
-                  fontsizesmall={14}
+                  fontsizesmall={12}
                   fontWeight="600"
                 >
                   {day.date.getDate()}

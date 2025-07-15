@@ -19,7 +19,6 @@ const Preview: FC<PreviewProps> = (props) => {
     id,
     open,
     disabled,
-    disabledWithoutColor,
     height,
     background,
     onClickOpen,
@@ -42,7 +41,7 @@ const Preview: FC<PreviewProps> = (props) => {
       <LinkContainer
         disableRipple
         aria-describedby={id}
-        disabled={disabled || disabledWithoutColor}
+        disabled={disabled}
         onClick={onClickOpen}
         sx={sx}
       >
@@ -54,7 +53,7 @@ const Preview: FC<PreviewProps> = (props) => {
     return (
       <CombinedContainer
         aria-describedby={id}
-        disabled={disabled || disabledWithoutColor}
+        disabled={disabled}
         background={
           backgroundDisabled ||
           background ||
@@ -75,7 +74,7 @@ const Preview: FC<PreviewProps> = (props) => {
   return (
     <SeparateContainer
       aria-describedby={id}
-      disabled={disabled || disabledWithoutColor}
+      disabled={disabled}
       background={
         backgroundDisabled ||
         background ||

@@ -1,4 +1,4 @@
-import Widget from "./widget/widget";
+import Widget from "./engine/engine";
 
 function App() {
   return (

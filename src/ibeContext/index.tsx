@@ -7,7 +7,7 @@ import {
   IbeContext,
 } from "./ibeContext.utils";
 import type { IBEProviderProps } from "./ibeContext.types";
-import type { ParamsSize } from "@/widget/widget.types";
+import type { ParamsSize } from "@/engine/engine.types";
 
 export const IBEProvider: FC<IBEProviderProps> = (props) => {
   const { children, localeText, size, engineConfig } = props;

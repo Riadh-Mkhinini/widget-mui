@@ -16,10 +16,10 @@ export const Column = styled("td")<{ background?: string }>(
     position: "relative",
     cursor: "pointer",
     [theme.breakpoints.down("sm")]: {
-      width: 46,
-      height: 46,
-      minWidth: 46,
-      minHeight: 46,
+      width: 26,
+      height: 26,
+      minWidth: 26,
+      minHeight: 26,
     },
   })
 );

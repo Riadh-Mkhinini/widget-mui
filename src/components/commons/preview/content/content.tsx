@@ -12,7 +12,7 @@ import { getTotalOfDays } from "../preview.utils";
 import { Row, Column, ContainerIcon, Badge } from "./content.styles";
 //types
 import type { PreviewProps } from "../preview.types";
-import type { DayProps } from "@/widget/widget.types";
+import type { DayProps } from "@/engine/engine.types";
 
 const Content: FC<PreviewProps> = (props) => {
   const { open, disabled, icon, showIconSelect = true, sizes } = props;

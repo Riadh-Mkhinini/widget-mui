@@ -28,11 +28,11 @@ export const List = styled("div")<{ monthNumberDisplays: number }>(
       [theme.breakpoints.down("md")]: {
         gridTemplateColumns: "1fr",
         padding: theme.spacing(0, 2, 2, 2),
-        maxHeight: "calc(100vh - 106px)",
+        maxHeight: "calc(100vh - 122px)",
       },
       [theme.breakpoints.down("sm")]: {
         gridTemplateColumns: "1fr",
-        padding: theme.spacing(0, 2, 2, 2),
+        padding: theme.spacing(0, 1, 1, 1),
         maxHeight: "calc(100vh - 70px)",
       },
     };

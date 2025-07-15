@@ -1,6 +1,6 @@
 import { createContext } from "react";
 import type { IbeContextProps } from "./ibeContext.types";
-import type { ParamsSize } from "@/widget/widget.types";
+import type { ParamsSize } from "@/engine/engine.types";
 
 export const paramsSizeExtraSmall: ParamsSize = {
   sizeIcon: 18,

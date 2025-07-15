@@ -1,4 +1,4 @@
-import type { DayProps } from "@/widget/widget.types";
+import type { DayProps } from "@/engine/engine.types";
 import type { Locale } from "date-fns";
 
 export type CalendarRangeProps = {

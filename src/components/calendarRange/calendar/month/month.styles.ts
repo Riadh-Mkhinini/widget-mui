@@ -17,11 +17,13 @@ export const Header = styled("div")(({ theme }) => ({
     top: 0,
     zIndex: 2,
     background: theme.palette.common.white,
-    height: 72,
+    height: 94,
   },
 }));
 
 export const Table = styled("table")(() => ({
   borderCollapse: "collapse",
   borderSpacing: 0,
+  width: "100%",
+  height: "100%",
 }));

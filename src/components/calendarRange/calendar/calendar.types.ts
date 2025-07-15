@@ -1,4 +1,4 @@
-import type { CalendarConfig } from "@/widget/widget.types";
+import type { CalendarConfig } from "@/engine/engine.types";
 import type { Theme } from "@mui/material";
 import type { Locale } from "date-fns";
 

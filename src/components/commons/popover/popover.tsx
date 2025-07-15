@@ -24,10 +24,6 @@ const Popover: FC<PopoverProps> = (props) => {
   const portalContainer = (window as any)
     .__BOOKINI_WIDGET_PORTAL_CONTAINER__ as HTMLElement | undefined;
 
-  if (!portalContainer) {
-    console.warn("Popover: MUI portal container not set up correctly.");
-  }
-
   if (mode === "pop-up") {
     return (
       <CustomDialog
