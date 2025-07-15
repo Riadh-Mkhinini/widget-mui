@@ -14,22 +14,11 @@ export type PreviewProps = {
   layout?: LayoutConfig;
   sx?: SxProps<Theme>;
   onClickOpen?: (event: React.MouseEvent<HTMLButtonElement>) => void;
-} & (ButtonType | SimpleType | RangeDateType | LinkType | InputType);
+} & (SimpleType | RangeDateType);
 
-export type ButtonType = { type: "button" } & {
-  textButton?: string;
-  textButtonColor?: string;
-  hoverButton?: string;
-  right?: React.ReactNode;
-};
 export type SimpleType = { type: "simple" } & {
   label?: string;
   placeholder?: string;
-  value?: string | number | null;
-};
-
-export type LinkType = { type: "link" } & {
-  label?: string;
   value?: string | number | null;
 };
 
@@ -39,10 +28,4 @@ export type RangeDateType = { type: "rangeDate" } & {
   labelStartDate?: string;
   labelEndDate?: string;
   getLabelNights?: (days: number) => string | undefined;
-};
-
-export type InputType = { type: "input" } & {
-  name: string;
-  placeholder?: string;
-  value?: string | number | null;
 };

@@ -1,28 +1,24 @@
 import { styled, Typography as MuiTypography } from "@mui/material";
 
-export const Body = styled("tbody")(() => ({}));
+export const TBody = styled("tbody")(() => ({}));
 
-export const Row = styled("tr")(() => ({}));
+export const Tr = styled("tr")(() => ({}));
 
-export const Column = styled("td")<{ background?: string }>(
-  ({ theme, background }) => ({
-    background,
-    width: 58,
-    height: 58,
-    minWidth: 58,
-    minHeight: 58,
-    textAlign: "center",
-    padding: theme.spacing(1),
-    position: "relative",
-    cursor: "pointer",
-    [theme.breakpoints.down("sm")]: {
-      width: 26,
-      height: 26,
-      minWidth: 26,
-      minHeight: 26,
-    },
-  })
-);
+export const Td = styled("td")<{
+  background?: string;
+  mode?: "default" | "pop-up";
+}>(({ theme, background, mode }) => ({
+  background,
+  height: 50,
+  minWidth: mode === "pop-up" ? undefined : 42,
+  textAlign: "center",
+  padding: theme.spacing(1),
+  position: "relative",
+  cursor: "pointer",
+  [theme.breakpoints.down("sm")]: {
+    height: 26,
+  },
+}));
 
 export const HeaderDay = styled("span")(({ theme }) => ({
   display: "flex",

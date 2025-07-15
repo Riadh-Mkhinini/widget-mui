@@ -5,11 +5,7 @@ import { useIBE } from "@contextAPI";
 //component
 import Content from "./content/content";
 //styles
-import {
-  SeparateContainer,
-  CombinedContainer,
-  LinkContainer,
-} from "./preview.styles";
+import { SeparateContainer, CombinedContainer } from "./preview.styles";
 //types
 //types
 import type { PreviewProps } from "./preview.types";
@@ -36,19 +32,6 @@ const Preview: FC<PreviewProps> = (props) => {
     [disabled, theme.palette.divider]
   );
 
-  if (props.type === "link") {
-    return (
-      <LinkContainer
-        disableRipple
-        aria-describedby={id}
-        disabled={disabled}
-        onClick={onClickOpen}
-        sx={sx}
-      >
-        <Content {...props} />
-      </LinkContainer>
-    );
-  }
   if (layout === "combined") {
     return (
       <CombinedContainer
@@ -61,9 +44,6 @@ const Preview: FC<PreviewProps> = (props) => {
           theme.palette.background.paper
         }
         height={height || params.heightContent}
-        backgroundhover={
-          props.type === "button" ? props.hoverButton : undefined
-        }
         onClick={onClickOpen}
         sx={sx}
       >
@@ -84,7 +64,6 @@ const Preview: FC<PreviewProps> = (props) => {
       bordercolor={borderColor || engineConfig?.global?.preview?.border}
       radius={engineConfig?.global?.preview?.radius}
       height={height || params.heightContent}
-      backgroundhover={props.type === "button" ? props.hoverButton : undefined}
       open={open}
       onClick={onClickOpen}
       sx={sx}

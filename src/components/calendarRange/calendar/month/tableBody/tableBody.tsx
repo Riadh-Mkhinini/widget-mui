@@ -5,9 +5,9 @@ import { addFakeItem, chunk } from "./tableBody.utils";
 //styles
 import { Indicator } from "@/components/commons";
 import {
-  Body,
-  Row,
-  Column,
+  TBody,
+  Tr,
+  Td,
   HeaderDay,
   FooterDay,
   Typography,
@@ -17,7 +17,8 @@ import type { TableBodyProps } from "./tableBody.types";
 import type { DayProps } from "../../calendar.types";
 
 const TableBody: FC<TableBodyProps> = (props) => {
-  const { startDate, endDate, daysOfMonth, onClickDay, hoverList } = props;
+  const { startDate, endDate, daysOfMonth, onClickDay, hoverList, mode } =
+    props;
   const theme = useTheme();
   //useMemo
   const daysChunk = useMemo(() => {
@@ -41,10 +42,10 @@ const TableBody: FC<TableBodyProps> = (props) => {
   const renderItem = () => {
     return daysChunk.map((week, index) => {
       return (
-        <Row key={index}>
+        <Tr key={index}>
           {week.map((day, iterator) => {
             if (day.type === "NEXT_DAY" || day.type === "PREVIOUS_DAY") {
-              return <Column key={iterator} />;
+              return <Td key={iterator} mode={mode} />;
             }
             const firstDay = startDate && startDate.formated === day.formated;
             const lastDay = endDate && endDate.formated === day.formated;
@@ -55,9 +56,10 @@ const TableBody: FC<TableBodyProps> = (props) => {
             };
             if (firstDay || lastDay) {
               return (
-                <Column
+                <Td
                   key={iterator}
                   sx={sx}
+                  mode={mode}
                   background={theme.palette.primary.main}
                   onMouseEnter={onMouseEnter(day)}
                   onClick={onClickItem(day)}
@@ -93,7 +95,7 @@ const TableBody: FC<TableBodyProps> = (props) => {
                       {day.price}
                     </Typography>
                   </FooterDay>
-                </Column>
+                </Td>
               );
             }
             const isBetweenDate =
@@ -114,9 +116,10 @@ const TableBody: FC<TableBodyProps> = (props) => {
               color = theme.palette.primary.contrastText;
             }
             return (
-              <Column
+              <Td
                 key={iterator}
                 sx={sx}
+                mode={mode}
                 background={background}
                 onMouseEnter={onMouseEnter(day)}
                 onClick={onClickItem(day)}
@@ -154,14 +157,14 @@ const TableBody: FC<TableBodyProps> = (props) => {
                     </Typography>
                   </FooterDay>
                 )}
-              </Column>
+              </Td>
             );
           })}
-        </Row>
+        </Tr>
       );
     });
   };
-  return <Body>{renderItem()}</Body>;
+  return <TBody>{renderItem()}</TBody>;
 };
 
 export default TableBody;

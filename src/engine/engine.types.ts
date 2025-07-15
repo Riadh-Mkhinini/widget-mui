@@ -16,15 +16,13 @@ export type DayProps = {
 
 //*****************PROPS******************** */
 export type EngineProps = {
+  engineId: string;
   disabled?: boolean;
-  disabledWithoutColor?: boolean;
   defaultState?: EngineState;
-  state?: EngineState;
   locale?: Locale;
   engineConfig?: EngineConfig;
   localeText?: LocaleText;
-  size: EngineSize;
-  title?: string;
+  size?: EngineSize;
   onClickSearch?: (values: EngineState) => Promise<void>;
 };
 

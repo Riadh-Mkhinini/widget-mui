@@ -88,9 +88,7 @@ export const getMaxWidthPopup = (monthNumberDisplays: number): Breakpoint => {
     case 0:
       return "xs";
     case 1:
-      return "md";
-    case 2:
-      return "xl";
+      return "lg";
     default:
       return "xl";
   }

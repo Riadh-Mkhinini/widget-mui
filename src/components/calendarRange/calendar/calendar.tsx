@@ -15,7 +15,7 @@ import { Popover } from "@/components/commons";
 import Month from "./month/month";
 import Header from "./header/header";
 //styles
-import { Content, Footer, Row, List } from "./calendar.styles";
+import { Content, Footer, List } from "./calendar.styles";
 //types
 import type { CalendarProps, DayProps } from "./calendar.types";
 
@@ -160,6 +160,7 @@ const Calendar: FC<CalendarProps> = (props) => {
       return (
         <Month
           key={index}
+          mode={calendarConfig?.popUpMode}
           month={format(month[0].date, "MMMM", { locale })}
           year={format(month[0].date, "yyyy", { locale })}
           startDate={startDate}
@@ -178,18 +179,6 @@ const Calendar: FC<CalendarProps> = (props) => {
     [config.monthNumberDisplays]
   );
 
-  // const renderTags = () => {
-  //   return tags?.map((tag, index) => {
-  //     return (
-  //       <Tag
-  //         key={index}
-  //         label={tag.label}
-  //         textcolor={tag.textColor}
-  //         background={tag.background}
-  //       />
-  //     );
-  //   });
-  // };
   return (
     <Popover
       mode={calendarConfig?.popUpMode}
@@ -214,7 +203,6 @@ const Calendar: FC<CalendarProps> = (props) => {
         </List>
       </Content>
       <Footer>
-        <Row>{/* {renderTags()} */}</Row>
         <Button variant="contained" onClick={onClickDone}>
           {popUpButtonDone}
         </Button>

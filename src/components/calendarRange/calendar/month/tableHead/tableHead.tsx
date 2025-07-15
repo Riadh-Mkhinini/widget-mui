@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import { Typography, useTheme } from "@mui/material";
-import { Head, Row, Column } from "./tableHead.styles";
+import { THead, Tr, Th } from "./tableHead.styles";
 import type { TableHeadProps } from "./tableHead.types";
 
 const TableHead: FC<TableHeadProps> = (props) => {
@@ -15,7 +15,7 @@ const TableHead: FC<TableHeadProps> = (props) => {
           ? theme.palette.primary.main
           : theme.palette.text.primary;
       return (
-        <Column key={item}>
+        <Th key={item}>
           <Typography
             fontSize={14}
             fontWeight="600"
@@ -24,14 +24,14 @@ const TableHead: FC<TableHeadProps> = (props) => {
           >
             {item}
           </Typography>
-        </Column>
+        </Th>
       );
     });
   };
   return (
-    <Head>
-      <Row>{renderItem()}</Row>
-    </Head>
+    <THead>
+      <Tr>{renderItem()}</Tr>
+    </THead>
   );
 };
 

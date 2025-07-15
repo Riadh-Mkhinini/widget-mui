@@ -1,9 +1,9 @@
-import Widget from "./engine/engine";
+import Engine from "./engine/engine";
 
 function App() {
   return (
     <>
-      <Widget engineId="ENGINE-564654" />
+      <Engine engineId="ENGINE-564654" size="xl" />
     </>
   );
 }

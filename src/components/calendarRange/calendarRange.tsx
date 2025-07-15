@@ -1,6 +1,5 @@
 import { type FC, useMemo, useState } from "react";
-import { Stack, Tooltip } from "@mui/material";
-import { useController, useFormContext } from "react-hook-form";
+import { Stack } from "@mui/material";
 //context
 import { useIBE } from "@contextAPI";
 //components
@@ -10,25 +9,13 @@ import { Calendar } from "./calendar/calendar";
 import { getDayOfWeek } from "@helpers";
 //types
 import type { CalendarRangeProps } from "./calendarRange.types";
-import type { DayProps, EngineState } from "@/engine/engine.types";
+import type { DayProps } from "@/engine/engine.types";
 
 const CalendarRange: FC<CalendarRangeProps> = (props) => {
-  const { disabled, defaultStartDate, defaultEndDate, locale } = props;
+  const { disabled, startDate, endDate, locale } = props;
   const { localeText, engineConfig } = useIBE();
-  //
-  const methods = useFormContext<EngineState>();
-  const { fieldState } = useController({
-    control: methods.control,
-    name: "startDate",
-    rules: {
-      required: localeText?.calendar?.popUpRequiredField,
-    },
-  });
-  const resultStartDate = methods.watch("startDate");
-  const resultEndDate = methods.watch("endDate");
 
   //states
-
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
 
   //useMemo
@@ -38,7 +25,6 @@ const CalendarRange: FC<CalendarRangeProps> = (props) => {
   const daysList = useMemo(() => getDayOfWeek(locale), [locale]);
   //functions
   const onClickOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
-    methods.clearErrors("startDate");
     setAnchorEl(event.currentTarget);
   };
 
@@ -50,53 +36,40 @@ const CalendarRange: FC<CalendarRangeProps> = (props) => {
     endDate: DayProps | null;
   }) => {
     if (params.startDate && params.endDate) {
-      methods.setValue("startDate", params.startDate);
-      methods.setValue("endDate", params.endDate);
+      props.onClickDone?.(params);
     }
     setAnchorEl(null);
   };
   //render
   return (
-    <Tooltip
-      arrow
-      open={!!fieldState.error?.message}
-      title={fieldState.error?.message}
-    >
-      <Stack>
-        <Preview
-          type="rangeDate"
-          id={id}
-          disabled={disabled}
-          open={open}
-          startDate={resultStartDate}
-          endDate={resultEndDate}
-          layout={engineConfig?.global?.layout}
-          labelStartDate={localeText?.calendar?.previewCheckInLabel}
-          labelEndDate={localeText?.calendar?.previewCheckOutLabel}
-          getLabelNights={localeText?.calendar?.previewNightsLabel}
-          onClickOpen={onClickOpen}
-        />
-        <Calendar
-          id={id}
-          open={open}
-          anchorEl={anchorEl}
-          defaultStartDate={defaultStartDate}
-          defaultEndDate={defaultEndDate}
-          daysList={daysList}
-          locale={locale}
-          calendarConfig={engineConfig?.calendar}
-          popUpButtonDone={localeText?.calendar?.popUpButtonDone}
-          tags={[
-            { label: "Available", textColor: "#027A48", background: "#ECFDF3" },
-            { label: "Min-Stay", textColor: "#B54708", background: "#FFFAEB" },
-            { label: "Sold Out", textColor: "#B42318", background: "#FEF3F2" },
-            { label: "Min-Price", textColor: "#026AA2", background: "#F0F9FF" },
-          ]}
-          onClickDone={onClickDone}
-          onClose={onClose}
-        />
-      </Stack>
-    </Tooltip>
+    <Stack>
+      <Preview
+        type="rangeDate"
+        id={id}
+        disabled={disabled}
+        open={open}
+        startDate={startDate}
+        endDate={endDate}
+        layout={engineConfig?.global?.layout}
+        labelStartDate={localeText?.calendar?.previewCheckInLabel}
+        labelEndDate={localeText?.calendar?.previewCheckOutLabel}
+        getLabelNights={localeText?.calendar?.previewNightsLabel}
+        onClickOpen={onClickOpen}
+      />
+      <Calendar
+        id={id}
+        open={open}
+        anchorEl={anchorEl}
+        defaultStartDate={startDate}
+        defaultEndDate={endDate}
+        daysList={daysList}
+        locale={locale}
+        calendarConfig={engineConfig?.calendar}
+        popUpButtonDone={localeText?.calendar?.popUpButtonDone}
+        onClickDone={onClickDone}
+        onClose={onClose}
+      />
+    </Stack>
   );
 };
 

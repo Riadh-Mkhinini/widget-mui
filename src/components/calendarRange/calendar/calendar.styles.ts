@@ -28,7 +28,7 @@ export const List = styled("div")<{ monthNumberDisplays: number }>(
       [theme.breakpoints.down("md")]: {
         gridTemplateColumns: "1fr",
         padding: theme.spacing(0, 2, 2, 2),
-        maxHeight: "calc(100vh - 122px)",
+        maxHeight: "calc(100vh - 150px)",
       },
       [theme.breakpoints.down("sm")]: {
         gridTemplateColumns: "1fr",
@@ -39,19 +39,12 @@ export const List = styled("div")<{ monthNumberDisplays: number }>(
   }
 );
 
-export const Row = styled("div")(({ theme }) => ({
+export const Footer = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
-  flexWrap: "wrap",
-  flex: 1,
-  gap: theme.spacing(1),
-}));
-
-export const Footer = styled("div")(({ theme }) => ({
+  justifyContent: "end",
   borderTop: `1px solid ${theme.palette.divider}`,
   padding: theme.spacing(2),
-  display: "flex",
-  alignItems: "center",
   gap: theme.spacing(1),
   [theme.breakpoints.down("sm")]: {
     alignItems: "flex-start",

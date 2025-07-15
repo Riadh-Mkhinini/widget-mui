@@ -1,11 +1,10 @@
 import { type FC, useMemo } from "react";
-import { InputAdornment, Typography, useTheme } from "@mui/material";
+import { Typography, useTheme } from "@mui/material";
 import { format } from "date-fns";
 //svgs
 import { Svgs } from "@constants";
 //contextAPI
 import { useIBE } from "@contextAPI";
-import { Input } from "../../input/input";
 //utils
 import { getTotalOfDays } from "../preview.utils";
 //styles
@@ -73,29 +72,7 @@ const Content: FC<PreviewProps> = (props) => {
     );
   };
 
-  if (props.type === "input") {
-    return (
-      <Input
-        name={props.name}
-        fullWidth
-        placeholder={props.placeholder}
-        sxContainer={{ width: "100%" }}
-        startAdornment={
-          engineConfig?.global?.preview?.showIcon && (
-            <InputAdornment position="start">{icon}</InputAdornment>
-          )
-        }
-        sx={{
-          "& .MuiOutlinedInput-root": {
-            fontSize: params.fontSizeValue,
-            color: engineConfig?.global?.preview?.value || "grey.700",
-            padding: 0,
-            "& fieldset": { border: "none" },
-          },
-        }}
-      />
-    );
-  } else if (props.type === "simple") {
+  if (props.type === "simple") {
     return (
       <Row>
         {engineConfig?.global?.preview?.showIcon && icon}
@@ -141,42 +118,6 @@ const Content: FC<PreviewProps> = (props) => {
             />
           </ContainerIcon>
         )}
-      </Row>
-    );
-  } else if (props.type === "button") {
-    return (
-      <Row>
-        {icon ? (
-          icon
-        ) : (
-          <Svgs.PlusIcon
-            width={params.sizeIcon}
-            height={params.sizeIcon}
-            stroke={
-              props.textButtonColor ||
-              engineConfig?.global?.preview?.icon ||
-              theme.palette.grey[600]
-            }
-          />
-        )}
-
-        <Column minHeight={39} justifyContent="center">
-          <Typography
-            textAlign="start"
-            fontSize={params.fontSizeButton}
-            fontWeight="500"
-            maxWidth={200}
-            color={
-              props.textButtonColor ||
-              engineConfig?.global?.preview?.value ||
-              "grey.600"
-            }
-            noWrap
-          >
-            {props.textButton}
-          </Typography>
-        </Column>
-        {props.right}
       </Row>
     );
   } else if (props.type === "rangeDate") {
@@ -257,28 +198,6 @@ const Content: FC<PreviewProps> = (props) => {
           </Row>
         </Column>
       </>
-    );
-  } else if (props.type === "link") {
-    return (
-      <Row>
-        <Typography
-          textAlign="start"
-          fontSize={16}
-          color={theme.palette.text.primary}
-          fontWeight="500"
-          noWrap
-          className="link"
-        >
-          {props.value || props.label}
-        </Typography>
-        <ContainerIcon open={open}>
-          <Svgs.ChevronDownIcon
-            width={params.sizeIcon}
-            height={params.sizeIcon}
-            stroke={theme.palette.text.primary}
-          />
-        </ContainerIcon>
-      </Row>
     );
   }
   return null;

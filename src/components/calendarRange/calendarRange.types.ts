@@ -2,9 +2,12 @@ import type { DayProps } from "@/engine/engine.types";
 import type { Locale } from "date-fns";
 
 export type CalendarRangeProps = {
-  defaultStartDate?: DayProps | null;
-  defaultEndDate?: DayProps | null;
+  startDate?: DayProps | null;
+  endDate?: DayProps | null;
   disabled?: boolean;
-  disabledWithoutColor?: boolean;
   locale?: Locale;
+  onClickDone?: (params: {
+    startDate: DayProps | null;
+    endDate: DayProps | null;
+  }) => void;
 };

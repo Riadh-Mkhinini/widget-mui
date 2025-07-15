@@ -28,8 +28,8 @@ const Popover: FC<PopoverProps> = (props) => {
     return (
       <CustomDialog
         fullScreen={fullScreen}
-        fullWidth
         maxWidth={maxWidth}
+        fullWidth
         scroll="paper"
         open={props.open}
         slots={{ transition: Transition }}
