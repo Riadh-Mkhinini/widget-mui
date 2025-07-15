@@ -24,6 +24,8 @@ const Popover: FC<PopoverProps> = (props) => {
     | ShadowRoot
     | undefined;
 
+  console.log(shadowRoot);
+
   if (mode === "pop-up") {
     return (
       <CustomDialog
