@@ -20,11 +20,15 @@ const Popover: FC<PopoverProps> = (props) => {
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
-  const shadowRoot = (window as any).__BOOKINI_WIDGET_SHADOW__ as
-    | ShadowRoot
-    | undefined;
+  // ✅ Get the container element instead of the ShadowRoot
+  const portalContainer = (window as any)
+    .__BOOKINI_WIDGET_PORTAL_CONTAINER__ as HTMLElement | undefined;
 
-  console.log(shadowRoot);
+  if (!portalContainer) {
+    console.warn("Popover: MUI portal container not set up correctly.");
+    return null; // or a fallback render
+  }
+  console.log(portalContainer);
 
   if (mode === "pop-up") {
     return (
@@ -36,9 +40,9 @@ const Popover: FC<PopoverProps> = (props) => {
         open={props.open}
         slots={{ transition: Transition }}
         onClose={props.onClose}
-        container={shadowRoot as unknown as Element}
+        container={portalContainer}
         slotProps={{
-          root: { container: shadowRoot as unknown as Element },
+          root: { container: portalContainer },
         }}
       >
         {children}
@@ -52,12 +56,8 @@ const Popover: FC<PopoverProps> = (props) => {
       disablePortal={false}
       slots={{ transition: fullScreen ? Transition : undefined }}
       anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-      container={shadowRoot as unknown as Element}
-      slotProps={{ root: { container: shadowRoot as unknown as Element } }}
-      // slotProps={{
-      //   backdrop: { container: shadowRoot },
-      //   root: { container: shadowRoot },
-      // }}
+      container={portalContainer}
+      slotProps={{ root: { container: portalContainer } }}
     >
       {children}
     </CustomPopover>
