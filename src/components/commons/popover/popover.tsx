@@ -21,6 +21,7 @@ const Popover: FC<PopoverProps> = (props) => {
   const { children, mode, maxWidth = "xl", ...rest } = props;
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
+  console.log(shadowRoot);
 
   if (mode === "pop-up") {
     return (
@@ -33,6 +34,9 @@ const Popover: FC<PopoverProps> = (props) => {
         slots={{ transition: Transition }}
         onClose={props.onClose}
         container={shadowRoot as unknown as Element}
+        slotProps={{
+          root: { container: shadowRoot as unknown as Element },
+        }}
       >
         {children}
       </CustomDialog>
@@ -42,9 +46,15 @@ const Popover: FC<PopoverProps> = (props) => {
     <CustomPopover
       {...rest}
       marginThreshold={0}
+      disablePortal={false}
       slots={{ transition: fullScreen ? Transition : undefined }}
       anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
       container={shadowRoot as unknown as Element}
+      slotProps={{ root: { container: shadowRoot as unknown as Element } }}
+      // slotProps={{
+      //   backdrop: { container: shadowRoot },
+      //   root: { container: shadowRoot },
+      // }}
     >
       {children}
     </CustomPopover>
