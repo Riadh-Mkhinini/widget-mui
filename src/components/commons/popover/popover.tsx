@@ -26,9 +26,7 @@ const Popover: FC<PopoverProps> = (props) => {
 
   if (!portalContainer) {
     console.warn("Popover: MUI portal container not set up correctly.");
-    return null; // or a fallback render
   }
-  console.log(portalContainer);
 
   if (mode === "pop-up") {
     return (
