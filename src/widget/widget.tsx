@@ -1,20 +1,51 @@
-import { Box, Typography, Button } from "@mui/material";
+import { useMemo, type FC } from "react";
+import { Stack, Typography } from "@mui/material";
+import { CalendarRange } from "@components";
+import { FormProvider, useForm } from "react-hook-form";
+import type { EngineState } from "./widget.types";
+import { IBEProvider } from "@contextAPI";
+import { initLocaleText } from "./widget.utils";
 
 export interface WidgetProps {
   engineId: string;
 }
 
-const Widget = ({ engineId }: WidgetProps) => {
+const Widget: FC<WidgetProps> = (props) => {
+  const { engineId } = props;
+  const methods = useForm<EngineState>({
+    mode: "onChange",
+    reValidateMode: "onChange",
+    defaultValues: {
+      property: null,
+      startDate: null,
+      endDate: null,
+      rooms: [{ adultsCount: 1, childs: [], childCount: 0 }],
+      guestsResult: { rooms: 1, adults: 1, childs: 0 },
+      promoCode: "",
+      searchProperty: "",
+    },
+  });
+  const localeText = useMemo(() => initLocaleText(), []);
+
   return (
-    <Box p={2} borderRadius={2} boxShadow={2} maxWidth={300}>
-      <Typography variant="h6">Bookini Widget</Typography>
-      <Typography variant="body2" mb={2}>
-        Engine ID: {engineId}
-      </Typography>
-      <Button variant="contained" color="primary" fullWidth>
-        Start Booking
-      </Button>
-    </Box>
+    <FormProvider {...methods}>
+      <IBEProvider
+        localeText={localeText}
+        size="xl"
+        engineConfig={{ calendar: { monthNumberDisplays: 1 } }}
+      >
+        <Stack p={2} borderRadius={2} boxShadow={2} gap={2}>
+          <Typography>Engine ID: {engineId}</Typography>
+          <CalendarRange
+          // disabled={disabled}
+          // disabledWithoutColor={disabledWithoutColor}
+          // defaultStartDate={defaultState?.propertyState?.startDate}
+          // defaultEndDate={defaultState?.propertyState?.endDate}
+          // locale={locale}
+          />
+        </Stack>
+      </IBEProvider>
+    </FormProvider>
   );
 };
 
