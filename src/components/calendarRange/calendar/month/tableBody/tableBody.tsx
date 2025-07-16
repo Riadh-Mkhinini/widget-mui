@@ -1,9 +1,10 @@
 import { type FC, useMemo } from "react";
 import { useTheme } from "@mui/material";
+//components
+import { Indicator } from "./indicator/indicator";
 //utils
 import { addFakeItem, chunk } from "./tableBody.utils";
 //styles
-import { Indicator } from "@/components/commons";
 import {
   TBody,
   Tr,

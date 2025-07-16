@@ -1,18 +1,16 @@
 import { type FC, useMemo, useState } from "react";
-import { Stack } from "@mui/material";
 //context
 import { useIBE } from "@contextAPI";
 //components
 import { Preview } from "../commons";
-import { Calendar } from "./calendar/calendar";
+import { Calendar, type DayProps } from "./calendar/calendar";
 //helpers
 import { getDayOfWeek } from "@helpers";
 //types
 import type { CalendarRangeProps } from "./calendarRange.types";
-import type { DayProps } from "@/engine/engine.types";
 
 const CalendarRange: FC<CalendarRangeProps> = (props) => {
-  const { disabled, startDate, endDate, locale } = props;
+  const { startDate, endDate, locale } = props;
   const { localeText, engineConfig } = useIBE();
 
   //states
@@ -20,7 +18,7 @@ const CalendarRange: FC<CalendarRangeProps> = (props) => {
 
   //useMemo
   const open = Boolean(anchorEl);
-  const id = open ? "property-popover" : undefined;
+  const id = open ? "calendar-popover" : undefined;
 
   const daysList = useMemo(() => getDayOfWeek(locale), [locale]);
   //functions
@@ -42,11 +40,10 @@ const CalendarRange: FC<CalendarRangeProps> = (props) => {
   };
   //render
   return (
-    <Stack>
+    <>
       <Preview
         type="rangeDate"
         id={id}
-        disabled={disabled}
         open={open}
         startDate={startDate}
         endDate={endDate}
@@ -69,8 +66,8 @@ const CalendarRange: FC<CalendarRangeProps> = (props) => {
         onClickDone={onClickDone}
         onClose={onClose}
       />
-    </Stack>
+    </>
   );
 };
 
-export { CalendarRange };
+export { CalendarRange, type DayProps };

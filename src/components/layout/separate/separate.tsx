@@ -12,9 +12,9 @@ const Separate: FC<LayoutProps> = (props) => {
 
   return (
     <Grid
+      size={size}
       showProperty={engineConfig?.property?.showProperty}
       showPromoCode={engineConfig?.promoCode?.showPromoCode}
-      size={size}
     >
       {children}
     </Grid>

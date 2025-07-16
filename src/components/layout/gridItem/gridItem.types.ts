@@ -1,6 +1,6 @@
 import type { BoxProps } from "@mui/material";
 
 export type GridItemProps = BoxProps & {
-  hide?: boolean;
+  isVisible?: boolean;
   children?: React.ReactNode;
 };

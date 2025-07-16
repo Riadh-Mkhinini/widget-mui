@@ -1,10 +1,9 @@
-import type { DayProps } from "@/engine/engine.types";
 import type { Locale } from "date-fns";
+import type { DayProps } from "./calendarRange";
 
 export type CalendarRangeProps = {
   startDate?: DayProps | null;
   endDate?: DayProps | null;
-  disabled?: boolean;
   locale?: Locale;
   onClickDone?: (params: {
     startDate: DayProps | null;

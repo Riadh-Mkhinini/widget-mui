@@ -1,78 +1,39 @@
-import type { PaletteOptions, Theme } from "@mui/material";
+import type { DayProps, PropertyItem, RoomData } from "@components";
 import type { Locale } from "date-fns";
 
-export type DayProps = {
-  date: Date;
-  formated: string;
-  type?: "PREVIOUS_DAY" | "NEXT_DAY";
-  disabled?: boolean;
-  background?: string;
-  color?: string;
-  weatherIcon?: React.ReactNode;
-  temperature?: string;
-  price?: string;
-  group?: string;
-};
-
 //*****************PROPS******************** */
+type ResultEngine = {
+  property: PropertyItem | null;
+  startDate: DayProps | null;
+  endDate: DayProps | null;
+  promoCode: string;
+  rooms: Array<RoomData>;
+};
 export type EngineProps = {
-  engineId: string;
-  disabled?: boolean;
-  defaultState?: EngineState;
+  idEngine: string;
   locale?: Locale;
-  engineConfig?: EngineConfig;
-  localeText?: LocaleText;
-  size?: EngineSize;
-  onClickSearch?: (values: EngineState) => Promise<void>;
+  onClickSearch?: (values: ResultEngine) => void;
 };
 
 export type EngineSize = "xl" | "lg" | "md" | "sm" | "xs";
-//*****************STATE******************** */
-
-export type EngineState = {
-  searchProperty?: string;
-  property?: PropertyItem | null;
-  //
-  startDate?: DayProps | null;
-  endDate?: DayProps | null;
-  //
-  guestsResult?: { rooms: number; adults: number; childs: number };
-  rooms?: Array<RoomGuests>;
-  //
-  promoCode: string;
-};
-
-export type PropertyItem = {
-  id: string;
-  name: string;
-  country: string;
-  city: string;
-  image?: string;
-};
-export type RoomGuests = {
-  adultsCount: number;
-  childCount: number;
-  childs: Array<{ value: number | null }>;
-};
 
 //*****************ENGINE CONFIG******************** */
 // Engine config
 export type EngineConfig = {
+  colors?: Palette;
   global?: GlobalConfig;
   property?: PropertyConfig;
   calendar?: CalendarConfig;
   guests?: GuestsPropertyConfig;
   promoCode?: PromoCodeConfig;
+  search?: SearchEngineConfig;
 };
 
 //****GLOBAL***
-
 export type GlobalConfig = {
-  theme?: Theme;
   container?: ContainerConfig;
   layout?: LayoutConfig;
   preview?: PreviewConfig;
-  search?: SearchEngineConfig;
   title?: TitleConfig;
 };
 
@@ -83,7 +44,16 @@ export type TitleConfig = {
   textAlign?: "left" | "center" | "right" | "justify";
 };
 
-export type Palette = PaletteOptions;
+type PaletteColorOptions = {
+  light?: string;
+  main: string;
+  dark?: string;
+  contrastText?: string;
+};
+export type Palette = {
+  primary?: PaletteColorOptions;
+  secondary?: PaletteColorOptions;
+};
 
 export type ContainerConfig = {
   background?: string;
@@ -105,10 +75,8 @@ export type PreviewConfig = {
   label?: string;
   placeholder?: string;
   value?: string;
-  disabled?: string;
   size?: "small" | "medium" | "large" | "custom";
   formatDate?: "dd-MM-yyyy" | "yyyy-MM-dd";
-  formatTime?: "24" | "12";
   showIcon?: boolean;
   customParamsSize?: ParamsSize;
 };
@@ -131,7 +99,6 @@ export type CalendarConfig = {
 export type PropertyConfig = {
   popUpMode?: "default" | "pop-up";
   mode?: "simple" | "grouped" | "cards";
-  data?: Array<PropertyItem>;
   showSearch?: boolean;
   showProperty?: boolean;
 };

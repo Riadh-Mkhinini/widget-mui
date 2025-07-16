@@ -44,7 +44,7 @@ const Header: FC<HeaderProps> = (props) => {
         disabled={disabledPrevious}
         onClick={onClickPrevious}
       >
-        <Svgs.ArrowNarrowLeftIcon stroke={colorPrevious} />
+        <Svgs.IconArrowLeft stroke={colorPrevious} />
       </IconButton>
 
       <IconButton
@@ -54,7 +54,7 @@ const Header: FC<HeaderProps> = (props) => {
         disabled={disabledNext}
         onClick={onClickNext}
       >
-        <Svgs.ArrowNarrowRightIcon stroke={colorNext} />
+        <Svgs.IconArrowRight stroke={colorNext} />
       </IconButton>
     </Container>
   );

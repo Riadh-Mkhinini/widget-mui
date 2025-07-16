@@ -3,10 +3,10 @@ import type { LocaleText } from "./engine.types";
 export const initLocaleText = (localeText?: LocaleText): LocaleText => ({
   searchLabel: localeText?.searchLabel || "Search",
   property: {
-    previewLabel: localeText?.property?.previewLabel || "Choose Hotel",
+    previewLabel: localeText?.property?.previewLabel || "Choose hotel",
     previewPlaceholder:
       localeText?.property?.previewPlaceholder || "Select your destination",
-    popUpTitle: localeText?.property?.popUpTitle || "Choose Hotel",
+    popUpTitle: localeText?.property?.popUpTitle || "Choose hotel",
     popUpSubTitle:
       localeText?.property?.popUpSubTitle || "Select your destination",
     popUpSearchPlaceholder:
@@ -43,7 +43,7 @@ export const initLocaleText = (localeText?: LocaleText): LocaleText => ({
       return `Age of ${value} child`;
     },
     popUpButtonAddRoom: localeText?.guests?.popUpButtonAddRoom || "Add room",
-    popUpButtonDone: localeText?.guests?.popUpButtonDone || "Done",
+    popUpButtonDone: localeText?.guests?.popUpButtonDone || "Confirm",
     popUpRequiredField:
       localeText?.guests?.popUpRequiredField || "This field is required",
     popUpAgeChildPlaceholder:
@@ -68,7 +68,7 @@ export const initLocaleText = (localeText?: LocaleText): LocaleText => ({
     },
     popUpRequiredField:
       localeText?.calendar?.popUpRequiredField || "This field is required",
-    popUpButtonDone: localeText?.calendar?.popUpButtonDone || "Done",
+    popUpButtonDone: localeText?.calendar?.popUpButtonDone || "Confirm",
   },
   promoCode: {
     previewPlaceholder:

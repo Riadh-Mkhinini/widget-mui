@@ -61,7 +61,7 @@ const Calendar: FC<CalendarProps> = (props) => {
         date: from,
         monthNumberDisplays: config.monthNumberDisplays,
         weatherIcon: (
-          <Svgs.WeatherIcon
+          <Svgs.IconChevronDown
             fill={theme.palette.grey[400]}
             width={14}
             height={14}
@@ -114,9 +114,8 @@ const Calendar: FC<CalendarProps> = (props) => {
 
   const onClickDay = useCallback(
     (day: DayProps) => {
-      if (startDate && startDate.date === day.date) {
-        return;
-      }
+      if (startDate && startDate.date === day.date) return;
+
       if (!startDate || (startDate && endDate) || day.date < startDate.date) {
         setStartDate(day);
         setEndDate(null);
@@ -142,9 +141,7 @@ const Calendar: FC<CalendarProps> = (props) => {
       setStartDate(null);
       setEndDate(null);
     }
-    if (props.onClose) {
-      props.onClose();
-    }
+    props.onClose?.();
   };
 
   const onClickDone = () => {
@@ -203,7 +200,11 @@ const Calendar: FC<CalendarProps> = (props) => {
         </List>
       </Content>
       <Footer>
-        <Button variant="contained" onClick={onClickDone}>
+        <Button
+          variant="contained"
+          sx={{ textTransform: "none" }}
+          onClick={onClickDone}
+        >
           {popUpButtonDone}
         </Button>
       </Footer>
@@ -211,4 +212,4 @@ const Calendar: FC<CalendarProps> = (props) => {
   );
 };
 
-export { Calendar };
+export { Calendar, type DayProps };

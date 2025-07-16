@@ -1,4 +1,4 @@
-import type { DayProps } from "@/engine/engine.types";
+import type { DayProps } from "../../calendar.types";
 
 export type TableBodyProps = {
   mode?: "default" | "pop-up";

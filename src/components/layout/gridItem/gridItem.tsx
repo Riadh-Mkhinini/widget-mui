@@ -7,10 +7,10 @@ import { ContainerFixed } from "./gridItem.styles";
 import type { GridItemProps } from "./gridItem.types";
 
 const GridItem: FC<GridItemProps> = (props) => {
-  const { hide, children, ...rest } = props;
+  const { isVisible = true, children, ...rest } = props;
   const { engineConfig, size } = useIBE();
 
-  if (hide) return null;
+  if (!isVisible) return null;
 
   return (
     <ContainerFixed

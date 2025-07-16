@@ -11,41 +11,24 @@ import { SeparateContainer, CombinedContainer } from "./preview.styles";
 import type { PreviewProps } from "./preview.types";
 
 const Preview: FC<PreviewProps> = (props) => {
-  const {
-    id,
-    open,
-    disabled,
-    height,
-    background,
-    onClickOpen,
-    layout,
-    sizes,
-    sx,
-    borderColor,
-  } = props;
+  const { id, open, height, onClickOpen, layout, sizes, sx, borderColor } =
+    props;
   const theme = useTheme();
   const { engineConfig, paramsSize } = useIBE();
   const params = useMemo(() => sizes || paramsSize, [sizes, paramsSize]);
 
-  const backgroundDisabled = useMemo(
-    () => (disabled ? theme.palette.divider : undefined),
-    [disabled, theme.palette.divider]
-  );
-
   if (layout === "combined") {
     return (
       <CombinedContainer
-        aria-describedby={id}
-        disabled={disabled}
         background={
-          backgroundDisabled ||
-          background ||
           engineConfig?.global?.preview?.background ||
           theme.palette.background.paper
         }
         height={height || params.heightContent}
-        onClick={onClickOpen}
+        disableRipple={props.type === "input"}
+        aria-describedby={id}
         sx={sx}
+        onClick={onClickOpen}
       >
         <Content {...props} />
       </CombinedContainer>
@@ -53,20 +36,18 @@ const Preview: FC<PreviewProps> = (props) => {
   }
   return (
     <SeparateContainer
-      aria-describedby={id}
-      disabled={disabled}
       background={
-        backgroundDisabled ||
-        background ||
         engineConfig?.global?.preview?.background ||
         theme.palette.background.paper
       }
       bordercolor={borderColor || engineConfig?.global?.preview?.border}
       radius={engineConfig?.global?.preview?.radius}
       height={height || params.heightContent}
+      disableRipple={props.type === "input"}
+      aria-describedby={id}
       open={open}
-      onClick={onClickOpen}
       sx={sx}
+      onClick={onClickOpen}
     >
       <Content {...props} />
     </SeparateContainer>

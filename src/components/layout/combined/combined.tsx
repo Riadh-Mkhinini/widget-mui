@@ -12,9 +12,9 @@ const Combined: FC<LayoutProps> = (props) => {
 
   return (
     <Grid
+      size={size}
       showProperty={engineConfig?.property?.showProperty}
       showPromoCode={engineConfig?.promoCode?.showPromoCode}
-      size={size}
       isRounded={engineConfig?.global?.preview?.isRounded}
       showShadow={engineConfig?.global?.preview?.showShadow}
       borderWidth={engineConfig?.global?.preview?.borderWidth}

@@ -1,13 +1,16 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-expect-error
 window.process = { env: { NODE_ENV: "production" } };
-
 import ReactDOM from "react-dom/client";
 import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
 import Engine from "./engine/engine";
 
-function initEngine(containerId: string, engineId: string) {
+type Params = {
+  idEngine: string;
+};
+
+function initEngine(containerId: string, params: Params) {
+  const { idEngine } = params;
   const container = document.getElementById(containerId);
   if (!container || container.shadowRoot) return;
 
@@ -27,7 +30,7 @@ function initEngine(containerId: string, engineId: string) {
   // ✅ Inject fonts
   const fontLink = document.createElement("link");
   fontLink.href =
-    "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap&family=Noto+Kufi+Arabic:wght@400;500;600;700";
+    "https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap";
   fontLink.rel = "stylesheet";
   shadowRoot.appendChild(fontLink);
 
@@ -45,10 +48,16 @@ function initEngine(containerId: string, engineId: string) {
   const root = ReactDOM.createRoot(mountNode);
   root.render(
     <CacheProvider value={emotionCache}>
-      <Engine engineId={engineId} />
+      <Engine idEngine={idEngine} />
     </CacheProvider>
   );
 }
+
+// Expose the init method for script-based loading
+// @ts-ignore
+window.BookiniWidget = {
+  initEngine: initEngine,
+};
 
 // Optional auto-init block if you want script to self-start (commented out)
 // const container = document.getElementById("bookini-ibe-widget");
@@ -64,10 +73,3 @@ function initEngine(containerId: string, engineId: string) {
 //   });
 //   initEngine("bookini-ibe-widget", idEngine);
 // }
-
-// Expose the init method for script-based loading
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-window.BookiniWidget = {
-  initEngine: initEngine,
-};

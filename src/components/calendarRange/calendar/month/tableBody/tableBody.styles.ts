@@ -10,13 +10,14 @@ export const Td = styled("td")<{
 }>(({ theme, background, mode }) => ({
   background,
   height: 50,
-  minWidth: mode === "pop-up" ? undefined : 42,
+  minWidth: mode === "default" ? 42 : undefined,
   textAlign: "center",
   padding: theme.spacing(1),
   position: "relative",
   cursor: "pointer",
   [theme.breakpoints.down("sm")]: {
     height: 26,
+    minWidth: "unset",
   },
 }));
 
