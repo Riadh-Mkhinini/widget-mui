@@ -1,3 +1,5 @@
+import { format } from "date-fns";
+import type { DayProps } from "@components";
 import type { LocaleText } from "./engine.types";
 
 export const initLocaleText = (localeText?: LocaleText): LocaleText => ({
@@ -75,3 +77,14 @@ export const initLocaleText = (localeText?: LocaleText): LocaleText => ({
       localeText?.promoCode?.previewPlaceholder || "Promo code",
   },
 });
+
+export const generateDayProps = (day: Date): DayProps => {
+  const isWeekend = day.getDay() === 0 || day.getDay() === 6;
+  return {
+    date: day,
+    formated: format(day, "yyyy-MM-dd"),
+    disabled: false,
+    background: isWeekend ? "#F9FAFB" : "#ffffff",
+    color: isWeekend ? "#667085" : "#344054",
+  };
+};

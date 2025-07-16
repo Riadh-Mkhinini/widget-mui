@@ -1,4 +1,5 @@
 import { useMemo, useState, type FC } from "react";
+import { addDays } from "date-fns";
 import { ThemeProvider } from "@mui/material";
 //contextAPI
 import { IBEProvider } from "@contextAPI";
@@ -19,7 +20,7 @@ import {
 } from "@components";
 //utils
 import { createCustomTheme } from "@theme";
-import { initLocaleText } from "./engine.utils";
+import { generateDayProps, initLocaleText } from "./engine.utils";
 //types
 import type { EngineConfig, EngineProps, ResultEngine } from "./engine.types";
 
@@ -29,8 +30,12 @@ const Engine: FC<EngineProps> = (props) => {
   const localeText = useMemo(() => initLocaleText(), []);
 
   const [property, setProperty] = useState<PropertyItem | null>(null);
-  const [startDate, setStartDate] = useState<DayProps | null>(null);
-  const [endDate, setEndDate] = useState<DayProps | null>(null);
+  const [startDate, setStartDate] = useState<DayProps | null>(
+    generateDayProps(new Date())
+  );
+  const [endDate, setEndDate] = useState<DayProps | null>(
+    generateDayProps(addDays(new Date(), 1))
+  );
   const [promoCode, setPromoCode] = useState<string>("");
   const [rooms, setRooms] = useState<Array<RoomData>>([
     { adultsCount: 2, childCount: 0, childs: [] },

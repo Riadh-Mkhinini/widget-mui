@@ -61,7 +61,6 @@ export const generateDaysList = (params: GenerateDaysListParams) => {
 
   const dataGrouped = groupBy(days, "group");
   const data: Array<Array<DayProps>> = Object.keys(dataGrouped).map(
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     //@ts-ignore
     (key) => dataGrouped[key]
   );
