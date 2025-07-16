@@ -7,10 +7,11 @@ import Engine from "./engine/engine";
 
 type Params = {
   idEngine: string;
+  onClickSearch?: (values: any) => void;
 };
 
 function initEngine(containerId: string, params: Params) {
-  const { idEngine } = params;
+  const { idEngine, onClickSearch } = params;
   const container = document.getElementById(containerId);
   if (!container || container.shadowRoot) return;
 
@@ -48,7 +49,7 @@ function initEngine(containerId: string, params: Params) {
   const root = ReactDOM.createRoot(mountNode);
   root.render(
     <CacheProvider value={emotionCache}>
-      <Engine idEngine={idEngine} />
+      <Engine idEngine={idEngine} onClickSearch={onClickSearch} />
     </CacheProvider>
   );
 }
