@@ -57,7 +57,13 @@ const Engine: FC<EngineProps> = (props) => {
     setRooms(value);
   };
   const onClickSearch = () => {
-    props.onClickSearch?.({ property, startDate, endDate, promoCode, rooms });
+    props.onClickSearch?.({
+      property: property || undefined,
+      startDate,
+      endDate,
+      promoCode: promoCode || undefined,
+      rooms,
+    });
   };
   //render
   const engineConfig: EngineConfig = {

@@ -3,10 +3,10 @@ import type { Locale } from "date-fns";
 
 //*****************PROPS******************** */
 type ResultEngine = {
-  property: PropertyItem | null;
+  property?: PropertyItem | null;
   startDate: DayProps | null;
   endDate: DayProps | null;
-  promoCode: string;
+  promoCode?: string;
   rooms: Array<RoomData>;
 };
 export type EngineProps = {
