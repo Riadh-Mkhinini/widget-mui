@@ -21,7 +21,7 @@ import {
 import { createCustomTheme } from "@theme";
 import { initLocaleText } from "./engine.utils";
 //types
-import type { EngineConfig, EngineProps } from "./engine.types";
+import type { EngineConfig, EngineProps, ResultEngine } from "./engine.types";
 
 const Engine: FC<EngineProps> = (props) => {
   const { idEngine } = props;
@@ -57,13 +57,14 @@ const Engine: FC<EngineProps> = (props) => {
     setRooms(value);
   };
   const onClickSearch = () => {
-    props.onClickSearch?.({
-      property: property || undefined,
-      startDate,
-      endDate,
-      promoCode: promoCode || undefined,
-      rooms,
-    });
+    const params: ResultEngine = { startDate, endDate, rooms };
+    if (property) {
+      params.property = property;
+    }
+    if (promoCode) {
+      params.promoCode = promoCode;
+    }
+    props.onClickSearch?.(params);
   };
   //render
   const engineConfig: EngineConfig = {

@@ -2,7 +2,7 @@ import type { DayProps, PropertyItem, RoomData } from "@components";
 import type { Locale } from "date-fns";
 
 //*****************PROPS******************** */
-type ResultEngine = {
+export type ResultEngine = {
   property?: PropertyItem | null;
   startDate: DayProps | null;
   endDate: DayProps | null;
