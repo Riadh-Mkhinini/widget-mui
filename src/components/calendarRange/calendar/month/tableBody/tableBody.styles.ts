@@ -18,6 +18,7 @@ export const Td = styled("td")<{
   [theme.breakpoints.down("sm")]: {
     height: 26,
     minWidth: "unset",
+    padding: theme.spacing(0.5),
   },
 }));
 

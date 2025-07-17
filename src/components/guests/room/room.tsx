@@ -70,58 +70,56 @@ const Room: FC<RoomProps> = (props) => {
   };
   if (engineConfig?.guests?.mode === "accordion") {
     return (
-      <Container>
-        <Accordion defaultExpanded disableGutters variant="outlined">
-          <AccordionSummary aria-controls="room-guests" id="room-guests-header">
-            <Typography flex={1} fontSize={14} fontWeight="600">
-              {title}
-            </Typography>
-            <Typography fontSize={14} fontWeight="400" color="grey.600">
-              {localeText?.guests?.popUpCountAdultChild &&
-                localeText?.guests?.popUpCountAdultChild(
-                  room.adultsCount,
-                  room.childCount
-                )}
-            </Typography>
-            <Fade in={showDeleteButton} unmountOnExit mountOnEnter>
-              <Stack direction="row" alignItems="center">
-                <Divider
-                  orientation="vertical"
-                  sx={{ height: 22, ml: 1, mr: 1 }}
-                />
-                <IconButton size="small" onClick={onClickDelete}>
-                  <Svgs.IconTrash02 sx={{ fontSize: 18, color: "grey.600" }} />
-                </IconButton>
+      <Accordion defaultExpanded disableGutters variant="outlined">
+        <AccordionSummary aria-controls="room-guests" id="room-guests-header">
+          <Typography flex={1} fontSize={14} fontWeight="600">
+            {title}
+          </Typography>
+          <Typography fontSize={14} fontWeight="400" color="grey.600">
+            {localeText?.guests?.popUpCountAdultChild &&
+              localeText?.guests?.popUpCountAdultChild(
+                room.adultsCount,
+                room.childCount
+              )}
+          </Typography>
+          <Fade in={showDeleteButton} unmountOnExit mountOnEnter>
+            <Stack direction="row" alignItems="center">
+              <Divider
+                orientation="vertical"
+                sx={{ height: 22, ml: 1, mr: 1 }}
+              />
+              <Stack onClick={onClickDelete}>
+                <Svgs.IconTrash sx={{ fontSize: 16, color: "grey.600" }} />
               </Stack>
-            </Fade>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Stack gap={1}>
-              <Counter
-                min={1}
-                direction="row"
-                mode={engineConfig?.guests?.counterMode}
-                max={engineConfig?.guests?.maxAdults}
-                label={localeText?.guests?.popUpAdults}
-                caption={localeText?.guests?.popUpAdultsCaption}
-                value={room.adultsCount}
-                onChange={onChangeAdults}
-              />
-              <Counter
-                direction="row"
-                mode={engineConfig?.guests?.counterMode}
-                max={engineConfig?.guests?.maxChildren}
-                label={localeText?.guests?.popUpChildren}
-                caption={localeText?.guests?.popUpChildrenCaption}
-                value={room.childCount}
-                onChange={onChangeChildren}
-              />
             </Stack>
-            {room.childs.length > 0 && <Divider />}
-            <Stack>{renderItem()}</Stack>
-          </AccordionDetails>
-        </Accordion>
-      </Container>
+          </Fade>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Stack gap={1}>
+            <Counter
+              min={1}
+              direction="row"
+              mode={engineConfig?.guests?.counterMode}
+              max={engineConfig?.guests?.maxAdults}
+              label={localeText?.guests?.popUpAdults}
+              caption={localeText?.guests?.popUpAdultsCaption}
+              value={room.adultsCount}
+              onChange={onChangeAdults}
+            />
+            <Counter
+              direction="row"
+              mode={engineConfig?.guests?.counterMode}
+              max={engineConfig?.guests?.maxChildren}
+              label={localeText?.guests?.popUpChildren}
+              caption={localeText?.guests?.popUpChildrenCaption}
+              value={room.childCount}
+              onChange={onChangeChildren}
+            />
+          </Stack>
+          {room.childs.length > 0 && <Divider />}
+          <Stack>{renderItem()}</Stack>
+        </AccordionDetails>
+      </Accordion>
     );
   }
   return (
@@ -132,7 +130,7 @@ const Room: FC<RoomProps> = (props) => {
         </Typography>
         <Fade in={showDeleteButton} unmountOnExit mountOnEnter>
           <IconButton size="small" onClick={onClickDelete}>
-            <Svgs.IconTrash02 sx={{ fontSize: 18, color: "grey.600" }} />
+            <Svgs.IconTrash sx={{ fontSize: 16, color: "grey.600" }} />
           </IconButton>
         </Fade>
       </Stack>

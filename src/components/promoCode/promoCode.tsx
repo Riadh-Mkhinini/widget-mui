@@ -1,4 +1,5 @@
 import type { FC } from "react";
+import { useTranslation } from "react-i18next";
 //constants
 import { Svgs } from "@constants";
 //context
@@ -10,7 +11,8 @@ import type { PromoCodeProps } from "./promoCode.types";
 
 const PromoCode: FC<PromoCodeProps> = (props) => {
   const { value, onChangeValue } = props;
-  const { localeText, engineConfig, paramsSize } = useIBE();
+  const { t } = useTranslation();
+  const { engineConfig, paramsSize } = useIBE();
 
   //functions
   const onChange = (
@@ -23,7 +25,7 @@ const PromoCode: FC<PromoCodeProps> = (props) => {
     <Preview
       type="input"
       layout={engineConfig?.global?.layout}
-      placeholder={localeText?.promoCode?.previewPlaceholder}
+      placeholder={t("property.promo_code.preview_placeholder")}
       value={value}
       icon={
         <Svgs.IconPromoCode

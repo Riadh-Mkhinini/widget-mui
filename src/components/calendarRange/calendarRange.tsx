@@ -62,7 +62,7 @@ const CalendarRange: FC<CalendarRangeProps> = (props) => {
         daysList={daysList}
         locale={locale}
         calendarConfig={engineConfig?.calendar}
-        popUpButtonDone={localeText?.calendar?.popUpButtonDone}
+        texts={{ popUpButtonDone: localeText?.calendar?.popUpButtonDone }}
         onClickDone={onClickDone}
         onClose={onClose}
       />

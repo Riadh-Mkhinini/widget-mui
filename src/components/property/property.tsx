@@ -1,4 +1,5 @@
 import { type FC, useEffect, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 //constants
 import { Svgs } from "@constants";
 //context
@@ -22,7 +23,8 @@ import type {
 
 const Property: FC<PropertyProps> = (props) => {
   const { value, onChange } = props;
-  const { localeText, engineConfig, paramsSize } = useIBE();
+  const { t } = useTranslation();
+  const { engineConfig, paramsSize } = useIBE();
   //
   const [data, setData] = useState<Array<PropertyItem>>([]);
   const [dataGrouped, setDataGrouped] = useState<Array<CountryGrouped>>([]);
@@ -99,9 +101,9 @@ const Property: FC<PropertyProps> = (props) => {
     if (engineConfig?.property?.mode === "grouped") {
       return (
         <DataList
-          title={localeText?.property?.popUpTitle}
-          subTitle={localeText?.property?.popUpSubTitle}
-          placeholderSearch={localeText?.property?.popUpSearchPlaceholder}
+          title={t("property.property.pop_up_title")}
+          subTitle={t("property.property.pop_up_sub_title")}
+          placeholderSearch={t("property.property.pop_up_search_placeholder")}
           mode={engineConfig?.property?.popUpMode}
           data={filteredDataGrouped}
           showSearch={engineConfig?.property?.showSearch}
@@ -116,9 +118,9 @@ const Property: FC<PropertyProps> = (props) => {
     } else if (engineConfig?.property?.mode === "cards") {
       return (
         <DataList
-          title={localeText?.property?.popUpTitle}
-          subTitle={localeText?.property?.popUpSubTitle}
-          placeholderSearch={localeText?.property?.popUpSearchPlaceholder}
+          title={t("property.property.pop_up_title")}
+          subTitle={t("property.property.pop_up_sub_title")}
+          placeholderSearch={t("property.property.pop_up_search_placeholder")}
           mode={engineConfig?.property?.popUpMode}
           data={filteredData}
           showSearch={engineConfig?.property?.showSearch}
@@ -135,9 +137,9 @@ const Property: FC<PropertyProps> = (props) => {
     }
     return (
       <DataList
-        title={localeText?.property?.popUpTitle}
-        subTitle={localeText?.property?.popUpSubTitle}
-        placeholderSearch={localeText?.property?.popUpSearchPlaceholder}
+        title={t("property.property.pop_up_title")}
+        subTitle={t("property.property.pop_up_sub_title")}
+        placeholderSearch={t("property.property.pop_up_search_placeholder")}
         mode={engineConfig?.property?.popUpMode}
         data={filteredData}
         showSearch={engineConfig?.property?.showSearch}
@@ -167,8 +169,8 @@ const Property: FC<PropertyProps> = (props) => {
         type="simple"
         id={id}
         open={open}
-        label={localeText?.property?.previewLabel}
-        placeholder={localeText?.property?.previewPlaceholder}
+        label={t("property.preview_label")}
+        placeholder={t("property.preview_placeholder")}
         value={value?.name}
         icon={
           <Svgs.IconHotel

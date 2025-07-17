@@ -11,7 +11,9 @@ export type CalendarProps = {
   defaultEndDate?: DayProps | null;
   locale?: Locale;
   calendarConfig?: CalendarConfig;
-  popUpButtonDone?: string;
+  texts?: {
+    popUpButtonDone?: string;
+  };
   tags?: Array<Tag>;
   onClose?: () => void;
   onClickDone?: (params: {
@@ -31,8 +33,7 @@ export type DayProps = {
   type?: "PREVIOUS_DAY" | "NEXT_DAY";
   disabled?: boolean;
   background?: string;
-  color?: string;
-  weatherIcon?: React.ReactNode;
+  weatherIcon?: React.ElementType<any, keyof React.JSX.IntrinsicElements>;
   temperature?: string;
   price?: string;
   group?: string;
@@ -43,7 +44,8 @@ export type GenerateDaysListParams = {
   theme: Theme;
   date: Date;
   monthNumberDisplays: number;
-  weatherIcon: React.ReactNode;
+  isVisibleWeather?: boolean;
+  isVisiblePrice?: boolean;
 };
 
 export type GetMinMaxDateParams = {

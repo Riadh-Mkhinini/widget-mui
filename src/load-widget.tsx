@@ -5,7 +5,9 @@ import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
 import Engine from "./engine/engine";
 import stylisRTLPlugin from "stylis-plugin-rtl";
+import i18n from "i18next";
 import { isRtlLanguage, type Language } from "@helpers";
+import "./i18n";
 
 type Params = {
   idEngine: string;
@@ -21,7 +23,13 @@ function initEngine(containerId: string, params: Params) {
   const isRtl = isRtlLanguage(language);
   const direction = isRtl ? "rtl" : "ltr";
 
+  // ✅ Set direction for layout
   container.setAttribute("dir", direction);
+
+  // ✅ Initialize i18n language
+  if (language) {
+    i18n.changeLanguage(language);
+  }
 
   // ✅ Create Shadow DOM
   const shadowRoot = container.attachShadow({ mode: "open" });
@@ -32,6 +40,7 @@ function initEngine(containerId: string, params: Params) {
   // ✅ Create the root mount node for React inside portalContainer
   const mountNode = document.createElement("div");
 
+  // ✅ Set direction for layout
   mountNode.setAttribute("dir", direction);
 
   portalContainer.appendChild(mountNode);

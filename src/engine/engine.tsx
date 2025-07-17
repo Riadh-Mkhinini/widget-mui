@@ -41,7 +41,6 @@ const Engine: FC<EngineProps> = (props) => {
   ]);
 
   //useMemo
-
   const theme = useMemo(
     () =>
       createCustomTheme({ direction: isRtlLanguage(language) ? "rtl" : "ltr" }),
@@ -49,6 +48,7 @@ const Engine: FC<EngineProps> = (props) => {
   );
   const localeText = useMemo(() => initLocaleText(), []);
   const locale = useMemo(() => getLocale(language), [language]);
+
   //functions
   const onChangeProperty = (item: PropertyItem) => {
     setProperty(item);
@@ -102,19 +102,23 @@ const Engine: FC<EngineProps> = (props) => {
       },
       title: {
         fontSize: 26,
+        color: "#2c2c2c",
+        fontWeight: "600",
         textAlign: "center",
       },
     },
     calendar: {
+      popUpMode: "default",
       monthNumberDisplays: 1,
       maxYear: 1,
-      popUpMode: "default",
+      isVisiblePrice: false,
+      isVisibleWeather: false,
     },
     property: {
       mode: "simple",
       popUpMode: "default",
       showSearch: true,
-      showProperty: false,
+      showProperty: true,
     },
     promoCode: {
       showPromoCode: false,

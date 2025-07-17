@@ -1,11 +1,8 @@
-import { type FC, useMemo } from "react";
+import { type FC, useMemo, useCallback } from "react";
 import { useTheme } from "@mui/material";
-//components
 import { Indicator } from "./indicator/indicator";
-//utils
 import { formatNumber } from "@helpers";
 import { addFakeItem, chunk } from "./tableBody.utils";
-//styles
 import {
   TBody,
   Tr,
@@ -14,161 +11,143 @@ import {
   FooterDay,
   Typography,
 } from "./tableBody.styles";
-//types
 import type { TableBodyProps } from "./tableBody.types";
 import type { DayProps } from "../../calendar.types";
 
-const TableBody: FC<TableBodyProps> = (props) => {
-  const { startDate, endDate, daysOfMonth, onClickDay, hoverList, mode } =
-    props;
+const TableBody: FC<TableBodyProps> = ({
+  startDate,
+  endDate,
+  daysOfMonth,
+  onClickDay,
+  onMouseEnter,
+  hoverList,
+  mode,
+  locale,
+}) => {
   const theme = useTheme();
-  //useMemo
-  const daysChunk = useMemo(() => {
-    const daysMonth = addFakeItem(daysOfMonth);
-    return chunk(daysMonth);
-  }, [daysOfMonth]);
+  const lang = useMemo(
+    () => (locale?.code === "ar" ? "ar-EG" : undefined),
+    [locale]
+  );
 
-  //functions
-  const onClickItem = (day: DayProps) => () => {
-    if (!day.disabled) {
-      onClickDay?.(day);
+  const daysChunk = useMemo(
+    () => chunk(addFakeItem(daysOfMonth)),
+    [daysOfMonth]
+  );
+
+  const handleClick = useCallback(
+    (day: DayProps) => () => !day.disabled && onClickDay?.(day),
+    [onClickDay]
+  );
+
+  const handleHover = useCallback(
+    (day: DayProps) => () => onMouseEnter?.(day),
+    [onMouseEnter]
+  );
+
+  const baseSx = useMemo(
+    () => ({
+      border: `1px solid ${theme.palette.divider}`,
+      borderCollapse: "collapse",
+    }),
+    [theme]
+  );
+
+  const renderDayCell = (day: DayProps, key: number) => {
+    const IconWeather = day.weatherIcon;
+
+    if (day.type === "NEXT_DAY" || day.type === "PREVIOUS_DAY") {
+      return <Td key={key} mode={mode} />;
     }
+
+    const isFirst = startDate?.formated === day.formated;
+    const isLast = endDate?.formated === day.formated;
+    const isBetween =
+      startDate &&
+      endDate &&
+      day.date > startDate.date &&
+      day.date < endDate.date;
+    const isHovered = hoverList?.includes(day.formated) ?? false;
+
+    const isActive = isFirst || isLast;
+    const isInteractive = !day.disabled;
+    const highlight = isBetween || isHovered;
+
+    let background = day.background;
+    let primaryText = theme.palette.grey[700];
+    let secondaryText = theme.palette.grey[400];
+
+    if (day.disabled) {
+      primaryText = theme.palette.grey[300];
+      secondaryText = theme.palette.grey[200];
+    } else if (isActive) {
+      background = theme.palette.primary.main;
+      primaryText = theme.palette.primary.contrastText;
+      secondaryText = theme.palette.primary.contrastText;
+    } else if (highlight) {
+      background = theme.palette.secondary.dark;
+      primaryText = theme.palette.primary.contrastText;
+      secondaryText = theme.palette.primary.contrastText;
+    }
+
+    return (
+      <Td
+        key={key}
+        sx={baseSx}
+        mode={mode}
+        background={background}
+        onMouseEnter={handleHover(day)}
+        onClick={handleClick(day)}
+      >
+        {isActive && <Indicator variant={isFirst ? "LEFT" : "RIGHT"} />}
+        {isInteractive && (
+          <HeaderDay>
+            {IconWeather && (
+              <IconWeather sx={{ fontSize: 16, color: secondaryText }} />
+            )}
+            <Typography
+              color={secondaryText}
+              fontsizelarge={8}
+              fontsizesmall={8}
+              fontWeight="400"
+            >
+              {day.temperature}
+            </Typography>
+          </HeaderDay>
+        )}
+        <Typography
+          color={primaryText}
+          fontsizelarge={14}
+          fontsizesmall={12}
+          fontWeight="600"
+        >
+          {formatNumber(day.date.getDate(), lang)}
+        </Typography>
+        {isInteractive && day.price && (
+          <FooterDay>
+            <Typography
+              color={secondaryText}
+              fontsizelarge={12}
+              fontsizesmall={10}
+              fontWeight="400"
+            >
+              {day.price}
+            </Typography>
+          </FooterDay>
+        )}
+      </Td>
+    );
   };
-  const onMouseEnter = (day: DayProps) => () => {
-    props.onMouseEnter?.(day);
-  };
 
-  //render
-  const renderItem = () => {
-    return daysChunk.map((week, index) => {
-      return (
-        <Tr key={index}>
-          {week.map((day, iterator) => {
-            if (day.type === "NEXT_DAY" || day.type === "PREVIOUS_DAY") {
-              return <Td key={iterator} mode={mode} />;
-            }
-            const firstDay = startDate && startDate.formated === day.formated;
-            const lastDay = endDate && endDate.formated === day.formated;
-
-            const sx = {
-              border: `1px solid ${theme.palette.divider}`,
-              borderCollapse: "collapse",
-            };
-            const lang = props.locale?.code === "ar" ? "ar-EG" : undefined;
-
-            if (firstDay || lastDay) {
-              return (
-                <Td
-                  key={iterator}
-                  sx={sx}
-                  mode={mode}
-                  background={theme.palette.primary.main}
-                  onMouseEnter={onMouseEnter(day)}
-                  onClick={onClickItem(day)}
-                >
-                  {firstDay && <Indicator variant="LEFT" />}
-                  {lastDay && <Indicator variant="RIGHT" />}
-                  <HeaderDay>
-                    {day.weatherIcon}
-                    <Typography
-                      color={theme.palette.primary.contrastText}
-                      fontsizelarge={8}
-                      fontsizesmall={8}
-                      fontWeight="400"
-                    >
-                      {day.temperature}
-                    </Typography>
-                  </HeaderDay>
-                  <Typography
-                    fontWeight="600"
-                    fontsizelarge={14}
-                    fontsizesmall={12}
-                    color={theme.palette.primary.contrastText}
-                  >
-                    {formatNumber(day.date.getDate(), lang)}
-                    {/* {day.date.getDate()} */}
-                  </Typography>
-                  <FooterDay>
-                    <Typography
-                      color={theme.palette.primary.contrastText}
-                      fontsizelarge={12}
-                      fontsizesmall={10}
-                      fontWeight="400"
-                    >
-                      {day.price}
-                    </Typography>
-                  </FooterDay>
-                </Td>
-              );
-            }
-            const isBetweenDate =
-              startDate &&
-              endDate &&
-              day.date > startDate.date &&
-              day.date < endDate.date;
-            const isHovered = hoverList?.indexOf(day.formated) !== -1;
-            const background =
-              isHovered || isBetweenDate
-                ? theme.palette.secondary.dark
-                : day.background;
-
-            let color = day.color;
-            if (day.disabled) {
-              color = theme.palette.grey[300];
-            } else if (isHovered || isBetweenDate) {
-              color = theme.palette.primary.contrastText;
-            }
-            return (
-              <Td
-                key={iterator}
-                sx={sx}
-                mode={mode}
-                background={background}
-                onMouseEnter={onMouseEnter(day)}
-                onClick={onClickItem(day)}
-              >
-                {!day.disabled && (
-                  <HeaderDay>
-                    {day.weatherIcon}
-                    <Typography
-                      color={color}
-                      fontsizelarge={8}
-                      fontsizesmall={8}
-                      fontWeight="400"
-                    >
-                      {day.temperature}
-                    </Typography>
-                  </HeaderDay>
-                )}
-                <Typography
-                  color={color}
-                  fontsizelarge={14}
-                  fontsizesmall={12}
-                  fontWeight="600"
-                >
-                  {/* {day.date.getDate()} */}
-                  {formatNumber(day.date.getDate(), lang)}
-                </Typography>
-                {!day.disabled && (
-                  <FooterDay>
-                    <Typography
-                      color={color}
-                      fontsizelarge={12}
-                      fontsizesmall={10}
-                      fontWeight="400"
-                    >
-                      {day.price}
-                    </Typography>
-                  </FooterDay>
-                )}
-              </Td>
-            );
-          })}
+  return (
+    <TBody>
+      {daysChunk.map((week, weekIndex) => (
+        <Tr key={weekIndex}>
+          {week.map((day, dayIndex) => renderDayCell(day, dayIndex))}
         </Tr>
-      );
-    });
-  };
-  return <TBody>{renderItem()}</TBody>;
+      ))}
+    </TBody>
+  );
 };
 
 export default TableBody;

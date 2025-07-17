@@ -46,8 +46,10 @@ export const getTotalOfDays = (start?: Date, end?: Date) => {
   if (!start || !end) {
     return 0;
   }
-  const timeStart = start.getTime();
-  const timeEnd = end.getTime();
+  const startDate = new Date(new Date(start).setHours(8, 0, 0, 0));
+  const endDate = new Date(new Date(end).setHours(8, 0, 0, 0));
+  const timeStart = startDate.getTime();
+  const timeEnd = endDate.getTime();
   if (Number.isNaN(timeEnd) || Number.isNaN(timeStart)) {
     return 0;
   }

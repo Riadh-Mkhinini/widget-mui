@@ -7,9 +7,10 @@ import {
   IconButton as MuiIconButton,
 } from "@mui/material";
 
-export const Container = styled("div")(() => ({
+export const Container = styled("div")(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
+  padding: theme.spacing(0, 1),
 }));
 
 export const Accordion = styled(MuiAccordion)(({ theme }) => ({

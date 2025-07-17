@@ -13,6 +13,7 @@ import type {
   GenerateDaysListParams,
   GetMinMaxDateParams,
 } from "./calendar.types";
+import { SvgsWeather } from "@constants";
 
 export const getMinMaxDate = (params: GetMinMaxDateParams) => {
   const { from, maxYear, monthNumberDisplays } = params;
@@ -29,8 +30,15 @@ export const getMinMaxDate = (params: GetMinMaxDateParams) => {
   };
 };
 
+const randomWeatherIndex = (): number => {
+  const keys = Object.keys(SvgsWeather).map(Number);
+  const randomIndex = Math.floor(Math.random() * keys.length);
+  return keys[randomIndex];
+};
 export const generateDaysList = (params: GenerateDaysListParams) => {
-  const { theme, date, monthNumberDisplays } = params;
+  const { theme, date, monthNumberDisplays, isVisiblePrice, isVisibleWeather } =
+    params;
+
   const today = new Date();
   const start = new Date(date.getFullYear(), date.getMonth(), 1);
   const endDate = addMonths(start, monthNumberDisplays);
@@ -50,12 +58,15 @@ export const generateDaysList = (params: GenerateDaysListParams) => {
       background: isWeekend
         ? theme.palette.action.hover
         : theme.palette.background.paper,
-      // weatherIcon: weatherIcon,
-      // temperature: `${Math.round(Math.random() * (50 - 0))}°C`,
-      // price: `${Math.round(Math.random() * (3000 - 0) + 50)}€`,
-      color: isWeekend
-        ? theme.palette.text.primary
-        : theme.palette.text.primary,
+      weatherIcon: isVisibleWeather
+        ? SvgsWeather[randomWeatherIndex()]
+        : undefined,
+      temperature: isVisibleWeather
+        ? `${Math.round(Math.random() * (50 - 0))}°C`
+        : undefined,
+      price: isVisiblePrice
+        ? `${Math.round(Math.random() * (3000 - 0) + 50)}€`
+        : undefined,
     };
   });
 

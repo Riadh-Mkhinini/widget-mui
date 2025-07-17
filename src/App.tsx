@@ -2,7 +2,9 @@ import { useEffect, useMemo } from "react";
 import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
 import stylisRTLPlugin from "stylis-plugin-rtl";
+import i18next from "i18next";
 import "@fontsource-variable/inter-tight/wght.css";
+import "./i18n";
 
 //components
 import Engine from "./engine/engine";
@@ -10,12 +12,13 @@ import Engine from "./engine/engine";
 import { isRtlLanguage } from "@helpers";
 
 function App() {
-  const language = "ar";
+  const language = "enUS";
   const isRtl = useMemo(() => isRtlLanguage(language), [language]);
 
   useEffect(() => {
+    i18next.changeLanguage(language);
     document.body.dir = isRtl ? "rtl" : "ltr";
-  }, [isRtl]);
+  }, [isRtl, language]);
 
   const cache = useMemo(
     () =>

@@ -92,6 +92,8 @@ export type CalendarConfig = {
   popUpMode?: "default" | "pop-up";
   monthNumberDisplays?: number;
   maxYear?: number;
+  isVisibleWeather?: boolean;
+  isVisiblePrice?: boolean;
 };
 
 //****PROPERTY***

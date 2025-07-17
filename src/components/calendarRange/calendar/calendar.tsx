@@ -1,8 +1,6 @@
 import { type FC, useCallback, useEffect, useMemo, useState } from "react";
-import { Button, useTheme } from "@mui/material";
+import { useTheme } from "@mui/material";
 import { addDays, format, sub } from "date-fns";
-//constants
-import { Svgs } from "@constants";
 //utils
 import {
   generateDaysList,
@@ -12,10 +10,11 @@ import {
 } from "./calendar.utils";
 //components
 import { Popover } from "@/components/commons";
-import Month from "./month/month";
 import Header from "./header/header";
+import Month from "./month/month";
+import Footer from "./footer/footer";
 //styles
-import { Content, Footer, List } from "./calendar.styles";
+import { Content, List } from "./calendar.styles";
 //types
 import type { CalendarProps, DayProps } from "./calendar.types";
 
@@ -26,7 +25,7 @@ const Calendar: FC<CalendarProps> = (props) => {
     defaultEndDate,
     locale,
     calendarConfig,
-    popUpButtonDone = "Done",
+    texts,
     id,
     open,
     anchorEl,
@@ -40,6 +39,7 @@ const Calendar: FC<CalendarProps> = (props) => {
   const [endDate, setEndDate] = useState<DayProps | null>(
     defaultEndDate || null
   );
+  const [dayHovered, setDayHovered] = useState<Date | null>(null);
   const [hoverList, setHoverList] = useState<Array<string>>([]);
 
   //useMemo
@@ -50,6 +50,8 @@ const Calendar: FC<CalendarProps> = (props) => {
           ? calendarConfig?.monthNumberDisplays
           : 0,
       maxYear: calendarConfig?.maxYear || 1,
+      isVisiblePrice: calendarConfig?.isVisiblePrice,
+      isVisibleWeather: calendarConfig?.isVisibleWeather,
     }),
     [calendarConfig]
   );
@@ -60,15 +62,16 @@ const Calendar: FC<CalendarProps> = (props) => {
         theme,
         date: from,
         monthNumberDisplays: config.monthNumberDisplays,
-        weatherIcon: (
-          <Svgs.IconChevronDown
-            fill={theme.palette.grey[400]}
-            width={14}
-            height={14}
-          />
-        ),
+        isVisiblePrice: config.isVisiblePrice,
+        isVisibleWeather: config.isVisibleWeather,
       }),
-    [theme, from, config.monthNumberDisplays]
+    [
+      theme,
+      from,
+      config.monthNumberDisplays,
+      config.isVisiblePrice,
+      config.isVisibleWeather,
+    ]
   );
 
   const { disabledPrevious, disabledNext } = useMemo(
@@ -128,6 +131,7 @@ const Calendar: FC<CalendarProps> = (props) => {
   );
   const onMouseEnter = useCallback(
     (day: DayProps) => {
+      setDayHovered(day.date);
       if (startDate && !endDate && day.date > startDate.date) {
         const list = getDatesInRange(startDate.date, day.date);
         setHoverList(list);
@@ -200,15 +204,12 @@ const Calendar: FC<CalendarProps> = (props) => {
           {renderMonths()}
         </List>
       </Content>
-      <Footer>
-        <Button
-          variant="contained"
-          sx={{ textTransform: "none" }}
-          onClick={onClickDone}
-        >
-          {popUpButtonDone}
-        </Button>
-      </Footer>
+      <Footer
+        label={texts?.popUpButtonDone}
+        dayHovered={dayHovered}
+        hoverList={hoverList}
+        onClick={onClickDone}
+      />
     </Popover>
   );
 };

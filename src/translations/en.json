@@ -1,0 +1,36 @@
+{
+  "search_label": "Search",
+  "property": {
+    "preview_label": "Choose hotel",
+    "preview_placeholder": "Select your destination",
+    "pop_up_title": "Choose hotel",
+    "pop_up_sub_title": "Select your destination",
+    "pop_up_search_placeholder": "Search..."
+  },
+  "guests": {
+    "preview_label": "Guests",
+    "preview_value": "rooms_and_guests",
+    "pop_up_title": "Guests",
+    "pop_up_room": "room_x",
+    "pop_up_adults": "Adults",
+    "pop_up_adults_caption": "(13+ years)",
+    "pop_up_children": "Children",
+    "pop_up_children_caption": "Children",
+    "pop_up_age_child": "age_child_x",
+    "pop_up_button_add_room": "Add room",
+    "pop_up_button_done": "Confirm",
+    "pop_up_required_field": "This field is required",
+    "pop_up_age_child_placeholder": "Select",
+    "pop_up_count_adult_child": "adults_and_children"
+  },
+  "calendar": {
+    "preview_check_in_label": "Check in",
+    "preview_check_out_label": "Check out",
+    "preview_nights_label": "x nights",
+    "pop_up_required_field": "This field is required",
+    "pop_up_button_done": "Confirm"
+  },
+  "promo_code": {
+    "preview_placeholder": "Promo code"
+  }
+}
