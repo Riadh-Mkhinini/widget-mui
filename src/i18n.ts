@@ -12,7 +12,7 @@ for (const path in modules) {
 
 i18n.use(initReactI18next).init({
   resources,
-  fallbackLng: "en",
+  fallbackLng: "enUs",
   interpolation: {
     escapeValue: false, // React already escapes
   },

@@ -5,6 +5,7 @@ import {
   startOfWeek,
   type Locale,
 } from "date-fns";
+import type { TFunction } from "i18next";
 
 export function groupBy<T>(array: Array<T>, key: keyof T) {
   return array.reduce((objectsByKeyValue, obj) => {
@@ -56,4 +57,38 @@ export const getTotalOfDays = (start?: Date, end?: Date) => {
   const difference = timeEnd - timeStart;
   const totalDays = Math.ceil(difference / (1000 * 3600 * 24));
   return totalDays;
+};
+
+export const getMessageGuests = (params: {
+  t: TFunction;
+  rooms?: number;
+  adults: number;
+  children: number;
+}) => {
+  const { t, rooms = 0, adults, children } = params;
+  const data = [
+    {
+      count: rooms,
+      message:
+        rooms === 1 ? t("guests.room") : t("guests.rooms", { value: rooms }),
+    },
+    {
+      count: adults,
+      message:
+        adults === 1
+          ? t("guests.adult")
+          : t("guests.adults", { value: adults }),
+    },
+    {
+      count: children,
+      message:
+        children === 1
+          ? t("guests.child")
+          : t("guests.children", { value: children }),
+    },
+  ];
+  return data
+    .filter((o) => o.count > 0)
+    .map((o) => o.message)
+    .join(", ");
 };

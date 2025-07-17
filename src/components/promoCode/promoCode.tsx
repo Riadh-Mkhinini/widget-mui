@@ -25,7 +25,7 @@ const PromoCode: FC<PromoCodeProps> = (props) => {
     <Preview
       type="input"
       layout={engineConfig?.global?.layout}
-      placeholder={t("property.promo_code.preview_placeholder")}
+      placeholder={t("promo_code.preview_placeholder")}
       value={value}
       icon={
         <Svgs.IconPromoCode

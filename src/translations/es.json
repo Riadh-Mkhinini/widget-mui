@@ -1,0 +1,45 @@
+{
+  "property": {
+    "preview_label": "Elegir hotel",
+    "preview_placeholder": "Seleccione su destino",
+    "pop_up_title": "Elegir hotel",
+    "pop_up_sub_title": "Seleccione su destino",
+    "pop_up_search_placeholder": "Buscar..."
+  },
+  "guests": {
+    "preview_label": "Huéspedes",
+    "pop_up_title": "Huéspedes",
+    "pop_up_room": "Habitación {{value}}",
+    "pop_up_adults": "Adultos",
+    "pop_up_adults_caption": "(13+ años)",
+    "pop_up_children": "Niños",
+    "pop_up_children_caption": "Niños",
+    "pop_up_age_child": "Edad del niño {{value}}",
+    "pop_up_button_add_room": "Añadir habitación",
+    "pop_up_button_done": "Confirmar",
+    "pop_up_required_field": "Este campo es obligatorio",
+    "pop_up_age_child_placeholder": "Seleccionar",
+    "room": "1 habitación",
+    "rooms": "{{value}} habitaciones",
+    "adult": "1 adulto",
+    "adults": "{{value}} adultos",
+    "child": "1 niño",
+    "children": "{{value}} niños"
+  },
+  "calendar": {
+    "preview_check_in_label": "Entrada",
+    "preview_check_out_label": "Salida",
+    "preview_nights_label": "{{value}} noches",
+    "pop_up_required_field": "Este campo es obligatorio",
+    "pop_up_start_end_date_nights": "{{start}} - {{end}} ({{nights}} noches)",
+    "pop_up_note": "Los mejores precios por persona y por noche",
+    "pop_up_sub_note": "Los precios están sujetos a condiciones especiales de reserva",
+    "pop_up_button_done": "Confirmar"
+  },
+  "promo_code": {
+    "preview_placeholder": "Código promocional"
+  },
+  "search": {
+    "search_label": "Buscar"
+  }
+}

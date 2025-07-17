@@ -10,7 +10,7 @@ import type { IBEProviderProps } from "./ibeContext.types";
 import type { ParamsSize } from "@/engine/engine.types";
 
 export const IBEProvider: FC<IBEProviderProps> = (props) => {
-  const { children, localeText, size, engineConfig } = props;
+  const { children, size, engineConfig } = props;
 
   const paramsSize: ParamsSize = useMemo(() => {
     if (engineConfig?.global?.preview?.size === "custom") {
@@ -31,7 +31,6 @@ export const IBEProvider: FC<IBEProviderProps> = (props) => {
   return (
     <IbeContext.Provider
       value={{
-        localeText,
         engineConfig,
         paramsSize,
         paramsSizeExtraSmall,

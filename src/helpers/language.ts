@@ -1,21 +1,51 @@
 import * as locales from "date-fns/locale";
 import { type Locale } from "date-fns";
 
-export type Language = keyof typeof locales;
+export type Language =
+  | "ar" // Arabic
+  | "de" // German
+  | "enUS" // English (US)
+  | "enGB" // English (UK)
+  | "es" // Spanish
+  | "fr" // French
+  | "it" // Italian
+  | "ja" // Japanese
+  | "ko" // Korean
+  | "ptBR" // Portuguese (Brazil)
+  | "ru" // Russian
+  | "tr" // Turkish
+  | "zhCN" // Chinese (Simplified)
+  | "zhTW" // Chinese (Traditional - Taiwan)
+  | "zhHK"; // Chinese (Traditional - Hong Kong)
 
-const normalizeLang = (lang: Language): string => {
-  return lang.toLowerCase().split(/[-_]/)[0];
+// Map your Language codes to available locale keys from date-fns
+const languageToLocaleMap: Partial<Record<Language, keyof typeof locales>> = {
+  ar: "ar",
+  de: "de",
+  enUS: "enUS",
+  enGB: "enGB",
+  es: "es",
+  fr: "fr",
+  it: "it",
+  ja: "ja",
+  ko: "ko",
+  ptBR: "ptBR",
+  ru: "ru",
+  tr: "tr",
+  zhCN: "zhCN",
+  zhTW: "zhTW",
+  zhHK: "zhHK", // May not exist in date-fns; fallback will handle it
 };
 
 export const getLocale = (language?: Language): Locale => {
-  if (!language) return locales.enUS;
+  const fallback = locales.enUS;
 
-  const exactLocale = (locales as Record<string, Locale>)[language];
-  if (exactLocale) return exactLocale;
+  if (!language) return fallback;
 
-  const baseLang = normalizeLang(language);
-  const baseLocale = (locales as Record<string, Locale>)[baseLang];
-  return baseLocale || locales.enUS;
+  const localeKey = languageToLocaleMap[language];
+  const locale = localeKey ? locales[localeKey] : undefined;
+
+  return locale || fallback;
 };
 
 const rtlLanguages = new Set([
@@ -31,9 +61,7 @@ const rtlLanguages = new Set([
 
 export const isRtlLanguage = (language?: Language): boolean => {
   if (!language) return false;
-
-  const normalized = normalizeLang(language);
-  return rtlLanguages.has(normalized);
+  return rtlLanguages.has(language);
 };
 
 export const formatNumber = (value: number, language?: string): string => {
@@ -43,95 +71,3 @@ export const formatNumber = (value: number, language?: string): string => {
     return new Intl.NumberFormat("en-US").format(value);
   }
 };
-
-export const languageSupported = [
-  "af", // Afrikaans
-  "ar", // Arabic
-  "ar-DZ", // Arabic (Algeria)
-  "ar-MA", // Arabic (Morocco)
-  "ar-SA", // Arabic (Saudi Arabia)
-  "az", // Azerbaijani
-  "be", // Belarusian
-  "bg", // Bulgarian
-  "bn", // Bengali
-  "bs", // Bosnian
-  "ca", // Catalan
-  "cs", // Czech
-  "cy", // Welsh
-  "da", // Danish
-  "de", // German
-  "de-AT", // German (Austria)
-  "el", // Greek
-  "en-AU", // English (Australia)
-  "en-CA", // English (Canada)
-  "en-GB", // English (UK)
-  "en-IN", // English (India)
-  "en-NZ", // English (New Zealand)
-  "en-US", // English (US)
-  "en-ZA", // English (South Africa)
-  "eo", // Esperanto
-  "es", // Spanish
-  "es-AR", // Spanish (Argentina)
-  "es-DO", // Spanish (Dominican Republic)
-  "es-MX", // Spanish (Mexico)
-  "es-US", // Spanish (US)
-  "et", // Estonian
-  "eu", // Basque
-  "fa-IR", // Persian (Iran)
-  "fi", // Finnish
-  "fr", // French
-  "fr-CA", // French (Canada)
-  "fr-CH", // French (Switzerland)
-  "gd", // Scottish Gaelic
-  "gl", // Galician
-  "gu", // Gujarati
-  "he", // Hebrew
-  "hi", // Hindi
-  "hr", // Croatian
-  "ht", // Haitian Creole
-  "hu", // Hungarian
-  "hy", // Armenian
-  "id", // Indonesian
-  "is", // Icelandic
-  "it", // Italian
-  "ja", // Japanese
-  "ja-Hira", // Japanese (Hiragana)
-  "ka", // Georgian
-  "kk", // Kazakh
-  "km", // Khmer
-  "kn", // Kannada
-  "ko", // Korean
-  "lb", // Luxembourgish
-  "lt", // Lithuanian
-  "lv", // Latvian
-  "mk", // Macedonian
-  "mn", // Mongolian
-  "ms", // Malay
-  "mt", // Maltese
-  "nb", // Norwegian Bokmål
-  "nl", // Dutch
-  "nl-BE", // Dutch (Belgium)
-  "nn", // Norwegian Nynorsk
-  "pl", // Polish
-  "pt", // Portuguese
-  "pt-BR", // Portuguese (Brazil)
-  "ro", // Romanian
-  "ru", // Russian
-  "sk", // Slovak
-  "sl", // Slovenian
-  "sq", // Albanian
-  "sr", // Serbian (Cyrillic)
-  "sr-Latn", // Serbian (Latin)
-  "sv", // Swedish
-  "ta", // Tamil
-  "te", // Telugu
-  "th", // Thai
-  "tr", // Turkish
-  "ug", // Uyghur
-  "uk", // Ukrainian
-  "uz", // Uzbek
-  "vi", // Vietnamese
-  "zh-CN", // Chinese (Simplified)
-  "zh-HK", // Chinese (Hong Kong)
-  "zh-TW", // Chinese (Traditional)
-];

@@ -11,9 +11,7 @@ export type CalendarProps = {
   defaultEndDate?: DayProps | null;
   locale?: Locale;
   calendarConfig?: CalendarConfig;
-  texts?: {
-    popUpButtonDone?: string;
-  };
+  texts?: Texts;
   tags?: Array<Tag>;
   onClose?: () => void;
   onClickDone?: (params: {
@@ -22,6 +20,12 @@ export type CalendarProps = {
   }) => void;
 };
 
+export type Texts = {
+  popUpButtonDone?: string;
+  popUpStartEndDateNights?: (start: Date, end: Date) => string;
+  popUpNote?: string;
+  popUpSubNote?: string;
+};
 export type Tag = {
   label?: string;
   textColor?: string;

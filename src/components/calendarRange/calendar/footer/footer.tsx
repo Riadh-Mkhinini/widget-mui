@@ -1,31 +1,28 @@
 import { useMemo, type FC } from "react";
+import { format } from "date-fns";
 import { Button, Stack, Typography } from "@mui/material";
 //styles
 import { Container } from "./footer.styles";
 //types
 import type { FooterProps } from "./footer.types";
-import { format } from "date-fns";
-import { getTotalOfDays } from "@helpers";
 
 const Footer: FC<FooterProps> = (props) => {
-  const { label = "Done", dayHovered, hoverList = [], onClick } = props;
+  const { texts, dayHovered, hoverList = [], onClick } = props;
 
   const text = useMemo(() => {
     const start = hoverList.shift();
     const end = hoverList.pop();
     let text = "";
     if (dayHovered && start && end) {
-      text = `${format(new Date(start), "EEEEEE, dd MMM")} - ${format(
-        new Date(end),
-        "EEEEEE, dd MMM"
-      )} (${getTotalOfDays(new Date(start), new Date(end))} nights)`;
+      text =
+        texts?.popUpStartEndDateNights?.(new Date(start), new Date(end)) || "";
     } else if (dayHovered && start) {
       text = format(new Date(start), "EEEEEE, dd MMM");
     } else if (dayHovered) {
       text = format(dayHovered, "EEEEEE, dd MMM");
     }
     return text;
-  }, [dayHovered, hoverList]);
+  }, [dayHovered, hoverList, texts]);
 
   return (
     <Container>
@@ -34,10 +31,10 @@ const Footer: FC<FooterProps> = (props) => {
           {text}
         </Typography>
         <Typography fontSize={12} color="grey.600">
-          The best booking prices for 1 person per night
+          {texts?.popUpNote}
         </Typography>
         <Typography fontSize={12} color="grey.600">
-          Prices are subject to special booking conditions
+          {texts?.popUpSubNote}
         </Typography>
       </Stack>
       <Button
@@ -45,7 +42,7 @@ const Footer: FC<FooterProps> = (props) => {
         sx={{ textTransform: "none" }}
         onClick={onClick}
       >
-        {label}
+        {texts?.popUpButtonDone}
       </Button>
     </Container>
   );

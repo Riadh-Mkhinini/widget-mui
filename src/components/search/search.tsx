@@ -1,4 +1,5 @@
 import { type FC, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 //constants
 import { Svgs } from "@constants";
 //contextAPI
@@ -11,7 +12,8 @@ import type { SearchProps } from "./search.types";
 
 const Search: FC<SearchProps> = (props) => {
   const { sx, onClick } = props;
-  const { localeText, paramsSize, engineConfig, size } = useIBE();
+  const { t } = useTranslation();
+  const { paramsSize, engineConfig, size } = useIBE();
 
   const borderRadius = useMemo(
     () =>
@@ -36,7 +38,7 @@ const Search: FC<SearchProps> = (props) => {
         </ContainerIcon>
       )}
       <Typography size={size} mode={engineConfig?.search?.mode}>
-        {localeText?.searchLabel}
+        {t("search.search_label")}
       </Typography>
     </Button>
   );

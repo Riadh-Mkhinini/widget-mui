@@ -1,4 +1,5 @@
 import { type FC, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Button, Divider, Typography } from "@mui/material";
 //constants
 import { Svgs } from "@constants";
@@ -7,6 +8,8 @@ import { useIBE } from "@contextAPI";
 //components
 import { Popover, Preview } from "../commons";
 import Room from "./room/room";
+//helpers
+import { getMessageGuests } from "@helpers";
 //styles
 import { Container, Content, Footer } from "./guests.styles";
 //types
@@ -14,7 +17,8 @@ import type { GuestsProps, RoomData } from "./guests.types";
 
 const Guests: FC<GuestsProps> = (props) => {
   const { onChange } = props;
-  const { localeText, engineConfig, paramsSize } = useIBE();
+  const { t } = useTranslation();
+  const { engineConfig, paramsSize } = useIBE();
   //states
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
   const [rooms, setRooms] = useState<Array<RoomData>>(props.rooms);
@@ -99,7 +103,7 @@ const Guests: FC<GuestsProps> = (props) => {
           valid = false;
           return {
             ...child,
-            error: localeText?.guests?.popUpRequiredField,
+            error: t("guests.pop_up_required_field"),
           };
         }
         return child;
@@ -121,7 +125,7 @@ const Guests: FC<GuestsProps> = (props) => {
       return (
         <Room
           key={index}
-          title={localeText?.guests?.popUpRoom?.(index + 1)}
+          title={t("guests.pop_up_room", { value: index + 1 })}
           room={room}
           showDeleteButton={rooms.length > 1}
           onChangeAdults={onChangeAdults(index)}
@@ -139,12 +143,13 @@ const Guests: FC<GuestsProps> = (props) => {
         type="simple"
         id={id}
         open={open}
-        label={localeText?.guests?.previewLabel}
-        value={localeText?.guests?.previewValue?.(
-          totalRooms,
-          totalAdults,
-          totalChildren
-        )}
+        label={t("guests.preview_label")}
+        value={getMessageGuests({
+          t,
+          rooms: totalRooms,
+          adults: totalAdults,
+          children: totalChildren,
+        })}
         showIconSelect={false}
         icon={
           <Svgs.IconUserGroup03
@@ -169,7 +174,7 @@ const Guests: FC<GuestsProps> = (props) => {
       >
         <Container divider={<Divider />}>
           <Typography p={2} fontSize={16} fontWeight="700">
-            {localeText?.guests?.popUpTitle}
+            {t("guests.pop_up_title")}
           </Typography>
           <Content>{renderItem()}</Content>
           <Footer>
@@ -180,7 +185,9 @@ const Guests: FC<GuestsProps> = (props) => {
               disabled={engineConfig?.guests?.maxRoom === rooms.length}
               onClick={onClickAddRoom}
             >
-              {localeText?.guests?.popUpButtonAddRoom}
+              <Typography variant="inherit" noWrap>
+                {t("guests.pop_up_button_add_room")}
+              </Typography>
             </Button>
             <Button
               sx={{ textTransform: "none" }}
@@ -188,7 +195,9 @@ const Guests: FC<GuestsProps> = (props) => {
               fullWidth
               onClick={onClickDone}
             >
-              {localeText?.guests?.popUpButtonDone}
+              <Typography variant="inherit" noWrap>
+                {t("guests.pop_up_button_done")}
+              </Typography>
             </Button>
           </Footer>
         </Container>

@@ -1,0 +1,45 @@
+{
+  "property": {
+    "preview_label": "Выбрать отель",
+    "preview_placeholder": "Выберите направление",
+    "pop_up_title": "Выбрать отель",
+    "pop_up_sub_title": "Выберите направление",
+    "pop_up_search_placeholder": "Поиск..."
+  },
+  "guests": {
+    "preview_label": "Гости",
+    "pop_up_title": "Гости",
+    "pop_up_room": "Комната {{value}}",
+    "pop_up_adults": "Взрослые",
+    "pop_up_adults_caption": "(от 13 лет)",
+    "pop_up_children": "Дети",
+    "pop_up_children_caption": "Дети",
+    "pop_up_age_child": "Возраст {{value}} ребенка",
+    "pop_up_button_add_room": "Добавить комнату",
+    "pop_up_button_done": "Подтвердить",
+    "pop_up_required_field": "Это поле обязательно",
+    "pop_up_age_child_placeholder": "Выбрать",
+    "room": "1 комната",
+    "rooms": "{{value}} комнат",
+    "adult": "1 взрослый",
+    "adults": "{{value}} взрослых",
+    "child": "1 ребенок",
+    "children": "{{value}} детей"
+  },
+  "calendar": {
+    "preview_check_in_label": "Заезд",
+    "preview_check_out_label": "Выезд",
+    "preview_nights_label": "{{value}} ночей",
+    "pop_up_required_field": "Это поле обязательно",
+    "pop_up_start_end_date_nights": "{{start}} - {{end}} ({{nights}} ночей)",
+    "pop_up_note": "Лучшие цены за человека за ночь",
+    "pop_up_sub_note": "Цены могут зависеть от условий бронирования",
+    "pop_up_button_done": "Подтвердить"
+  },
+  "promo_code": {
+    "preview_placeholder": "Промокод"
+  },
+  "search": {
+    "search_label": "Поиск"
+  }
+}

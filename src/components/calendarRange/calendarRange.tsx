@@ -1,17 +1,20 @@
 import { type FC, useMemo, useState } from "react";
+import { format } from "date-fns";
+import { useTranslation } from "react-i18next";
 //context
 import { useIBE } from "@contextAPI";
 //components
 import { Preview } from "../commons";
 import { Calendar, type DayProps } from "./calendar/calendar";
 //helpers
-import { getDayOfWeek } from "@helpers";
+import { getDayOfWeek, getTotalOfDays } from "@helpers";
 //types
 import type { CalendarRangeProps } from "./calendarRange.types";
 
 const CalendarRange: FC<CalendarRangeProps> = (props) => {
   const { startDate, endDate, locale } = props;
-  const { localeText, engineConfig } = useIBE();
+  const { t } = useTranslation();
+  const { engineConfig } = useIBE();
 
   //states
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
@@ -48,9 +51,11 @@ const CalendarRange: FC<CalendarRangeProps> = (props) => {
         startDate={startDate}
         endDate={endDate}
         layout={engineConfig?.global?.layout}
-        labelStartDate={localeText?.calendar?.previewCheckInLabel}
-        labelEndDate={localeText?.calendar?.previewCheckOutLabel}
-        getLabelNights={localeText?.calendar?.previewNightsLabel}
+        labelStartDate={t("calendar.preview_check_in_label")}
+        labelEndDate={t("calendar.preview_check_out_label")}
+        getLabelNights={(days) =>
+          t("calendar.preview_nights_label", { value: days })
+        }
         onClickOpen={onClickOpen}
       />
       <Calendar
@@ -62,7 +67,17 @@ const CalendarRange: FC<CalendarRangeProps> = (props) => {
         daysList={daysList}
         locale={locale}
         calendarConfig={engineConfig?.calendar}
-        texts={{ popUpButtonDone: localeText?.calendar?.popUpButtonDone }}
+        texts={{
+          popUpButtonDone: t("calendar.pop_up_button_done"),
+          popUpNote: t("calendar.pop_up_note"),
+          popUpSubNote: t("calendar.pop_up_sub_note"),
+          popUpStartEndDateNights: (start, end) =>
+            t("calendar.pop_up_start_end_date_nights", {
+              start: format(start, "EEEEEE, dd MMM"),
+              end: format(end, "EEEEEE, dd MMM"),
+              nights: getTotalOfDays(start, end),
+            }),
+        }}
         onClickDone={onClickDone}
         onClose={onClose}
       />

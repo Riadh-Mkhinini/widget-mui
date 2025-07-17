@@ -1,0 +1,45 @@
+{
+  "property": {
+    "preview_label": "选择酒店",
+    "preview_placeholder": "请选择您的目的地",
+    "pop_up_title": "选择酒店",
+    "pop_up_sub_title": "请选择您的目的地",
+    "pop_up_search_placeholder": "搜索..."
+  },
+  "guests": {
+    "preview_label": "客人",
+    "pop_up_title": "客人",
+    "pop_up_room": "房间 {{value}}",
+    "pop_up_adults": "成人",
+    "pop_up_adults_caption": "（13岁以上）",
+    "pop_up_children": "儿童",
+    "pop_up_children_caption": "儿童",
+    "pop_up_age_child": "第{{value}}位儿童的年龄",
+    "pop_up_button_add_room": "添加房间",
+    "pop_up_button_done": "确认",
+    "pop_up_required_field": "此字段为必填项",
+    "pop_up_age_child_placeholder": "请选择",
+    "room": "1 间房",
+    "rooms": "{{value}} 间房",
+    "adult": "1 位成人",
+    "adults": "{{value}} 位成人",
+    "child": "1 位儿童",
+    "children": "{{value}} 位儿童"
+  },
+  "calendar": {
+    "preview_check_in_label": "入住",
+    "preview_check_out_label": "退房",
+    "preview_nights_label": "{{value}} 晚",
+    "pop_up_required_field": "此字段为必填项",
+    "pop_up_start_end_date_nights": "{{start}} - {{end}}（{{nights}} 晚）",
+    "pop_up_note": "每人每晚的最优价格",
+    "pop_up_sub_note": "价格可能受特别预订条件影响",
+    "pop_up_button_done": "确认"
+  },
+  "promo_code": {
+    "preview_placeholder": "优惠码"
+  },
+  "search": {
+    "search_label": "搜索"
+  }
+}

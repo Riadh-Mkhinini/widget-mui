@@ -9,7 +9,7 @@ import {
   Container,
   GridItem,
   Guests,
-  Header,
+  // Header,
   Layout,
   PromoCode,
   Property,
@@ -21,12 +21,12 @@ import {
 //utils
 import { getLocale, isRtlLanguage } from "@helpers";
 import { createCustomTheme } from "@theme";
-import { generateDayProps, initLocaleText } from "./engine.utils";
+import { generateDayProps } from "./engine.utils";
 //types
 import type { EngineConfig, EngineProps, ResultEngine } from "./engine.types";
 
 const Engine: FC<EngineProps> = (props) => {
-  const { idEngine, language } = props;
+  const { language } = props;
 
   const [property, setProperty] = useState<PropertyItem | null>(null);
   const [startDate, setStartDate] = useState<DayProps | null>(
@@ -46,7 +46,6 @@ const Engine: FC<EngineProps> = (props) => {
       createCustomTheme({ direction: isRtlLanguage(language) ? "rtl" : "ltr" }),
     [language]
   );
-  const localeText = useMemo(() => initLocaleText(), []);
   const locale = useMemo(() => getLocale(language), [language]);
 
   //functions
@@ -118,7 +117,7 @@ const Engine: FC<EngineProps> = (props) => {
       mode: "simple",
       popUpMode: "default",
       showSearch: true,
-      showProperty: true,
+      showProperty: false,
     },
     promoCode: {
       showPromoCode: false,
@@ -139,13 +138,9 @@ const Engine: FC<EngineProps> = (props) => {
   };
   return (
     <ThemeProvider theme={theme}>
-      <IBEProvider
-        size="xl"
-        localeText={localeText}
-        engineConfig={engineConfig}
-      >
+      <IBEProvider size="xl" engineConfig={engineConfig}>
         <Container>
-          <Header title={`Engine ID: ${idEngine}`} />
+          {/* <Header title={`Engine ID: ${idEngine}`} /> */}
           <Layout>
             <GridItem
               gridArea="property"

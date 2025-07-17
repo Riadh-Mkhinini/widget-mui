@@ -1,4 +1,5 @@
 import { type FC, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { Typography, Fade, Divider, Stack } from "@mui/material";
 //constants
 import { Svgs } from "@constants";
@@ -16,6 +17,7 @@ import {
 } from "./room.styles";
 //types
 import type { RoomProps } from "./room.types";
+import { getMessageGuests } from "@helpers";
 
 const Room: FC<RoomProps> = (props) => {
   const {
@@ -27,7 +29,8 @@ const Room: FC<RoomProps> = (props) => {
     onChangeChildren,
     onChangeChildValue,
   } = props;
-  const { localeText, engineConfig } = useIBE();
+  const { t } = useTranslation();
+  const { engineConfig } = useIBE();
 
   const dataChilds = useMemo(
     () =>
@@ -47,14 +50,14 @@ const Room: FC<RoomProps> = (props) => {
       return (
         <Stack key={iterator} direction="row" gap={2}>
           <Typography flex={1} fontSize={14} mt={1}>
-            {localeText?.guests?.popUpAgeChild?.(iterator + 1)}
+            {t("guests.pop_up_age_child", { value: iterator + 1 })}
           </Typography>
           <Select
             variant="standard"
             value={child.value}
             data={dataChilds}
             heightPaper={200}
-            placeholder={localeText?.guests?.popUpAgeChildPlaceholder}
+            placeholder={t("guests.pop_up_age_child_placeholder")}
             getOptionLabel={(item) => item}
             getOptionValue={(item) => item}
             sx={{ textAlign: "end" }}
@@ -76,11 +79,11 @@ const Room: FC<RoomProps> = (props) => {
             {title}
           </Typography>
           <Typography fontSize={14} fontWeight="400" color="grey.600">
-            {localeText?.guests?.popUpCountAdultChild &&
-              localeText?.guests?.popUpCountAdultChild(
-                room.adultsCount,
-                room.childCount
-              )}
+            {getMessageGuests({
+              t,
+              adults: room.adultsCount,
+              children: room.childCount,
+            })}
           </Typography>
           <Fade in={showDeleteButton} unmountOnExit mountOnEnter>
             <Stack direction="row" alignItems="center">
@@ -99,19 +102,19 @@ const Room: FC<RoomProps> = (props) => {
             <Counter
               min={1}
               direction="row"
+              label={t("guests.pop_up_adults")}
+              caption={t("guests.pop_up_adults_caption")}
               mode={engineConfig?.guests?.counterMode}
               max={engineConfig?.guests?.maxAdults}
-              label={localeText?.guests?.popUpAdults}
-              caption={localeText?.guests?.popUpAdultsCaption}
               value={room.adultsCount}
               onChange={onChangeAdults}
             />
             <Counter
               direction="row"
+              label={t("guests.pop_up_children")}
+              caption={t("guests.pop_up_children_caption")}
               mode={engineConfig?.guests?.counterMode}
               max={engineConfig?.guests?.maxChildren}
-              label={localeText?.guests?.popUpChildren}
-              caption={localeText?.guests?.popUpChildrenCaption}
               value={room.childCount}
               onChange={onChangeChildren}
             />
@@ -137,18 +140,18 @@ const Room: FC<RoomProps> = (props) => {
       <Stack direction="row" alignItems="center" justifyContent="space-between">
         <Counter
           min={1}
+          label={t("guests.pop_up_adults")}
+          caption={t("guests.pop_up_adults_caption")}
           mode={engineConfig?.guests?.counterMode}
           max={engineConfig?.guests?.maxAdults}
-          label={localeText?.guests?.popUpAdults}
-          caption={localeText?.guests?.popUpAdultsCaption}
           value={room.adultsCount}
           onChange={onChangeAdults}
         />
         <Counter
+          label={t("guests.pop_up_children")}
+          caption={t("guests.pop_up_children_caption")}
           mode={engineConfig?.guests?.counterMode}
           max={engineConfig?.guests?.maxChildren}
-          label={localeText?.guests?.popUpChildren}
-          caption={localeText?.guests?.popUpChildrenCaption}
           value={room.childCount}
           onChange={onChangeChildren}
         />

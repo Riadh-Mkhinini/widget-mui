@@ -1,36 +1,45 @@
 {
-  "search_label": "Search",
   "property": {
-    "preview_label": "Choose hotel",
-    "preview_placeholder": "Select your destination",
-    "pop_up_title": "Choose hotel",
-    "pop_up_sub_title": "Select your destination",
-    "pop_up_search_placeholder": "Search..."
+    "preview_label": "اختر فندقًا",
+    "preview_placeholder": "اختر وجهتك",
+    "pop_up_title": "اختر فندقًا",
+    "pop_up_sub_title": "اختر وجهتك",
+    "pop_up_search_placeholder": "بحث..."
   },
   "guests": {
-    "preview_label": "Guests",
-    "preview_value": "rooms_and_guests",
-    "pop_up_title": "Guests",
-    "pop_up_room": "room_x",
-    "pop_up_adults": "Adults",
-    "pop_up_adults_caption": "(13+ years)",
-    "pop_up_children": "Children",
-    "pop_up_children_caption": "Children",
-    "pop_up_age_child": "age_child_x",
-    "pop_up_button_add_room": "Add room",
-    "pop_up_button_done": "Confirm",
-    "pop_up_required_field": "This field is required",
-    "pop_up_age_child_placeholder": "Select",
-    "pop_up_count_adult_child": "adults_and_children"
+    "preview_label": "الضيوف",
+    "pop_up_title": "الضيوف",
+    "pop_up_room": "الغرفة {{value}}",
+    "pop_up_adults": "البالغون",
+    "pop_up_adults_caption": "(13 سنة فما فوق)",
+    "pop_up_children": "الأطفال",
+    "pop_up_children_caption": "الأطفال",
+    "pop_up_age_child": "عمر الطفل {{value}}",
+    "pop_up_button_add_room": "إضافة غرفة",
+    "pop_up_button_done": "تأكيد",
+    "pop_up_required_field": "هذا الحقل مطلوب",
+    "pop_up_age_child_placeholder": "اختر",
+    "room": "غرفة واحدة",
+    "rooms": "{{value}} غرف",
+    "adult": "بالغ واحد",
+    "adults": "{{value}} بالغ",
+    "child": "طفل واحد",
+    "children": "{{value}} أطفال"
   },
   "calendar": {
-    "preview_check_in_label": "Check in",
-    "preview_check_out_label": "Check out",
-    "preview_nights_label": "x nights",
-    "pop_up_required_field": "This field is required",
-    "pop_up_button_done": "Confirm"
+    "preview_check_in_label": "تسجيل الوصول",
+    "preview_check_out_label": "تسجيل المغادرة",
+    "preview_nights_label": "{{value}} ليالٍ",
+    "pop_up_required_field": "هذا الحقل مطلوب",
+    "pop_up_start_end_date_nights": "{{start}} - {{end}} ({{nights}} ليالٍ)",
+    "pop_up_note": "أفضل الأسعار لكل شخص في الليلة",
+    "pop_up_sub_note": "الأسعار خاضعة لشروط الحجز الخاصة",
+    "pop_up_button_done": "تأكيد"
   },
   "promo_code": {
-    "preview_placeholder": "Promo code"
+    "preview_placeholder": "رمز ترويجي"
+  },
+  "search": {
+    "search_label": "بحث"
   }
 }

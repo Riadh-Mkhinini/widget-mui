@@ -1,36 +1,45 @@
 {
-  "search_label": "Search",
   "property": {
-    "preview_label": "Choose hotel",
-    "preview_placeholder": "Select your destination",
-    "pop_up_title": "Choose hotel",
-    "pop_up_sub_title": "Select your destination",
-    "pop_up_search_placeholder": "Search..."
+    "preview_label": "Choisir un hôtel",
+    "preview_placeholder": "Sélectionnez votre destination",
+    "pop_up_title": "Choisir un hôtel",
+    "pop_up_sub_title": "Sélectionnez votre destination",
+    "pop_up_search_placeholder": "Recherche..."
   },
   "guests": {
-    "preview_label": "Guests",
-    "preview_value": "rooms_and_guests",
-    "pop_up_title": "Guests",
-    "pop_up_room": "room_x",
-    "pop_up_adults": "Adults",
-    "pop_up_adults_caption": "(13+ years)",
-    "pop_up_children": "Children",
-    "pop_up_children_caption": "Children",
-    "pop_up_age_child": "age_child_x",
-    "pop_up_button_add_room": "Add room",
-    "pop_up_button_done": "Confirm",
-    "pop_up_required_field": "This field is required",
-    "pop_up_age_child_placeholder": "Select",
-    "pop_up_count_adult_child": "adults_and_children"
+    "preview_label": "Invités",
+    "pop_up_title": "Invités",
+    "pop_up_room": "Chambre {{value}}",
+    "pop_up_adults": "Adultes",
+    "pop_up_adults_caption": "(13+ ans)",
+    "pop_up_children": "Enfants",
+    "pop_up_children_caption": "Enfants",
+    "pop_up_age_child": "Âge de l’enfant {{value}}",
+    "pop_up_button_add_room": "Ajouter une chambre",
+    "pop_up_button_done": "Confirmer",
+    "pop_up_required_field": "Ce champ est requis",
+    "pop_up_age_child_placeholder": "Sélectionner",
+    "room": "1 chambre",
+    "rooms": "{{value}} chambres",
+    "adult": "1 adulte",
+    "adults": "{{value}} adultes",
+    "child": "1 enfant",
+    "children": "{{value}} enfants"
   },
   "calendar": {
-    "preview_check_in_label": "Check in",
-    "preview_check_out_label": "Check out",
-    "preview_nights_label": "x nights",
-    "pop_up_required_field": "This field is required",
-    "pop_up_button_done": "Confirm"
+    "preview_check_in_label": "Arrivée",
+    "preview_check_out_label": "Départ",
+    "preview_nights_label": "{{value}} nuits",
+    "pop_up_required_field": "Ce champ est requis",
+    "pop_up_start_end_date_nights": "{{start}} - {{end}} ({{nights}} nuits)",
+    "pop_up_note": "Les meilleurs tarifs par personne et par nuit",
+    "pop_up_sub_note": "Les prix sont soumis à des conditions spéciales de réservation",
+    "pop_up_button_done": "Confirmer"
   },
   "promo_code": {
-    "preview_placeholder": "Promo code"
+    "preview_placeholder": "Code promo"
+  },
+  "search": {
+    "search_label": "Rechercher"
   }
 }

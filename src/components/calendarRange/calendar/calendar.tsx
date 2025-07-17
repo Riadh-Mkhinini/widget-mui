@@ -205,7 +205,7 @@ const Calendar: FC<CalendarProps> = (props) => {
         </List>
       </Content>
       <Footer
-        label={texts?.popUpButtonDone}
+        texts={texts}
         dayHovered={dayHovered}
         hoverList={hoverList}
         onClick={onClickDone}
