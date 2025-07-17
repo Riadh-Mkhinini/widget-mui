@@ -1,5 +1,5 @@
-import * as locales from "date-fns/locale";
 import type { DayProps, PropertyItem, RoomData } from "@components";
+import type { Language } from "@helpers";
 //*****************PROPS******************** */
 export type ResultEngine = {
   property?: PropertyItem | null;
@@ -14,7 +14,6 @@ export type EngineProps = {
   onClickSearch?: (values: ResultEngine) => void;
 };
 
-export type Language = keyof typeof locales;
 export type EngineSize = "xl" | "lg" | "md" | "sm" | "xs";
 
 //*****************ENGINE CONFIG******************** */

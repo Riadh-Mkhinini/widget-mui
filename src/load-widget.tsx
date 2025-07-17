@@ -4,7 +4,8 @@ import ReactDOM from "react-dom/client";
 import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
 import Engine from "./engine/engine";
-import type { Language } from "./engine/engine.types";
+import stylisRTLPlugin from "stylis-plugin-rtl";
+import { isRtlLanguage, type Language } from "@helpers";
 
 type Params = {
   idEngine: string;
@@ -17,6 +18,11 @@ function initEngine(containerId: string, params: Params) {
   const container = document.getElementById(containerId);
   if (!container || container.shadowRoot) return;
 
+  const isRtl = isRtlLanguage(language);
+  const direction = isRtl ? "rtl" : "ltr";
+
+  container.setAttribute("dir", direction);
+
   // ✅ Create Shadow DOM
   const shadowRoot = container.attachShadow({ mode: "open" });
 
@@ -25,6 +31,9 @@ function initEngine(containerId: string, params: Params) {
 
   // ✅ Create the root mount node for React inside portalContainer
   const mountNode = document.createElement("div");
+
+  mountNode.setAttribute("dir", direction);
+
   portalContainer.appendChild(mountNode);
 
   // ✅ Append both to shadow DOM
@@ -41,6 +50,7 @@ function initEngine(containerId: string, params: Params) {
   const emotionCache = createCache({
     key: "engine-widget",
     container: shadowRoot,
+    stylisPlugins: isRtl ? [stylisRTLPlugin] : undefined,
   });
 
   // ✅ Expose containers globally for Popover/Dialog use

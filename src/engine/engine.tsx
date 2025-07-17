@@ -19,8 +19,9 @@ import {
   type RoomData,
 } from "@components";
 //utils
+import { getLocale, isRtlLanguage } from "@helpers";
 import { createCustomTheme } from "@theme";
-import { generateDayProps, getLocale, initLocaleText } from "./engine.utils";
+import { generateDayProps, initLocaleText } from "./engine.utils";
 //types
 import type { EngineConfig, EngineProps, ResultEngine } from "./engine.types";
 
@@ -42,7 +43,8 @@ const Engine: FC<EngineProps> = (props) => {
   //useMemo
 
   const theme = useMemo(
-    () => createCustomTheme({ direction: language === "ar" ? "rtl" : "ltr" }),
+    () =>
+      createCustomTheme({ direction: isRtlLanguage(language) ? "rtl" : "ltr" }),
     [language]
   );
   const localeText = useMemo(() => initLocaleText(), []);

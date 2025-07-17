@@ -1,23 +1,27 @@
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
 import stylisRTLPlugin from "stylis-plugin-rtl";
+//components
 import Engine from "./engine/engine";
-
-// Create rtl cache
-export const cacheRtl = createCache({
-  key: "muirtl",
-  stylisPlugins: [stylisRTLPlugin],
-});
-
-// Create ltr cache
-export const cacheLtr = createCache({ key: "muiltr" });
+//helpers
+import { isRtlLanguage } from "@helpers";
 
 function App() {
   const language = "ar";
+  const isRtl = useMemo(() => isRtlLanguage(language), [language]);
+
+  useEffect(() => {
+    document.body.dir = isRtl ? "rtl" : "ltr";
+  }, [isRtl]);
+
   const cache = useMemo(
-    () => (language === "ar" ? cacheRtl : cacheLtr),
-    [language]
+    () =>
+      createCache({
+        key: "engine-widget",
+        stylisPlugins: isRtl ? [stylisRTLPlugin] : undefined,
+      }),
+    [isRtl]
   );
   return (
     <CacheProvider value={cache}>

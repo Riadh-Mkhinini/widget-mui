@@ -1,7 +1,6 @@
-import * as locales from "date-fns/locale";
-import { format, type Locale } from "date-fns";
+import { format } from "date-fns";
 import type { DayProps } from "@components";
-import type { Language, LocaleText } from "./engine.types";
+import type { LocaleText } from "./engine.types";
 
 export const initLocaleText = (localeText?: LocaleText): LocaleText => ({
   searchLabel: localeText?.searchLabel || "Search",
@@ -88,27 +87,4 @@ export const generateDayProps = (day: Date): DayProps => {
     background: isWeekend ? "#F9FAFB" : "#ffffff",
     color: isWeekend ? "#667085" : "#344054",
   };
-};
-
-const normalizeLang = (lang: Language): string => {
-  return lang.toLowerCase().replace(/[-_].*$/, "");
-};
-
-export const getLocale = (language?: Language): Locale => {
-  if (!language) return locales.enUS;
-
-  const normalized = normalizeLang(language);
-
-  // Try exact match first (e.g., 'en-US')
-  if (language in locales) {
-    return (locales as Record<string, Locale>)[language];
-  }
-
-  // Then try normalized base language code (e.g., 'en')
-  if (normalized in locales) {
-    return (locales as Record<string, Locale>)[normalized];
-  }
-
-  // Fallback to en-US
-  return locales.enUS;
 };
