@@ -1,7 +1,5 @@
 import * as locales from "date-fns/locale";
 import { format, type Locale } from "date-fns";
-import rtlPlugin from "stylis-plugin-rtl";
-import createCache from "@emotion/cache";
 import type { DayProps } from "@components";
 import type { Language, LocaleText } from "./engine.types";
 
@@ -114,13 +112,3 @@ export const getLocale = (language?: Language): Locale => {
   // Fallback to en-US
   return locales.enUS;
 };
-
-// Create rtl cache
-export const cacheRtl = createCache({
-  key: "muirtl",
-  stylisPlugins: [rtlPlugin],
-  //prefixer,
-});
-
-// Create ltr cache
-export const cacheLtr = createCache({ key: "muiltr" });
