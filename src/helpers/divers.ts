@@ -9,7 +9,6 @@ import {
 export function groupBy<T>(array: Array<T>, key: keyof T) {
   return array.reduce((objectsByKeyValue, obj) => {
     const value = obj[key];
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     //@ts-ignore
     objectsByKeyValue[value] = (objectsByKeyValue[value] || []).concat(obj);
     return objectsByKeyValue;

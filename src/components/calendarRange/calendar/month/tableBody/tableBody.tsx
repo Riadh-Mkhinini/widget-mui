@@ -3,6 +3,7 @@ import { useTheme } from "@mui/material";
 //components
 import { Indicator } from "./indicator/indicator";
 //utils
+import { formatNumber } from "@helpers";
 import { addFakeItem, chunk } from "./tableBody.utils";
 //styles
 import {
@@ -29,14 +30,12 @@ const TableBody: FC<TableBodyProps> = (props) => {
 
   //functions
   const onClickItem = (day: DayProps) => () => {
-    if (onClickDay && !day.disabled) {
-      onClickDay(day);
+    if (!day.disabled) {
+      onClickDay?.(day);
     }
   };
   const onMouseEnter = (day: DayProps) => () => {
-    if (props.onMouseEnter) {
-      props.onMouseEnter(day);
-    }
+    props.onMouseEnter?.(day);
   };
 
   //render
@@ -55,6 +54,8 @@ const TableBody: FC<TableBodyProps> = (props) => {
               border: `1px solid ${theme.palette.divider}`,
               borderCollapse: "collapse",
             };
+            const lang = props.locale?.code === "ar" ? "ar-EG" : undefined;
+
             if (firstDay || lastDay) {
               return (
                 <Td
@@ -84,7 +85,8 @@ const TableBody: FC<TableBodyProps> = (props) => {
                     fontsizesmall={12}
                     color={theme.palette.primary.contrastText}
                   >
-                    {day.date.getDate()}
+                    {formatNumber(day.date.getDate(), lang)}
+                    {/* {day.date.getDate()} */}
                   </Typography>
                   <FooterDay>
                     <Typography
@@ -144,7 +146,8 @@ const TableBody: FC<TableBodyProps> = (props) => {
                   fontsizesmall={12}
                   fontWeight="600"
                 >
-                  {day.date.getDate()}
+                  {/* {day.date.getDate()} */}
+                  {formatNumber(day.date.getDate(), lang)}
                 </Typography>
                 {!day.disabled && (
                   <FooterDay>

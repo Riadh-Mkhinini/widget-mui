@@ -43,3 +43,7 @@ export const isRtlLanguage = (language?: Language): boolean => {
   const normalized = normalizeLang(language);
   return rtlLanguages.has(normalized);
 };
+
+export const formatNumber = (value: number, language?: string): string => {
+  return new Intl.NumberFormat(language || "en-US").format(value);
+};

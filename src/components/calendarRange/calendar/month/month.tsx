@@ -8,11 +8,13 @@ import type { MonthProps } from "./month.types";
 
 import TableHead from "./tableHead/tableHead";
 import TableBody from "./tableBody/tableBody";
+import { formatNumber } from "@helpers";
 
 const Month: FC<MonthProps> = (props) => {
   const { month, year, daysList, ...rest } = props;
 
   //render
+
   return (
     <Section>
       <Header>
@@ -31,7 +33,10 @@ const Month: FC<MonthProps> = (props) => {
             fontSize={20}
             color="grey.700"
           >
-            {year}
+            {formatNumber(
+              Number(year),
+              props.locale?.code === "ar" ? "ar-EG" : undefined
+            )}
           </Typography>
         </Typography>
       </Header>

@@ -160,6 +160,7 @@ const Calendar: FC<CalendarProps> = (props) => {
           mode={calendarConfig?.popUpMode}
           month={format(month[0].date, "MMMM", { locale })}
           year={format(month[0].date, "yyyy", { locale })}
+          locale={locale}
           startDate={startDate}
           endDate={endDate}
           daysList={daysList}

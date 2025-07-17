@@ -1,3 +1,4 @@
+import type { Locale } from "date-fns";
 import type { DayProps } from "../../calendar.types";
 
 export type TableBodyProps = {
@@ -6,6 +7,7 @@ export type TableBodyProps = {
   startDate?: DayProps | null;
   endDate?: DayProps | null;
   hoverList?: Array<string>;
+  locale?: Locale;
   onClickDay?: (day: DayProps) => void;
   onMouseEnter?: (day: DayProps) => void;
 };
