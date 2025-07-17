@@ -476,6 +476,11 @@
     "@eslint/core" "^0.15.1"
     levn "^0.4.1"
 
+"@fontsource-variable/inter-tight@^5.2.6":
+  version "5.2.6"
+  resolved "https://registry.yarnpkg.com/@fontsource-variable/inter-tight/-/inter-tight-5.2.6.tgz#1583b9ca9ad21007250b772b778f35ec20a06fcf"
+  integrity sha512-umb36PJO+bwzqvpKkikmIEDs0YF3P5vUBQe+UEBgPSDffzDZyKVIU07M4/1cWcsZgU1PaXjyheUYKwlsJteopA==
+
 "@humanfs/core@^0.19.1":
   version "0.19.1"
   resolved "https://registry.yarnpkg.com/@humanfs/core/-/core-0.19.1.tgz#17c55ca7d426733fe3c561906b8173c336b40a77"

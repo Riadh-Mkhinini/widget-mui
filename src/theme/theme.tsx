@@ -25,7 +25,7 @@ const createCustomTheme = (params?: {
     },
     typography: {
       fontFamily: [
-        '"Inter Tight"',
+        "Inter Tight Variable",
         "-apple-system",
         "BlinkMacSystemFont",
         '"Segoe UI"',

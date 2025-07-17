@@ -2,6 +2,8 @@ import { useEffect, useMemo } from "react";
 import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
 import stylisRTLPlugin from "stylis-plugin-rtl";
+import "@fontsource-variable/inter-tight/wght.css";
+
 //components
 import Engine from "./engine/engine";
 //helpers
