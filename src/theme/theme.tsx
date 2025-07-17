@@ -1,10 +1,14 @@
-import { createTheme } from "@mui/material/styles";
+import { createTheme, type Direction } from "@mui/material/styles";
 import type { Palette } from "@/engine/engine.types";
 
-const createCustomTheme = (params?: { palette?: Palette }) => {
-  const { palette } = params || {};
+const createCustomTheme = (params?: {
+  palette?: Palette;
+  direction: Direction;
+}) => {
+  const { palette, direction } = params || {};
 
   return createTheme({
+    direction: direction,
     palette: {
       primary: {
         main: palette?.primary?.main || "#2250DA",

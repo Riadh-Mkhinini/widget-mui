@@ -1,5 +1,6 @@
 import { useMemo, useState, type FC } from "react";
 import { addDays } from "date-fns";
+import { CacheProvider } from "@emotion/react";
 import { ThemeProvider } from "@mui/material";
 //contextAPI
 import { IBEProvider } from "@contextAPI";
@@ -20,14 +21,18 @@ import {
 } from "@components";
 //utils
 import { createCustomTheme } from "@theme";
-import { generateDayProps, initLocaleText } from "./engine.utils";
+import {
+  cacheLtr,
+  cacheRtl,
+  generateDayProps,
+  getLocale,
+  initLocaleText,
+} from "./engine.utils";
 //types
 import type { EngineConfig, EngineProps, ResultEngine } from "./engine.types";
 
 const Engine: FC<EngineProps> = (props) => {
-  const { idEngine } = props;
-
-  const localeText = useMemo(() => initLocaleText(), []);
+  const { idEngine, language } = props;
 
   const [property, setProperty] = useState<PropertyItem | null>(null);
   const [startDate, setStartDate] = useState<DayProps | null>(
@@ -42,8 +47,16 @@ const Engine: FC<EngineProps> = (props) => {
   ]);
 
   //useMemo
-  const theme = useMemo(() => createCustomTheme(), []);
-
+  const cache = useMemo(
+    () => (language === "ar" ? cacheRtl : cacheLtr),
+    [language]
+  );
+  const theme = useMemo(
+    () => createCustomTheme({ direction: language === "ar" ? "rtl" : "ltr" }),
+    [language]
+  );
+  const localeText = useMemo(() => initLocaleText(), []);
+  const locale = useMemo(() => getLocale(language), [language]);
   //functions
   const onChangeProperty = (item: PropertyItem) => {
     setProperty(item);
@@ -129,72 +142,77 @@ const Engine: FC<EngineProps> = (props) => {
     },
   };
   return (
-    <ThemeProvider theme={theme}>
-      <IBEProvider
-        localeText={localeText}
-        size="xl"
-        engineConfig={engineConfig}
-      >
-        <Container>
-          <Header title={`Engine ID: ${idEngine}`} />
-          <Layout>
-            <GridItem
-              gridArea="property"
-              isVisible={engineConfig.property?.showProperty}
-            >
-              <Property
-                data={[
-                  {
-                    id: "8866",
-                    name: "Hasdrubal Thalassa & Spa 1",
-                    country: "tunisia",
-                    city: "djerba",
-                    image:
-                      "https://media.istockphoto.com/id/104731717/photo/luxury-resort.jpg?s=612x612&w=0&k=20&c=cODMSPbYyrn1FHake1xYz9M8r15iOfGz9Aosy9Db7mI=",
-                  },
-                  {
-                    id: "8876",
-                    name: "Hasdrubal Thalassa & Spa 5",
-                    country: "tunisia",
-                    city: "djerba",
-                    image:
-                      "https://thumbs.dreamstime.com/b/resort-night-12154190.jpg",
-                  },
-                  {
-                    id: "5458",
-                    name: "Hasdrubal Thalassa & Spa 2",
-                    country: "tunisia",
-                    city: "djerba",
-                    image:
-                      "https://cf.bstatic.com/xdata/images/hotel/max1024x768/4068449.jpg?k=84bdc933cd43edf87f74bae774f5beb45544d4cc1ba303231da151454bab07c0&o=&hp=1",
-                  },
-                ]}
-                value={property}
-                onChange={onChangeProperty}
-              />
-            </GridItem>
-            <GridItem gridArea="calendar">
-              <CalendarRange
-                startDate={startDate}
-                endDate={endDate}
-                // locale={locale}
-                onClickDone={onClickDone}
-              />
-            </GridItem>
-            <GridItem gridArea="guests">
-              <Guests rooms={rooms} onChange={onChangeRooms} />
-            </GridItem>
-            <GridItem
-              gridArea="promoCode"
-              isVisible={engineConfig.promoCode?.showPromoCode}
-            >
-              <PromoCode value={promoCode} onChangeValue={onChangePromoCode} />
-            </GridItem>
-            <Search sx={{ gridArea: "search" }} onClick={onClickSearch} />
-          </Layout>
-        </Container>
-      </IBEProvider>
-    </ThemeProvider>
+    <CacheProvider value={cache}>
+      <ThemeProvider theme={theme}>
+        <IBEProvider
+          localeText={localeText}
+          size="xl"
+          engineConfig={engineConfig}
+        >
+          <Container>
+            <Header title={`Engine ID: ${idEngine}`} />
+            <Layout>
+              <GridItem
+                gridArea="property"
+                isVisible={engineConfig.property?.showProperty}
+              >
+                <Property
+                  data={[
+                    {
+                      id: "8866",
+                      name: "Hasdrubal Thalassa & Spa 1",
+                      country: "tunisia",
+                      city: "djerba",
+                      image:
+                        "https://media.istockphoto.com/id/104731717/photo/luxury-resort.jpg?s=612x612&w=0&k=20&c=cODMSPbYyrn1FHake1xYz9M8r15iOfGz9Aosy9Db7mI=",
+                    },
+                    {
+                      id: "8876",
+                      name: "Hasdrubal Thalassa & Spa 5",
+                      country: "tunisia",
+                      city: "djerba",
+                      image:
+                        "https://thumbs.dreamstime.com/b/resort-night-12154190.jpg",
+                    },
+                    {
+                      id: "5458",
+                      name: "Hasdrubal Thalassa & Spa 2",
+                      country: "tunisia",
+                      city: "djerba",
+                      image:
+                        "https://cf.bstatic.com/xdata/images/hotel/max1024x768/4068449.jpg?k=84bdc933cd43edf87f74bae774f5beb45544d4cc1ba303231da151454bab07c0&o=&hp=1",
+                    },
+                  ]}
+                  value={property}
+                  onChange={onChangeProperty}
+                />
+              </GridItem>
+              <GridItem gridArea="calendar">
+                <CalendarRange
+                  startDate={startDate}
+                  endDate={endDate}
+                  locale={locale}
+                  onClickDone={onClickDone}
+                />
+              </GridItem>
+              <GridItem gridArea="guests">
+                <Guests rooms={rooms} onChange={onChangeRooms} />
+              </GridItem>
+              <GridItem
+                gridArea="promoCode"
+                isVisible={engineConfig.promoCode?.showPromoCode}
+              >
+                <PromoCode
+                  value={promoCode}
+                  onChangeValue={onChangePromoCode}
+                />
+              </GridItem>
+              <Search sx={{ gridArea: "search" }} onClick={onClickSearch} />
+            </Layout>
+          </Container>
+        </IBEProvider>
+      </ThemeProvider>
+    </CacheProvider>
   );
 };
 

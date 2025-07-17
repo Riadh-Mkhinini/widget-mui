@@ -1,8 +1,6 @@
 // @ts-expect-error
 window.process = { env: { NODE_ENV: "production" } };
 import ReactDOM from "react-dom/client";
-import { CacheProvider } from "@emotion/react";
-import createCache from "@emotion/cache";
 import Engine from "./engine/engine";
 
 type Params = {
@@ -35,23 +33,13 @@ function initEngine(containerId: string, params: Params) {
   fontLink.rel = "stylesheet";
   shadowRoot.appendChild(fontLink);
 
-  // ✅ Create Emotion cache in Shadow DOM
-  const emotionCache = createCache({
-    key: "engine-widget",
-    container: shadowRoot,
-  });
-
   // ✅ Expose containers globally for Popover/Dialog use
   (window as any).__BOOKINI_WIDGET_SHADOW__ = shadowRoot;
   (window as any).__BOOKINI_WIDGET_PORTAL_CONTAINER__ = portalContainer;
 
   // ✅ Mount React
   const root = ReactDOM.createRoot(mountNode);
-  root.render(
-    <CacheProvider value={emotionCache}>
-      <Engine idEngine={idEngine} onClickSearch={onClickSearch} />
-    </CacheProvider>
-  );
+  root.render(<Engine idEngine={idEngine} onClickSearch={onClickSearch} />);
 }
 
 // Expose the init method for script-based loading

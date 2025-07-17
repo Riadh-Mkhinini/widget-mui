@@ -21,6 +21,6 @@ export const Content = styled("div")(({ theme }) => ({
   padding: theme.spacing(1),
   [theme.breakpoints.down("sm")]: {
     maxHeight: "100vh",
-    height: "calc(100vh - 115px)",
+    height: "calc(100vh - 127px)",
   },
 }));
