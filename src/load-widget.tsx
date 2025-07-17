@@ -15,7 +15,7 @@ type Params = {
   onClickSearch?: (values: any) => void;
 };
 
-function initEngine(containerId: string, params: Params) {
+async function initEngine(containerId: string, params: Params) {
   const { idEngine, language, onClickSearch } = params;
   const container = document.getElementById(containerId);
   if (!container || container.shadowRoot) return;
@@ -28,7 +28,11 @@ function initEngine(containerId: string, params: Params) {
 
   // ✅ Initialize i18n language
   if (language) {
-    i18n.changeLanguage(language);
+    try {
+      await i18n.changeLanguage(language);
+    } catch (error) {
+      console.warn(error);
+    }
   }
 
   // ✅ Create Shadow DOM
@@ -73,7 +77,15 @@ function initEngine(containerId: string, params: Params) {
 }
 
 // Expose the init method for script-based loading
-// @ts-ignore
+declare global {
+  interface Window {
+    BookiniWidget?: {
+      initEngine: typeof initEngine;
+    };
+    __BOOKINI_WIDGET_SHADOW__?: ShadowRoot;
+    __BOOKINI_WIDGET_PORTAL_CONTAINER__?: HTMLDivElement;
+  }
+}
 window.BookiniWidget = {
   initEngine: initEngine,
 };
