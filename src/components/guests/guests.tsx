@@ -1,17 +1,14 @@
 import { type FC, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Button, Divider, Typography } from "@mui/material";
 //constants
 import { Svgs } from "@constants";
 //context
 import { useIBE } from "@contextAPI";
 //components
 import { Popover, Preview } from "../commons";
-import Room from "./room/room";
+import { GuestsRooms } from "./guestsRooms/guestsRooms";
 //helpers
 import { getMessageGuests } from "@helpers";
-//styles
-import { Container, Content, Footer } from "./guests.styles";
 //types
 import type { GuestsProps, RoomData } from "./guests.types";
 
@@ -21,8 +18,6 @@ const Guests: FC<GuestsProps> = (props) => {
   const { engineConfig, paramsSize } = useIBE();
   //states
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
-  const [rooms, setRooms] = useState<Array<RoomData>>(props.rooms);
-  const [indexExpanded, setIndexExpanded] = useState<number>(0);
   //
 
   const open = Boolean(anchorEl);
@@ -48,100 +43,9 @@ const Guests: FC<GuestsProps> = (props) => {
     setAnchorEl(null);
   };
 
-  const onClickAddRoom = () => {
-    setRooms((prev) => [
-      ...prev,
-      { adultsCount: 2, childCount: 0, childs: [] },
-    ]);
-    setIndexExpanded(rooms.length);
-  };
-  const onChangeAdults = (index: number) => (value: number) => {
-    setRooms((prev) => [
-      ...prev.map((room, iterator) => ({
-        ...room,
-        adultsCount: index === iterator ? value : room.adultsCount,
-      })),
-    ]);
-  };
-  const onChangeChildren = (index: number) => (value: number) => {
-    setRooms((prev) => [
-      ...prev.map((room, iterator) => ({
-        ...room,
-        childCount: index === iterator ? value : room.childCount,
-        childs:
-          index === iterator && value < room.childCount
-            ? room.childs.filter((_, i) => i + 1 !== room.childs.length)
-            : [...room.childs, { value: null }],
-      })),
-    ]);
-  };
-  const onChangeChildValue =
-    (index: number) => (value: number, indexChild: number) => {
-      setRooms((prev) => [
-        ...prev.map((room, iterator) => ({
-          ...room,
-          childs:
-            index === iterator
-              ? room.childs.map((o, i) => ({
-                  ...o,
-                  value: i === indexChild ? value : o.value,
-                  error: undefined,
-                }))
-              : room.childs,
-        })),
-      ]);
-    };
-
-  const onClickDeleteRoom = (index: number) => () => {
-    setRooms((prev) => prev.filter((_, iterator) => iterator !== index));
-  };
-
-  const onClickDone = () => {
-    let valid = true;
-    const newRooms = rooms.map((room) => ({
-      ...room,
-      childs: room.childs.map((child) => {
-        if (!child.value) {
-          valid = false;
-          return {
-            ...child,
-            error: t("guests.pop_up_required_field"),
-          };
-        }
-        return child;
-      }),
-    }));
-
-    if (!valid) {
-      setRooms(newRooms);
-      return;
-    }
-
+  const onComplete = (rooms: Array<RoomData>) => {
     setAnchorEl(null);
     onChange?.(rooms);
-  };
-
-  const onChangeExpanded = (index: number) => () => {
-    setIndexExpanded((prev) => (prev === index ? -1 : index));
-  };
-  //render
-  const renderItem = () => {
-    return rooms.map((room, index) => {
-      return (
-        <Room
-          key={index}
-          title={t("guests.pop_up_room", { value: index + 1 })}
-          room={room}
-          showDeleteButton={rooms.length > 1}
-          expanded={index === indexExpanded}
-          onChangeAdults={onChangeAdults(index)}
-          onChangeChildren={onChangeChildren(index)}
-          onChangeChildValue={onChangeChildValue(index)}
-          onClickDelete={onClickDeleteRoom(index)}
-          onChangeExpanded={onChangeExpanded(index)}
-        />
-      );
-    });
   };
 
   return (
@@ -179,35 +83,11 @@ const Guests: FC<GuestsProps> = (props) => {
         marginThreshold={0}
         anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
       >
-        <Container divider={<Divider />}>
-          <Typography p={2} fontSize={16} fontWeight="700">
-            {t("guests.pop_up_title")}
-          </Typography>
-          <Content>{renderItem()}</Content>
-          <Footer>
-            <Button
-              variant="outlined"
-              fullWidth
-              sx={{ textTransform: "none" }}
-              disabled={engineConfig?.guests?.maxRoom === rooms.length}
-              onClick={onClickAddRoom}
-            >
-              <Typography variant="inherit" noWrap>
-                {t("guests.pop_up_button_add_room")}
-              </Typography>
-            </Button>
-            <Button
-              sx={{ textTransform: "none" }}
-              variant="contained"
-              fullWidth
-              onClick={onClickDone}
-            >
-              <Typography variant="inherit" noWrap>
-                {t("guests.pop_up_button_done")}
-              </Typography>
-            </Button>
-          </Footer>
-        </Container>
+        <GuestsRooms
+          config={engineConfig?.guests}
+          rooms={props.rooms}
+          onComplete={onComplete}
+        />
       </Popover>
     </>
   );

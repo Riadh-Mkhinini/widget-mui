@@ -23,7 +23,7 @@ export type EngineConfig = {
   global?: GlobalConfig;
   property?: PropertyConfig;
   calendar?: CalendarConfig;
-  guests?: GuestsPropertyConfig;
+  guests?: GuestsConfig;
   promoCode?: PromoCodeConfig;
   search?: SearchEngineConfig;
 };
@@ -105,7 +105,7 @@ export type PropertyConfig = {
 };
 
 //****GUESTS***
-export type GuestsPropertyConfig = {
+export type GuestsConfig = {
   mode?: "default" | "accordion";
   popUpMode?: "default" | "pop-up";
   counterMode?: "rounded" | "circular";

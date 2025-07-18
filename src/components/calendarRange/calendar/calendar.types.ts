@@ -4,7 +4,7 @@ import type { Locale } from "date-fns";
 
 export type CalendarProps = {
   id?: string;
-  open: boolean;
+  open?: boolean;
   anchorEl?: HTMLButtonElement | null;
   daysList?: Array<string>;
   defaultStartDate?: DayProps | null;

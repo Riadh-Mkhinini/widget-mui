@@ -27,7 +27,7 @@ const Calendar: FC<CalendarProps> = (props) => {
     calendarConfig,
     texts,
     id,
-    open,
+    open = false,
     anchorEl,
     disablePortal,
   } = props;

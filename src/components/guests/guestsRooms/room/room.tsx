@@ -3,8 +3,6 @@ import { useTranslation } from "react-i18next";
 import { Typography, Divider, Stack, alpha, useTheme } from "@mui/material";
 //constants
 import { Svgs } from "@constants";
-//context
-import { useIBE } from "@contextAPI";
 //components
 import { Counter, Select, Accordion } from "@/components/commons";
 //helpers
@@ -20,6 +18,7 @@ const Room: FC<RoomProps> = (props) => {
     room,
     showDeleteButton = true,
     expanded,
+    config,
     onClickDelete,
     onChangeAdults,
     onChangeChildren,
@@ -28,14 +27,13 @@ const Room: FC<RoomProps> = (props) => {
   } = props;
   const theme = useTheme();
   const { t } = useTranslation();
-  const { engineConfig } = useIBE();
 
   const dataChilds = useMemo(
     () =>
-      new Array(engineConfig?.guests?.maxAgesChildren || 16)
+      new Array(config?.maxAgesChildren || 16)
         .fill(0)
         .map((_, index) => index + 1),
-    [engineConfig?.guests?.maxAgesChildren]
+    [config?.maxAgesChildren]
   );
 
   const onChange = (indexChild: number) => (event: any) => {
@@ -69,7 +67,7 @@ const Room: FC<RoomProps> = (props) => {
       );
     });
   };
-  if (engineConfig?.guests?.mode === "accordion") {
+  if (config?.mode === "accordion") {
     return (
       <Accordion
         expanded={expanded}
@@ -109,8 +107,8 @@ const Room: FC<RoomProps> = (props) => {
                 direction="row"
                 label={t("guests.pop_up_adults")}
                 caption={t("guests.pop_up_adults_caption")}
-                mode={engineConfig?.guests?.counterMode}
-                max={engineConfig?.guests?.maxAdults}
+                mode={config?.counterMode}
+                max={config?.maxAdults}
                 value={room.adultsCount}
                 onChange={onChangeAdults}
               />
@@ -118,8 +116,8 @@ const Room: FC<RoomProps> = (props) => {
                 direction="row"
                 label={t("guests.pop_up_children")}
                 caption={t("guests.pop_up_children_caption")}
-                mode={engineConfig?.guests?.counterMode}
-                max={engineConfig?.guests?.maxChildren}
+                mode={config?.counterMode}
+                max={config?.maxChildren}
                 value={room.childCount}
                 onChange={onChangeChildren}
               />
@@ -147,16 +145,16 @@ const Room: FC<RoomProps> = (props) => {
           min={1}
           label={t("guests.pop_up_adults")}
           caption={t("guests.pop_up_adults_caption")}
-          mode={engineConfig?.guests?.counterMode}
-          max={engineConfig?.guests?.maxAdults}
+          mode={config?.counterMode}
+          max={config?.maxAdults}
           value={room.adultsCount}
           onChange={onChangeAdults}
         />
         <Counter
           label={t("guests.pop_up_children")}
           caption={t("guests.pop_up_children_caption")}
-          mode={engineConfig?.guests?.counterMode}
-          max={engineConfig?.guests?.maxChildren}
+          mode={config?.counterMode}
+          max={config?.maxChildren}
           value={room.childCount}
           onChange={onChangeChildren}
         />

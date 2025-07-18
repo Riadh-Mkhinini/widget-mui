@@ -23,7 +23,14 @@ import { getLocale, isRtlLanguage } from "@helpers";
 import { createCustomTheme } from "@theme";
 import { generateDayProps } from "./engine.utils";
 //types
-import type { EngineConfig, EngineProps, ResultEngine } from "./engine.types";
+import type {
+  EngineConfig,
+  EngineProps,
+  ResultEngine,
+  PropertyConfig,
+  CalendarConfig,
+  GuestsConfig,
+} from "./engine.types";
 
 const Engine: FC<EngineProps> = (props) => {
   const { language } = props;
@@ -202,4 +209,10 @@ const Engine: FC<EngineProps> = (props) => {
   );
 };
 
+export {
+  type PropertyConfig,
+  type CalendarConfig,
+  type GuestsConfig,
+  generateDayProps,
+};
 export default Engine;
