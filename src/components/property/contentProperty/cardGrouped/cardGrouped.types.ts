@@ -1,4 +1,4 @@
-import type { CountryGrouped, PropertyItem } from "../property.types";
+import type { CountryGrouped, PropertyItem } from "../../property.types";
 
 export type CardGroupedProps = {
   item: CountryGrouped;

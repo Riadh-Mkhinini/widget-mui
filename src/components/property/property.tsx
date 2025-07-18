@@ -1,82 +1,26 @@
-import { type FC, useEffect, useMemo, useState } from "react";
+import { type FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 //constants
 import { Svgs } from "@constants";
 //context
 import { useIBE } from "@contextAPI";
 //components
-import { DataList, Popover, Preview } from "../commons";
-import CardGrouped from "./cardGrouped/cardGrouped";
-import CardProperty from "./cardProperty/cardProperty";
-import CardItem from "./cardItem/cardItem";
-//utils
-import { groupListPropertyBy } from "./property.utils";
+import { Popover, Preview } from "../commons";
+import { ContentProperty } from "./contentProperty/contentProperty";
 //styles
 import { Container } from "./property.styles";
 //types
-import type {
-  CityGrouped,
-  CountryGrouped,
-  PropertyItem,
-  PropertyProps,
-} from "./property.types";
+import type { PropertyItem, PropertyProps } from "./property.types";
 
 const Property: FC<PropertyProps> = (props) => {
   const { value, onChange } = props;
   const { t } = useTranslation();
   const { engineConfig, paramsSize } = useIBE();
-  //
-  const [data, setData] = useState<Array<PropertyItem>>([]);
-  const [dataGrouped, setDataGrouped] = useState<Array<CountryGrouped>>([]);
-  const [search, setSearch] = useState<string>("");
 
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
 
   const open = Boolean(anchorEl);
   const id = open ? "property-popover" : undefined;
-
-  const filteredData = useMemo(() => {
-    if (!search) return data;
-    return data.filter(
-      (item) =>
-        item.name.toLowerCase().includes(search.toLowerCase()) ||
-        item.id.toLowerCase().includes(search.toLowerCase())
-    );
-  }, [data, search]);
-
-  const filteredDataGrouped = useMemo(() => {
-    if (!search) return dataGrouped;
-    return dataGrouped
-      .map((countryGroup) => {
-        const filteredCities = countryGroup.data
-          .map((cityGroup) => {
-            const filteredItems = cityGroup.data.filter(
-              (item) =>
-                item.name.toLowerCase().includes(search.toLowerCase()) ||
-                item.id.toLowerCase().includes(search.toLowerCase())
-            );
-            return filteredItems.length > 0
-              ? { ...cityGroup, data: filteredItems }
-              : null;
-          })
-          .filter(Boolean) as CityGrouped[];
-
-        return filteredCities.length > 0
-          ? { ...countryGroup, data: filteredCities }
-          : null;
-      })
-      .filter(Boolean) as CountryGrouped[];
-  }, [dataGrouped, search]);
-
-  //useEffect
-  useEffect(() => {
-    if (engineConfig?.property?.mode === "grouped") {
-      const grouped = groupListPropertyBy(props.data || []);
-      setDataGrouped(grouped);
-    } else {
-      setData(props.data || []);
-    }
-  }, [engineConfig?.property?.mode, props.data]);
 
   //functions
   const onClickOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -86,83 +30,7 @@ const Property: FC<PropertyProps> = (props) => {
     setAnchorEl(null);
   };
 
-  const onClickItem = (item: PropertyItem) => {
-    setAnchorEl(null);
-    onChange?.(item);
-  };
-  const onChangeSearch = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setSearch(event.target.value);
-  };
-
   //render
-  const renderContent = () => {
-    if (engineConfig?.property?.mode === "grouped") {
-      return (
-        <DataList
-          title={t("property.property.pop_up_title")}
-          subTitle={t("property.property.pop_up_sub_title")}
-          placeholderSearch={t("property.property.pop_up_search_placeholder")}
-          mode={engineConfig?.property?.popUpMode}
-          data={filteredDataGrouped}
-          showSearch={engineConfig?.property?.showSearch}
-          valueSearch={search}
-          renderItem={({ item }) => (
-            <CardGrouped item={item} onClick={onClickItem} />
-          )}
-          onClickClose={onClose}
-          onChangeSearch={onChangeSearch}
-        />
-      );
-    } else if (engineConfig?.property?.mode === "cards") {
-      return (
-        <DataList
-          title={t("property.property.pop_up_title")}
-          subTitle={t("property.property.pop_up_sub_title")}
-          placeholderSearch={t("property.property.pop_up_search_placeholder")}
-          mode={engineConfig?.property?.popUpMode}
-          data={filteredData}
-          showSearch={engineConfig?.property?.showSearch}
-          valueSearch={search}
-          isGrid
-          size={{ xl: 6, lg: 6, md: 6, sm: 12, xs: 12 }}
-          renderItem={({ item }) => (
-            <CardProperty item={item} onClick={onClickItem} />
-          )}
-          onClickClose={onClose}
-          onChangeSearch={onChangeSearch}
-        />
-      );
-    }
-    return (
-      <DataList
-        title={t("property.property.pop_up_title")}
-        subTitle={t("property.property.pop_up_sub_title")}
-        placeholderSearch={t("property.property.pop_up_search_placeholder")}
-        mode={engineConfig?.property?.popUpMode}
-        data={filteredData}
-        showSearch={engineConfig?.property?.showSearch}
-        valueSearch={search}
-        renderItem={({ item }) => (
-          <CardItem
-            sx={
-              engineConfig?.property?.popUpMode === "default"
-                ? { minHeight: 50 }
-                : { minHeight: 58, borderRadius: 1 }
-            }
-            item={item}
-            getOptionLabel={(item) => `${item.id}- ${item.name}`}
-            getAvatarLabel={(item) => item.name.substring(0, 2).toUpperCase()}
-            onClick={onClickItem}
-          />
-        )}
-        onClickClose={onClose}
-        onChangeSearch={onChangeSearch}
-      />
-    );
-  };
-
   return (
     <Container>
       <Preview
@@ -192,7 +60,12 @@ const Property: FC<PropertyProps> = (props) => {
         marginThreshold={0}
         anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
       >
-        {renderContent()}
+        <ContentProperty
+          config={engineConfig?.property}
+          data={props.data}
+          onChange={onChange}
+          onClose={onClose}
+        />
       </Popover>
     </Container>
   );

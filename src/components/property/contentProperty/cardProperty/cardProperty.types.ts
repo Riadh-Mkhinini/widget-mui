@@ -1,4 +1,4 @@
-import type { PropertyItem } from "../property.types";
+import type { PropertyItem } from "../../property.types";
 
 export type CardPropertyProps = {
   item: PropertyItem;

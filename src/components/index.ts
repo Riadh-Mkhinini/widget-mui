@@ -2,6 +2,7 @@ export * from "./container/container";
 export * from "./header/header";
 export * from "./layout/layout";
 export * from "./property/property";
+export * from "./property/contentProperty/contentProperty";
 export * from "./calendarRange/calendarRange";
 export * from "./calendarRange/calendar/calendar";
 export * from "./promoCode/promoCode";

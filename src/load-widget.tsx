@@ -18,8 +18,9 @@ import Engine, {
   generateDayProps,
   type CalendarConfig,
   type GuestsConfig,
+  type PropertyConfig,
 } from "./engine/engine";
-import { Calendar, GuestsRooms } from "@components";
+import { Calendar, ContentProperty, GuestsRooms } from "@components";
 
 type InitEngineParams = {
   idEngine: string;
@@ -215,14 +216,92 @@ async function initGuests(containerId: string, params: InitGuestsParams) {
   );
 }
 
-// Expose the init method for script-based loading
+type InitPropertyParams = {
+  language?: Language;
+  config?: Omit<PropertyConfig, "popUpMode">;
+};
+async function initProperty(containerId: string, params: InitPropertyParams) {
+  const { language, config } = params;
+  const container = document.getElementById(containerId);
+  if (!container || container.shadowRoot) return;
 
+  const isRtl = isRtlLanguage(language);
+  const direction = isRtl ? "rtl" : "ltr";
+
+  // ✅ Set direction for layout
+  container.setAttribute("dir", direction);
+
+  // ✅ Initialize i18n language
+  try {
+    const langToUse =
+      language && i18n.hasResourceBundle(language, "translation")
+        ? language
+        : "enUS";
+    await i18n.changeLanguage(langToUse);
+  } catch (error) {
+    console.warn(error);
+  }
+
+  // ✅ Create Shadow DOM
+  const shadowRoot = container.attachShadow({ mode: "open" });
+
+  // ✅ Create mount node directly inside shadow root
+  const mountNode = document.createElement("div");
+  mountNode.setAttribute("dir", direction);
+  shadowRoot.appendChild(mountNode); // ✅ No portal container needed
+
+  // ✅ Create Emotion cache in Shadow DOM
+  const emotionCache = createCache({
+    key: "calendar-property", // 🆕 Use a distinct key
+    container: shadowRoot,
+    stylisPlugins: isRtl ? [stylisRTLPlugin] : undefined,
+  });
+
+  // ✅ Mount React component
+  const root = ReactDOM.createRoot(mountNode);
+
+  root.render(
+    <CacheProvider value={emotionCache}>
+      <ContentProperty
+        data={[
+          {
+            id: "8866",
+            name: "Hasdrubal Thalassa & Spa 1",
+            country: "tunisia",
+            city: "djerba",
+            image:
+              "https://media.istockphoto.com/id/104731717/photo/luxury-resort.jpg?s=612x612&w=0&k=20&c=cODMSPbYyrn1FHake1xYz9M8r15iOfGz9Aosy9Db7mI=",
+          },
+          {
+            id: "8876",
+            name: "Hasdrubal Thalassa & Spa 5",
+            country: "tunisia",
+            city: "djerba",
+            image: "https://thumbs.dreamstime.com/b/resort-night-12154190.jpg",
+          },
+          {
+            id: "5458",
+            name: "Hasdrubal Thalassa & Spa 2",
+            country: "tunisia",
+            city: "djerba",
+            image:
+              "https://cf.bstatic.com/xdata/images/hotel/max1024x768/4068449.jpg?k=84bdc933cd43edf87f74bae774f5beb45544d4cc1ba303231da151454bab07c0&o=&hp=1",
+          },
+        ]}
+        config={config}
+      />
+    </CacheProvider>
+  );
+}
+
+// Expose the init method for script-based loading
 declare global {
   interface Window {
     BookiniWidget?: {
       initEngine: typeof initEngine;
       initCalendar: typeof initCalendar;
       initGuests: typeof initGuests;
+      initProperty: typeof initProperty;
     };
     __BOOKINI_WIDGET_SHADOW__?: ShadowRoot;
     __BOOKINI_WIDGET_PORTAL_CONTAINER__?: HTMLDivElement;
@@ -232,6 +311,7 @@ window.BookiniWidget = {
   initEngine: initEngine,
   initCalendar: initCalendar,
   initGuests: initGuests,
+  initProperty: initProperty,
 };
 
 // Optional auto-init block if you want script to self-start (commented out)

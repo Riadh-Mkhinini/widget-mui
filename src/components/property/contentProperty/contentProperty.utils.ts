@@ -3,7 +3,7 @@ import type {
   CityGrouped,
   CountryGrouped,
   PropertyItem,
-} from "./property.types";
+} from "../property.types";
 
 export const groupListPropertyBy = (data: Array<PropertyItem>) => {
   const listGroupedByCountry = groupBy(data, "country");
