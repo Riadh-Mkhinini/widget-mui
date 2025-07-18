@@ -93,7 +93,7 @@ export const getDatesInRange = (startDate: Date, endDate: Date) => {
   return dates;
 };
 
-export const getMaxWidthPopup = (monthNumberDisplays: number): Breakpoint => {
+export const getMaxWidthPopup = (monthNumberDisplays = 0): Breakpoint => {
   switch (monthNumberDisplays) {
     case 0:
       return "xs";

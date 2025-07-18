@@ -13,6 +13,7 @@ export type CalendarProps = {
   calendarConfig?: CalendarConfig;
   texts?: Texts;
   tags?: Array<Tag>;
+  disablePortal?: boolean;
   onClose?: () => void;
   onClickDone?: (params: {
     startDate: DayProps | null;

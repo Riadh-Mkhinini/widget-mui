@@ -141,6 +141,7 @@ async function initModalCalendar(
     <CacheProvider value={emotionCache}>
       <Calendar
         open
+        disablePortal
         defaultStartDate={generateDayProps(new Date())}
         defaultEndDate={generateDayProps(new Date())}
         daysList={getDayOfWeek(locale)}

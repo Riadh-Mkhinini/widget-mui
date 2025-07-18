@@ -29,6 +29,7 @@ const Calendar: FC<CalendarProps> = (props) => {
     id,
     open,
     anchorEl,
+    disablePortal,
   } = props;
   const theme = useTheme();
   //states
@@ -181,17 +182,8 @@ const Calendar: FC<CalendarProps> = (props) => {
     [config.monthNumberDisplays]
   );
 
-  return (
-    <Popover
-      mode={calendarConfig?.popUpMode}
-      maxWidth={maxWidth}
-      id={id}
-      open={open}
-      anchorEl={anchorEl}
-      onClose={onClose}
-      marginThreshold={0}
-      anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-    >
+  const content = (
+    <>
       <Content>
         <Header
           locale={locale}
@@ -210,6 +202,23 @@ const Calendar: FC<CalendarProps> = (props) => {
         hoverList={hoverList}
         onClick={onClickDone}
       />
+    </>
+  );
+
+  if (disablePortal) return content;
+
+  return (
+    <Popover
+      mode={calendarConfig?.popUpMode}
+      maxWidth={maxWidth}
+      id={id}
+      open={open}
+      anchorEl={anchorEl}
+      onClose={onClose}
+      marginThreshold={0}
+      anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+    >
+      {content}
     </Popover>
   );
 };
