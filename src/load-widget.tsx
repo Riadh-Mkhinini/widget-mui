@@ -28,7 +28,7 @@ type InitEngineParams = {
 async function initEngine(containerId: string, params: InitEngineParams) {
   const { idEngine, language, onClickSearch } = params;
   const container = document.getElementById(containerId);
-  if (!container) return;
+  if (!container || container.shadowRoot) return;
 
   const isRtl = isRtlLanguage(language);
   const direction = isRtl ? "rtl" : "ltr";
@@ -99,7 +99,7 @@ async function initModalCalendar(
 ) {
   const { language, config } = params;
   const container = document.getElementById(containerId);
-  if (!container) return;
+  if (!container || container.shadowRoot) return;
 
   const isRtl = isRtlLanguage(language);
   const direction = isRtl ? "rtl" : "ltr";
@@ -137,7 +137,7 @@ async function initModalCalendar(
 
   // ✅ Create Emotion cache in Shadow DOM
   const emotionCache = createCache({
-    key: "engine-widget",
+    key: "calendar-widget",
     container: shadowRoot,
     stylisPlugins: isRtl ? [stylisRTLPlugin] : undefined,
   });
