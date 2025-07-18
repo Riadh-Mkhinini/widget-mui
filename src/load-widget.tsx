@@ -218,7 +218,7 @@ async function initGuests(containerId: string, params: InitGuestsParams) {
 
 type InitPropertyParams = {
   language?: Language;
-  config?: Omit<PropertyConfig, "popUpMode">;
+  config?: Omit<PropertyConfig, "popUpMode" | "showProperty">;
 };
 async function initProperty(containerId: string, params: InitPropertyParams) {
   const { language, config } = params;
@@ -296,7 +296,7 @@ async function initProperty(containerId: string, params: InitPropertyParams) {
 
 // Expose the init method for script-based loading
 declare global {
-  interface Window {
+  export interface Window {
     BookiniWidget?: {
       initEngine: typeof initEngine;
       initCalendar: typeof initCalendar;
