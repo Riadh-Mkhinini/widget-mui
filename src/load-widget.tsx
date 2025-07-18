@@ -27,12 +27,14 @@ async function initEngine(containerId: string, params: Params) {
   container.setAttribute("dir", direction);
 
   // ✅ Initialize i18n language
-  if (language) {
-    try {
-      await i18n.changeLanguage(language);
-    } catch (error) {
-      console.warn(error);
-    }
+  try {
+    const langToUse =
+      language && i18n.hasResourceBundle(language, "translation")
+        ? language
+        : "enUS";
+    await i18n.changeLanguage(langToUse);
+  } catch (error) {
+    console.warn(error);
   }
 
   // ✅ Create Shadow DOM
