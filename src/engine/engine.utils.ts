@@ -63,7 +63,7 @@ export const initConfigEngine = (config?: EngineConfig): EngineConfig => {
       },
     },
     calendar: {
-      popUpMode: config?.calendar?.popUpMode,
+      popUpMode: config?.calendar?.popUpMode || "default",
       monthNumberDisplays: config?.calendar?.monthNumberDisplays ?? 1,
       maxYear: config?.calendar?.maxYear ?? 1,
       isVisiblePrice: config?.calendar?.isVisiblePrice ?? false,
