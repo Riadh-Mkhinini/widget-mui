@@ -16,6 +16,7 @@ import {
 } from "@helpers";
 import Engine, {
   generateDayProps,
+  type EngineConfig,
   type CalendarConfig,
   type GuestsConfig,
   type PropertyConfig,
@@ -25,11 +26,12 @@ import { Calendar, ContentProperty, GuestsRooms } from "@components";
 type InitEngineParams = {
   idEngine: string;
   language?: Language;
+  config?: EngineConfig;
   onClickSearch?: (values: any) => void;
 };
 
 async function initEngine(containerId: string, params: InitEngineParams) {
-  const { idEngine, language, onClickSearch } = params;
+  const { idEngine, language, config, onClickSearch } = params;
   const container = document.getElementById(containerId);
   if (!container || container.shadowRoot) return;
 
@@ -85,6 +87,7 @@ async function initEngine(containerId: string, params: InitEngineParams) {
       <Engine
         idEngine={idEngine}
         language={language}
+        config={config}
         onClickSearch={onClickSearch}
       />
     </CacheProvider>

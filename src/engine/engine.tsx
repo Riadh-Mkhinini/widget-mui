@@ -9,7 +9,7 @@ import {
   Container,
   GridItem,
   Guests,
-  // Header,
+  Header,
   Layout,
   PromoCode,
   Property,
@@ -21,7 +21,7 @@ import {
 //utils
 import { getLocale, isRtlLanguage } from "@helpers";
 import { createCustomTheme } from "@theme";
-import { generateDayProps } from "./engine.utils";
+import { generateDayProps, initConfigEngine } from "./engine.utils";
 //types
 import type {
   EngineConfig,
@@ -33,7 +33,7 @@ import type {
 } from "./engine.types";
 
 const Engine: FC<EngineProps> = (props) => {
-  const { language } = props;
+  const { language, config } = props;
 
   const [property, setProperty] = useState<PropertyItem | null>(null);
   const [startDate, setStartDate] = useState<DayProps | null>(
@@ -54,6 +54,7 @@ const Engine: FC<EngineProps> = (props) => {
     [language]
   );
   const locale = useMemo(() => getLocale(language), [language]);
+  const engineConfig = useMemo(() => initConfigEngine(config), [config]);
 
   //functions
   const onChangeProperty = (item: PropertyItem) => {
@@ -83,71 +84,12 @@ const Engine: FC<EngineProps> = (props) => {
     props.onClickSearch?.(params);
   };
   //render
-  const engineConfig: EngineConfig = {
-    global: {
-      layout: "combined",
-      preview: {
-        showIcon: true,
-        radius: 1,
-        // background: "",
-        // borderWidth: 2, // supported in combined layout
-        // isRounded: true, // supported in combined layout & siz engine xl | lg
-        // border: "green",
-        // size: "large",
-        // label: "blue",
-        // value: "red",
-        // placeholder: "black",
-        // icon: "black",
-        formatDate: "dd-MM-yyyy",
-        showShadow: true,
-      },
-      container: {
-        padding: 1,
-        // background: "#00000010",
-        borderRadius: 1,
-      },
-      title: {
-        fontSize: 26,
-        color: "#2c2c2c",
-        fontWeight: "600",
-        textAlign: "center",
-      },
-    },
-    calendar: {
-      popUpMode: "default",
-      monthNumberDisplays: 1,
-      maxYear: 1,
-      isVisiblePrice: false,
-      isVisibleWeather: false,
-    },
-    property: {
-      mode: "simple",
-      popUpMode: "default",
-      showSearch: true,
-      showProperty: false,
-    },
-    promoCode: {
-      showPromoCode: false,
-    },
-    guests: {
-      mode: "accordion",
-      popUpMode: "default",
-      counterMode: "circular",
-      maxAdults: 6,
-      maxChildren: 8,
-      maxAgesChildren: 10,
-      maxRoom: 4,
-    },
-    search: {
-      mode: "button",
-      showIcon: true,
-    },
-  };
+
   return (
     <ThemeProvider theme={theme}>
-      <IBEProvider size="xl" engineConfig={engineConfig}>
+      <IBEProvider size={engineConfig.size || "xl"} engineConfig={engineConfig}>
         <Container>
-          {/* <Header title={`Engine ID: ${idEngine}`} /> */}
+          <Header title={engineConfig.global?.title?.label} />
           <Layout>
             <GridItem
               gridArea="property"
@@ -210,6 +152,7 @@ const Engine: FC<EngineProps> = (props) => {
 };
 
 export {
+  type EngineConfig,
   type PropertyConfig,
   type CalendarConfig,
   type GuestsConfig,

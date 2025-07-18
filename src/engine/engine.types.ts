@@ -11,6 +11,7 @@ export type ResultEngine = {
 export type EngineProps = {
   idEngine: string;
   language?: Language;
+  config?: EngineConfig;
   onClickSearch?: (values: ResultEngine) => void;
 };
 
@@ -19,6 +20,7 @@ export type EngineSize = "xl" | "lg" | "md" | "sm" | "xs";
 //*****************ENGINE CONFIG******************** */
 // Engine config
 export type EngineConfig = {
+  size?: EngineSize;
   colors?: Palette;
   global?: GlobalConfig;
   property?: PropertyConfig;
@@ -37,6 +39,7 @@ export type GlobalConfig = {
 };
 
 export type TitleConfig = {
+  label?: string;
   fontSize?: number | string;
   color?: string;
   fontWeight?: string;
