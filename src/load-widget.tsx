@@ -28,7 +28,7 @@ type InitEngineParams = {
 async function initEngine(containerId: string, params: InitEngineParams) {
   const { idEngine, language, onClickSearch } = params;
   const container = document.getElementById(containerId);
-  if (!container || container.shadowRoot) return;
+  if (!container) return;
 
   const isRtl = isRtlLanguage(language);
   const direction = isRtl ? "rtl" : "ltr";
@@ -99,7 +99,7 @@ async function initModalCalendar(
 ) {
   const { language, config } = params;
   const container = document.getElementById(containerId);
-  if (!container || container.shadowRoot) return;
+  if (!container) return;
 
   const isRtl = isRtlLanguage(language);
   const direction = isRtl ? "rtl" : "ltr";
