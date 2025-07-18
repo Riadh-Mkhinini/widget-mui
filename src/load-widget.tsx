@@ -121,34 +121,22 @@ async function initModalCalendar(
   // ✅ Create Shadow DOM
   const shadowRoot = container.attachShadow({ mode: "open" });
 
-  // ✅ Create a container element for MUI portals (Popover, Dialog, etc.)
-  const portalContainer = document.createElement("div");
-
-  // ✅ Create the root mount node for React inside portalContainer
+  // ✅ Create mount node directly inside shadow root
   const mountNode = document.createElement("div");
-
-  // ✅ Set direction for layout
   mountNode.setAttribute("dir", direction);
-
-  portalContainer.appendChild(mountNode);
-
-  // ✅ Append both to shadow DOM
-  shadowRoot.appendChild(portalContainer);
+  shadowRoot.appendChild(mountNode); // ✅ No portal container needed
 
   // ✅ Create Emotion cache in Shadow DOM
   const emotionCache = createCache({
-    key: "calendar-widget",
+    key: "calendar-widget", // 🆕 Use a distinct key
     container: shadowRoot,
     stylisPlugins: isRtl ? [stylisRTLPlugin] : undefined,
   });
 
-  // ✅ Expose containers globally for Popover/Dialog use
-  (window as any).__BOOKINI_WIDGET_SHADOW__ = shadowRoot;
-  (window as any).__BOOKINI_WIDGET_PORTAL_CONTAINER__ = portalContainer;
-
-  // ✅ Mount React
+  // ✅ Mount React component
   const root = ReactDOM.createRoot(mountNode);
   const locale = getLocale(language);
+
   root.render(
     <CacheProvider value={emotionCache}>
       <Calendar
@@ -172,6 +160,7 @@ async function initModalCalendar(
     </CacheProvider>
   );
 }
+
 // Expose the init method for script-based loading
 declare global {
   interface Window {
