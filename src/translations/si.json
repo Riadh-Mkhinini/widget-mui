@@ -1,0 +1,45 @@
+{
+  "property": {
+    "preview_label": "හෝටලය තෝරන්න",
+    "preview_placeholder": "ඔබේ ගමනාන්තය තේරීම",
+    "pop_up_title": "හෝටලය තෝරන්න",
+    "pop_up_sub_title": "ඔබේ ගමනාන්තය තේරීම",
+    "pop_up_search_placeholder": "සොයන්න…"
+  },
+  "guests": {
+    "preview_label": "අමුත්තන්",
+    "pop_up_title": "අමුත්තන්",
+    "pop_up_room": "කාමරය {{value}}",
+    "pop_up_adults": "ප්‍රවීණයින්",
+    "pop_up_adults_caption": "(13+ වයස)",
+    "pop_up_children": "ළමුන්",
+    "pop_up_children_caption": "ළමුන්",
+    "pop_up_age_child": "{{value}} වන ළදරු වයස",
+    "pop_up_button_add_room": "කාමරයක් එක් කරන්න",
+    "pop_up_button_done": "තහවුරු කරන්න",
+    "pop_up_required_field": "මෙම ක්ෂේත්‍රය අත්‍යවශ්‍යයි",
+    "pop_up_age_child_placeholder": "තෝරන්න",
+    "room": "1 කාමරය",
+    "rooms": "{{value}} කාමර",
+    "adult": "1 ප්‍රවීණ",
+    "adults": "{{value}} ප්‍රවීණ",
+    "child": "1 ළමයා",
+    "children": "{{value}} ළමුන්"
+  },
+  "calendar": {
+    "preview_check_in_label": "චෙක්-ඉන්",
+    "preview_check_out_label": "චෙක්-අවුට්",
+    "preview_nights_label": "{{value}} රැය",
+    "pop_up_required_field": "මෙම ක්ෂේත්‍රය අත්‍යවශ්‍යයි",
+    "pop_up_start_end_date_nights": "{{start}} – {{end}} ({{nights}} රැය)",
+    "pop_up_note": "රැයට එක් පුද්ගලයෙකුට ඇති හොඳම මිල ගණන්",
+    "pop_up_sub_note": "මිල ගණන් වෙන්කරීමේ නියමයන්ට එපා සහිතව වෙනස් විය හැක",
+    "pop_up_button_done": "තහවුරු කරන්න"
+  },
+  "promo_code": {
+    "preview_placeholder": "ප්‍රවර්ධන කේතය"
+  },
+  "search": {
+    "search_label": "සොයාගන්න"
+  }
+}

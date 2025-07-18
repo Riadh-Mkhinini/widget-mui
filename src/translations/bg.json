@@ -1,0 +1,45 @@
+{
+  "property": {
+    "preview_label": "Изберете хотел",
+    "preview_placeholder": "Изберете дестинацията си",
+    "pop_up_title": "Изберете хотел",
+    "pop_up_sub_title": "Изберете дестинацията си",
+    "pop_up_search_placeholder": "Търсене…"
+  },
+  "guests": {
+    "preview_label": "Гости",
+    "pop_up_title": "Гости",
+    "pop_up_room": "Стая {{value}}",
+    "pop_up_adults": "Възрастни",
+    "pop_up_adults_caption": "(13+ години)",
+    "pop_up_children": "Деца",
+    "pop_up_children_caption": "Деца",
+    "pop_up_age_child": "Възраст на {{value}}-то дете",
+    "pop_up_button_add_room": "Добави стая",
+    "pop_up_button_done": "Потвърди",
+    "pop_up_required_field": "Това поле е задължително",
+    "pop_up_age_child_placeholder": "Изберете",
+    "room": "1 стая",
+    "rooms": "{{value}} стаи",
+    "adult": "1 възрастен",
+    "adults": "{{value}} възрастни",
+    "child": "1 дете",
+    "children": "{{value}} деца"
+  },
+  "calendar": {
+    "preview_check_in_label": "Настаняване",
+    "preview_check_out_label": "Напускане",
+    "preview_nights_label": "{{value}} нощувки",
+    "pop_up_required_field": "Това поле е задължително",
+    "pop_up_start_end_date_nights": "{{start}} – {{end}} ({{nights}} нощувки)",
+    "pop_up_note": "Най-добрите цени на човек за нощувка",
+    "pop_up_sub_note": "Цените зависят от условията на резервация",
+    "pop_up_button_done": "Потвърди"
+  },
+  "promo_code": {
+    "preview_placeholder": "Промо код"
+  },
+  "search": {
+    "search_label": "Търси"
+  }
+}

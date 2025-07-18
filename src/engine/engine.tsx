@@ -83,8 +83,8 @@ const Engine: FC<EngineProps> = (props) => {
         showIcon: true,
         radius: 1,
         // background: "",
-        borderWidth: 2,
-        // isRounded: true,
+        // borderWidth: 2, // supported in combined layout
+        // isRounded: true, // supported in combined layout & siz engine xl | lg
         // border: "green",
         // size: "large",
         // label: "blue",
@@ -129,7 +129,7 @@ const Engine: FC<EngineProps> = (props) => {
       maxAdults: 6,
       maxChildren: 8,
       maxAgesChildren: 10,
-      maxRoom: 2,
+      maxRoom: 4,
     },
     search: {
       mode: "button",

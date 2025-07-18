@@ -1,0 +1,45 @@
+{
+  "property": {
+    "preview_label": "Izaberi hotel",
+    "preview_placeholder": "Izaberi destinaciju",
+    "pop_up_title": "Izaberi hotel",
+    "pop_up_sub_title": "Izaberi destinaciju",
+    "pop_up_search_placeholder": "Pretraži…"
+  },
+  "guests": {
+    "preview_label": "Gosti",
+    "pop_up_title": "Gosti",
+    "pop_up_room": "Soba {{value}}",
+    "pop_up_adults": "Odrasli",
+    "pop_up_adults_caption": "(13+ godina)",
+    "pop_up_children": "Djeca",
+    "pop_up_children_caption": "Djeca",
+    "pop_up_age_child": "Starost {{value}}. djeteta",
+    "pop_up_button_add_room": "Dodaj sobu",
+    "pop_up_button_done": "Potvrdi",
+    "pop_up_required_field": "Ovo polje je obavezno",
+    "pop_up_age_child_placeholder": "Izaberi",
+    "room": "1 soba",
+    "rooms": "{{value}} soba",
+    "adult": "1 odrasli",
+    "adults": "{{value}} odraslih",
+    "child": "1 dijete",
+    "children": "{{value}} djece"
+  },
+  "calendar": {
+    "preview_check_in_label": "Prijava",
+    "preview_check_out_label": "Odjava",
+    "preview_nights_label": "{{value}} noći",
+    "pop_up_required_field": "Ovo polje je obavezno",
+    "pop_up_start_end_date_nights": "{{start}} – {{end}} ({{nights}} noći)",
+    "pop_up_note": "Najbolje cijene po osobi po noći",
+    "pop_up_sub_note": "Cijene mogu ovisiti o uslovima rezervacije",
+    "pop_up_button_done": "Potvrdi"
+  },
+  "promo_code": {
+    "preview_placeholder": "Promo kod"
+  },
+  "search": {
+    "search_label": "Pretraži"
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "property": {
+    "preview_label": "Zgjidh hotelin",
+    "preview_placeholder": "Zgjidh destinacionin tënd",
+    "pop_up_title": "Zgjidh hotelin",
+    "pop_up_sub_title": "Zgjidh destinacionin tënd",
+    "pop_up_search_placeholder": "Kërko…"
+  },
+  "guests": {
+    "preview_label": "Mysafirë",
+    "pop_up_title": "Mysafirë",
+    "pop_up_room": "Dhoma {{value}}",
+    "pop_up_adults": "Të rritur",
+    "pop_up_adults_caption": "(13+ vjeç)",
+    "pop_up_children": "Fëmijë",
+    "pop_up_children_caption": "Fëmijë",
+    "pop_up_age_child": "Mosha e fëmijës {{value}}",
+    "pop_up_button_add_room": "Shto dhomë",
+    "pop_up_button_done": "Përfundo",
+    "pop_up_required_field": "Kjo fushë është e kërkuar",
+    "pop_up_age_child_placeholder": "Zgjidh",
+    "room": "1 dhomë",
+    "rooms": "{{value}} dhoma",
+    "adult": "1 i rritur",
+    "adults": "{{value}} të rritur",
+    "child": "1 fëmijë",
+    "children": "{{value}} fëmijë"
+  },
+  "calendar": {
+    "preview_check_in_label": "Check-in",
+    "preview_check_out_label": "Check-out",
+    "preview_nights_label": "{{value}} netë",
+    "pop_up_required_field": "Kjo fushë është e kërkuar",
+    "pop_up_start_end_date_nights": "{{start}} – {{end}} ({{nights}} netë)",
+    "pop_up_note": "Çmimet më të mira për person në natë",
+    "pop_up_sub_note": "Çmimet mund të ndryshojnë sipas kushteve të rezervimit",
+    "pop_up_button_done": "Përfundo"
+  },
+  "promo_code": {
+    "preview_placeholder": "Kodi promocional"
+  },
+  "search": {
+    "search_label": "Kërko"
+  }
+}

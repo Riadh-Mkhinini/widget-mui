@@ -22,6 +22,7 @@ const Guests: FC<GuestsProps> = (props) => {
   //states
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
   const [rooms, setRooms] = useState<Array<RoomData>>(props.rooms);
+  const [indexExpanded, setIndexExpanded] = useState<number>(0);
   //
 
   const open = Boolean(anchorEl);
@@ -52,6 +53,7 @@ const Guests: FC<GuestsProps> = (props) => {
       ...prev,
       { adultsCount: 2, childCount: 0, childs: [] },
     ]);
+    setIndexExpanded(rooms.length);
   };
   const onChangeAdults = (index: number) => (value: number) => {
     setRooms((prev) => [
@@ -119,6 +121,9 @@ const Guests: FC<GuestsProps> = (props) => {
     onChange?.(rooms);
   };
 
+  const onChangeExpanded = (index: number) => () => {
+    setIndexExpanded((prev) => (prev === index ? -1 : index));
+  };
   //render
   const renderItem = () => {
     return rooms.map((room, index) => {
@@ -128,10 +133,12 @@ const Guests: FC<GuestsProps> = (props) => {
           title={t("guests.pop_up_room", { value: index + 1 })}
           room={room}
           showDeleteButton={rooms.length > 1}
+          expanded={index === indexExpanded}
           onChangeAdults={onChangeAdults(index)}
           onChangeChildren={onChangeChildren(index)}
           onChangeChildValue={onChangeChildValue(index)}
           onClickDelete={onClickDeleteRoom(index)}
+          onChangeExpanded={onChangeExpanded(index)}
         />
       );
     });

@@ -1,0 +1,45 @@
+{
+  "property": {
+    "preview_label": "Vyberte hotel",
+    "preview_placeholder": "Vyberte svůj cíl",
+    "pop_up_title": "Vyberte hotel",
+    "pop_up_sub_title": "Vyberte svůj cíl",
+    "pop_up_search_placeholder": "Hledat…"
+  },
+  "guests": {
+    "preview_label": "Hosté",
+    "pop_up_title": "Hosté",
+    "pop_up_room": "Pokoj {{value}}",
+    "pop_up_adults": "Dospělí",
+    "pop_up_adults_caption": "(13+ let)",
+    "pop_up_children": "Děti",
+    "pop_up_children_caption": "Děti",
+    "pop_up_age_child": "Věk {{value}}. dítěte",
+    "pop_up_button_add_room": "Přidat pokoj",
+    "pop_up_button_done": "Potvrdit",
+    "pop_up_required_field": "Toto pole je povinné",
+    "pop_up_age_child_placeholder": "Vybrat",
+    "room": "1 pokoj",
+    "rooms": "{{value}} pokojů",
+    "adult": "1 dospělý",
+    "adults": "{{value}} dospělých",
+    "child": "1 dítě",
+    "children": "{{value}} dětí"
+  },
+  "calendar": {
+    "preview_check_in_label": "Check‑in",
+    "preview_check_out_label": "Check‑out",
+    "preview_nights_label": "{{value}} nocí",
+    "pop_up_required_field": "Toto pole je povinné",
+    "pop_up_start_end_date_nights": "{{start}} – {{end}} ({{nights}} nocí)",
+    "pop_up_note": "Nejlepší ceny za osobu a noc",
+    "pop_up_sub_note": "Ceny mohou podléhat podmínkám rezervace",
+    "pop_up_button_done": "Potvrdit"
+  },
+  "promo_code": {
+    "preview_placeholder": "Promo kód"
+  },
+  "search": {
+    "search_label": "Hledat"
+  }
+}

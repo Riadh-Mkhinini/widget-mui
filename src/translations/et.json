@@ -1,0 +1,45 @@
+{
+  "property": {
+    "preview_label": "Vali hotell",
+    "preview_placeholder": "Vali sihtkoht",
+    "pop_up_title": "Vali hotell",
+    "pop_up_sub_title": "Vali sihtkoht",
+    "pop_up_search_placeholder": "Otsi…"
+  },
+  "guests": {
+    "preview_label": "Külalised",
+    "pop_up_title": "Külalised",
+    "pop_up_room": "Tuba {{value}}",
+    "pop_up_adults": "Täiskasvanud",
+    "pop_up_adults_caption": "(13+ aastat)",
+    "pop_up_children": "Lapsed",
+    "pop_up_children_caption": "Lapsed",
+    "pop_up_age_child": "{{value}}. lapse vanus",
+    "pop_up_button_add_room": "Lisa tuba",
+    "pop_up_button_done": "Kinnita",
+    "pop_up_required_field": "See väli on kohustuslik",
+    "pop_up_age_child_placeholder": "Vali",
+    "room": "1 tuba",
+    "rooms": "{{value}} tuba",
+    "adult": "1 täiskasvanu",
+    "adults": "{{value}} täiskasvanut",
+    "child": "1 laps",
+    "children": "{{value}} last"
+  },
+  "calendar": {
+    "preview_check_in_label": "Sisseregistreerimine",
+    "preview_check_out_label": "Väljaväljamine",
+    "preview_nights_label": "{{value}} ööd",
+    "pop_up_required_field": "See väli on kohustuslik",
+    "pop_up_start_end_date_nights": "{{start}} – {{end}} ({{nights}} ööd)",
+    "pop_up_note": "Parimad hinnad inimese kohta öö kohta",
+    "pop_up_sub_note": "Hinnad võivad eritingimustel muutuda",
+    "pop_up_button_done": "Kinnita"
+  },
+  "promo_code": {
+    "preview_placeholder": "Promo kood"
+  },
+  "search": {
+    "search_label": "Otsi"
+  }
+}

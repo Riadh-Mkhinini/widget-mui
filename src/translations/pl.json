@@ -1,0 +1,45 @@
+{
+  "property": {
+    "preview_label": "Wybierz hotel",
+    "preview_placeholder": "Wybierz cel podróży",
+    "pop_up_title": "Wybierz hotel",
+    "pop_up_sub_title": "Wybierz cel podróży",
+    "pop_up_search_placeholder": "Szukaj…"
+  },
+  "guests": {
+    "preview_label": "Goście",
+    "pop_up_title": "Goście",
+    "pop_up_room": "Pokój {{value}}",
+    "pop_up_adults": "Dorośli",
+    "pop_up_adults_caption": "(13+ lat)",
+    "pop_up_children": "Dzieci",
+    "pop_up_children_caption": "Dzieci",
+    "pop_up_age_child": "Wiek {{value}}. dziecka",
+    "pop_up_button_add_room": "Dodaj pokój",
+    "pop_up_button_done": "Potwierdź",
+    "pop_up_required_field": "To pole jest wymagane",
+    "pop_up_age_child_placeholder": "Wybierz",
+    "room": "1 pokój",
+    "rooms": "{{value}} pokoi",
+    "adult": "1 dorosły",
+    "adults": "{{value}} dorosłych",
+    "child": "1 dziecko",
+    "children": "{{value}} dzieci"
+  },
+  "calendar": {
+    "preview_check_in_label": "Zameldowanie",
+    "preview_check_out_label": "Wymeldowanie",
+    "preview_nights_label": "{{value}} nocy",
+    "pop_up_required_field": "To pole jest wymagane",
+    "pop_up_start_end_date_nights": "{{start}} – {{end}} ({{nights}} nocy)",
+    "pop_up_note": "Najlepsze ceny za osobę za noc",
+    "pop_up_sub_note": "Ceny mogą zależeć od warunków rezerwacji",
+    "pop_up_button_done": "Potwierdź"
+  },
+  "promo_code": {
+    "preview_placeholder": "Kod promocyjny"
+  },
+  "search": {
+    "search_label": "Szukaj"
+  }
+}

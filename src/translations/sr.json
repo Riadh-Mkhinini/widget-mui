@@ -1,0 +1,45 @@
+{
+  "property": {
+    "preview_label": "Изаберите хотел",
+    "preview_placeholder": "Изаберите дестинацију",
+    "pop_up_title": "Изаберите хотел",
+    "pop_up_sub_title": "Изаберите дестинацију",
+    "pop_up_search_placeholder": "Претрага…"
+  },
+  "guests": {
+    "preview_label": "Гости",
+    "pop_up_title": "Гости",
+    "pop_up_room": "Соба {{value}}",
+    "pop_up_adults": "Одрасли",
+    "pop_up_adults_caption": "(13+ година)",
+    "pop_up_children": "Деца",
+    "pop_up_children_caption": "Деца",
+    "pop_up_age_child": "Старост {{value}}. детета",
+    "pop_up_button_add_room": "Додај собу",
+    "pop_up_button_done": "Потврди",
+    "pop_up_required_field": "Ово поље је обавезно",
+    "pop_up_age_child_placeholder": "Изабери",
+    "room": "1 соба",
+    "rooms": "{{value}} соба",
+    "adult": "1 одрасли",
+    "adults": "{{value}} одраслих",
+    "child": "1 дете",
+    "children": "{{value}} деце"
+  },
+  "calendar": {
+    "preview_check_in_label": "Пријава",
+    "preview_check_out_label": "Одјава",
+    "preview_nights_label": "{{value}} ноћи",
+    "pop_up_required_field": "Ово поље је обавезно",
+    "pop_up_start_end_date_nights": "{{start}} – {{end}} ({{nights}} ноћи)",
+    "pop_up_note": "Најбоље цене по особи по ноћи",
+    "pop_up_sub_note": "Цене зависе од услова резервације",
+    "pop_up_button_done": "Потврди"
+  },
+  "promo_code": {
+    "preview_placeholder": "Промо код"
+  },
+  "search": {
+    "search_label": "Претражи"
+  }
+}

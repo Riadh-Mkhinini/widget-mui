@@ -1,0 +1,45 @@
+{
+  "property": {
+    "preview_label": "Επιλέξτε ξενοδοχείο",
+    "preview_placeholder": "Επιλέξτε τον προορισμό σας",
+    "pop_up_title": "Επιλέξτε ξενοδοχείο",
+    "pop_up_sub_title": "Επιλέξτε τον προορισμό σας",
+    "pop_up_search_placeholder": "Αναζήτηση…"
+  },
+  "guests": {
+    "preview_label": "Επισκέπτες",
+    "pop_up_title": "Επισκέπτες",
+    "pop_up_room": "Δωμάτιο {{value}}",
+    "pop_up_adults": "Ενήλικες",
+    "pop_up_adults_caption": "(13+ ετών)",
+    "pop_up_children": "Παιδιά",
+    "pop_up_children_caption": "Παιδιά",
+    "pop_up_age_child": "Ηλικία {{value}}ου παιδιού",
+    "pop_up_button_add_room": "Προσθήκη δωματίου",
+    "pop_up_button_done": "Επιβεβαίωση",
+    "pop_up_required_field": "Αυτό το πεδίο είναι υποχρεωτικό",
+    "pop_up_age_child_placeholder": "Επιλέξτε",
+    "room": "1 δωμάτιο",
+    "rooms": "{{value}} δωμάτια",
+    "adult": "1 ενήλικας",
+    "adults": "{{value}} ενήλικες",
+    "child": "1 παιδί",
+    "children": "{{value}} παιδιά"
+  },
+  "calendar": {
+    "preview_check_in_label": "Άφιξη",
+    "preview_check_out_label": "Αναχώρηση",
+    "preview_nights_label": "{{value}} νύχτες",
+    "pop_up_required_field": "Αυτό το πεδίο είναι υποχρεωτικό",
+    "pop_up_start_end_date_nights": "{{start}} – {{end}} ({{nights}} νύχτες)",
+    "pop_up_note": "Καλύτερες τιμές ανά άτομο ανά διανυκτέρευση",
+    "pop_up_sub_note": "Οι τιμές υπόκεινται σε ειδικούς όρους κράτησης",
+    "pop_up_button_done": "Επιβεβαίωση"
+  },
+  "promo_code": {
+    "preview_placeholder": "Κωδικός προσφοράς"
+  },
+  "search": {
+    "search_label": "Αναζήτηση"
+  }
+}

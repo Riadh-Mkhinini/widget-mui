@@ -1,0 +1,45 @@
+{
+  "property": {
+    "preview_label": "Szálloda kiválasztása",
+    "preview_placeholder": "Válassza ki az úticélt",
+    "pop_up_title": "Szálloda kiválasztása",
+    "pop_up_sub_title": "Válassza ki az úticélt",
+    "pop_up_search_placeholder": "Keresés…"
+  },
+  "guests": {
+    "preview_label": "Vendégek",
+    "pop_up_title": "Vendégek",
+    "pop_up_room": "{{value}}. szoba",
+    "pop_up_adults": "Felnőttek",
+    "pop_up_adults_caption": "(13+ év)",
+    "pop_up_children": "Gyermekek",
+    "pop_up_children_caption": "Gyermekek",
+    "pop_up_age_child": "{{value}}. gyermek életkora",
+    "pop_up_button_add_room": "Szoba hozzáadása",
+    "pop_up_button_done": "Megerősítés",
+    "pop_up_required_field": "Ez a mező kötelező",
+    "pop_up_age_child_placeholder": "Választás",
+    "room": "1 szoba",
+    "rooms": "{{value}} szoba",
+    "adult": "1 felnőtt",
+    "adults": "{{value}} felnőtt",
+    "child": "1 gyermek",
+    "children": "{{value}} gyermek"
+  },
+  "calendar": {
+    "preview_check_in_label": "Bejelentkezés",
+    "preview_check_out_label": "Kijelentkezés",
+    "preview_nights_label": "{{value}} éjszaka",
+    "pop_up_required_field": "Ez a mező kötelező",
+    "pop_up_start_end_date_nights": "{{start}} – {{end}} ({{nights}} éjszaka)",
+    "pop_up_note": "A legjobb árak személyenként és éjszakára",
+    "pop_up_sub_note": "Az árak különleges foglalási feltételekhez kötöttek lehetnek",
+    "pop_up_button_done": "Megerősítés"
+  },
+  "promo_code": {
+    "preview_placeholder": "Kuponkód"
+  },
+  "search": {
+    "search_label": "Keresés"
+  }
+}

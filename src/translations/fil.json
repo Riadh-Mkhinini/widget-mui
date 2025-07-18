@@ -1,0 +1,45 @@
+{
+  "property": {
+    "preview_label": "Piliin ang hotel",
+    "preview_placeholder": "Piliin ang iyong destinasyon",
+    "pop_up_title": "Piliin ang hotel",
+    "pop_up_sub_title": "Piliin ang iyong destinasyon",
+    "pop_up_search_placeholder": "Maghanap…"
+  },
+  "guests": {
+    "preview_label": "Mga bisita",
+    "pop_up_title": "Mga bisita",
+    "pop_up_room": "Silid {{value}}",
+    "pop_up_adults": "Mga matatanda",
+    "pop_up_adults_caption": "(13+ taon)",
+    "pop_up_children": "Mga bata",
+    "pop_up_children_caption": "Mga bata",
+    "pop_up_age_child": "Edad ng ika-{{value}} na bata",
+    "pop_up_button_add_room": "Magdagdag ng silid",
+    "pop_up_button_done": "Kumpirmahin",
+    "pop_up_required_field": "Kinakailangang punan ang patlang na ito",
+    "pop_up_age_child_placeholder": "Pumili",
+    "room": "1 silid",
+    "rooms": "{{value}} silid",
+    "adult": "1 matatanda",
+    "adults": "{{value}} matatanda",
+    "child": "1 bata",
+    "children": "{{value}} bata"
+  },
+  "calendar": {
+    "preview_check_in_label": "Pag-check in",
+    "preview_check_out_label": "Pag-check out",
+    "preview_nights_label": "{{value}} gabi",
+    "pop_up_required_field": "Kinakailangang punan ang patlang na ito",
+    "pop_up_start_end_date_nights": "{{start}} – {{end}} ({{nights}} gabi)",
+    "pop_up_note": "Pinakamagandang presyo bawat tao bawat gabi",
+    "pop_up_sub_note": "Ang presyo ay maaaring magbago depende sa mga kondisyon ng booking",
+    "pop_up_button_done": "Kumpirmahin"
+  },
+  "promo_code": {
+    "preview_placeholder": "Promo code"
+  },
+  "search": {
+    "search_label": "Maghanap"
+  }
+}

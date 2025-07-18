@@ -1,0 +1,45 @@
+{
+  "property": {
+    "preview_label": "Оберіть готель",
+    "preview_placeholder": "Виберіть ваш пункт призначення",
+    "pop_up_title": "Оберіть готель",
+    "pop_up_sub_title": "Виберіть ваш пункт призначення",
+    "pop_up_search_placeholder": "Пошук…"
+  },
+  "guests": {
+    "preview_label": "Гості",
+    "pop_up_title": "Гості",
+    "pop_up_room": "Кімната {{value}}",
+    "pop_up_adults": "Дорослі",
+    "pop_up_adults_caption": "(13+ років)",
+    "pop_up_children": "Діти",
+    "pop_up_children_caption": "Діти",
+    "pop_up_age_child": "Вік {{value}}‑ї дитини",
+    "pop_up_button_add_room": "Додати кімнату",
+    "pop_up_button_done": "Підтвердити",
+    "pop_up_required_field": "Це поле обов’язкове",
+    "pop_up_age_child_placeholder": "Обрати",
+    "room": "1 кімната",
+    "rooms": "{{value}} кімнат",
+    "adult": "1 дорослий",
+    "adults": "{{value}} дорослих",
+    "child": "1 дитина",
+    "children": "{{value}} дітей"
+  },
+  "calendar": {
+    "preview_check_in_label": "Заїзд",
+    "preview_check_out_label": "Виїзд",
+    "preview_nights_label": "{{value}} ночей",
+    "pop_up_required_field": "Це поле обов’язкове",
+    "pop_up_start_end_date_nights": "{{start}} – {{end}} ({{nights}} ночей)",
+    "pop_up_note": "Найкращі ціни за особу за ніч",
+    "pop_up_sub_note": "Ціни залежать від умов бронювання",
+    "pop_up_button_done": "Підтвердити"
+  },
+  "promo_code": {
+    "preview_placeholder": "Промокод"
+  },
+  "search": {
+    "search_label": "Пошук"
+  }
+}

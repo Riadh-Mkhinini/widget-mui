@@ -1,0 +1,45 @@
+{
+  "property": {
+    "preview_label": "Chọn khách sạn",
+    "preview_placeholder": "Chọn điểm đến của bạn",
+    "pop_up_title": "Chọn khách sạn",
+    "pop_up_sub_title": "Chọn điểm đến của bạn",
+    "pop_up_search_placeholder": "Tìm kiếm…"
+  },
+  "guests": {
+    "preview_label": "Khách",
+    "pop_up_title": "Khách",
+    "pop_up_room": "Phòng {{value}}",
+    "pop_up_adults": "Người lớn",
+    "pop_up_adults_caption": "(13+ tuổi)",
+    "pop_up_children": "Trẻ em",
+    "pop_up_children_caption": "Trẻ em",
+    "pop_up_age_child": "Tuổi của trẻ thứ {{value}}",
+    "pop_up_button_add_room": "Thêm phòng",
+    "pop_up_button_done": "Xác nhận",
+    "pop_up_required_field": "Trường này là bắt buộc",
+    "pop_up_age_child_placeholder": "Chọn",
+    "room": "1 phòng",
+    "rooms": "{{value}} phòng",
+    "adult": "1 người lớn",
+    "adults": "{{value}} người lớn",
+    "child": "1 trẻ em",
+    "children": "{{value}} trẻ em"
+  },
+  "calendar": {
+    "preview_check_in_label": "Nhận phòng",
+    "preview_check_out_label": "Trả phòng",
+    "preview_nights_label": "{{value}} đêm",
+    "pop_up_required_field": "Trường này là bắt buộc",
+    "pop_up_start_end_date_nights": "{{start}} – {{end}} ({{nights}} đêm)",
+    "pop_up_note": "Giá tốt nhất mỗi người mỗi đêm",
+    "pop_up_sub_note": "Giá có thể thay đổi theo điều kiện đặt phòng",
+    "pop_up_button_done": "Xác nhận"
+  },
+  "promo_code": {
+    "preview_placeholder": "Mã khuyến mại"
+  },
+  "search": {
+    "search_label": "Tìm kiếm"
+  }
+}

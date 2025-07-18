@@ -113,25 +113,25 @@ const sizeXl = (params: {
   const { theme, showProperty, showPromoCode, isRounded } = params;
   if (showProperty && showPromoCode) {
     return {
-      borderRadius: isRounded ? "50%" : theme.spacing(1),
+      borderRadius: isRounded ? 30 : theme.spacing(1),
       gridTemplateColumns: "1fr 2fr 1fr 1fr auto",
       gridTemplateAreas: `"property calendar guests promoCode search"`,
     };
   } else if (showProperty && !showPromoCode) {
     return {
-      borderRadius: isRounded ? "50%" : theme.spacing(1),
+      borderRadius: isRounded ? 30 : theme.spacing(1),
       gridTemplateColumns: "1fr 2fr 1fr auto",
       gridTemplateAreas: `"property calendar guests search"`,
     };
   } else if (!showProperty && showPromoCode) {
     return {
-      borderRadius: isRounded ? "50%" : theme.spacing(1),
+      borderRadius: isRounded ? 30 : theme.spacing(1),
       gridTemplateColumns: "2fr 1fr 1fr auto",
       gridTemplateAreas: `"calendar guests promoCode search"`,
     };
   }
   return {
-    borderRadius: isRounded ? "50%" : theme.spacing(1),
+    borderRadius: isRounded ? 30 : theme.spacing(1),
     gridTemplateColumns: "2fr 1fr auto",
     gridTemplateAreas: `"calendar guests search"`,
   };
@@ -145,25 +145,25 @@ const sizeLg = (params: {
   const { theme, showProperty, showPromoCode, isRounded } = params;
   if (showProperty && showPromoCode) {
     return {
-      borderRadius: isRounded ? "50%" : theme.spacing(1),
+      borderRadius: isRounded ? 30 : theme.spacing(1),
       gridTemplateColumns: "1fr 2fr 1fr 1fr auto",
       gridTemplateAreas: `"property calendar guests promoCode search"`,
     };
   } else if (showProperty && !showPromoCode) {
     return {
-      borderRadius: isRounded ? "50%" : theme.spacing(1),
+      borderRadius: isRounded ? 30 : theme.spacing(1),
       gridTemplateColumns: "1fr 2fr 1fr auto",
       gridTemplateAreas: `"property calendar guests search"`,
     };
   } else if (!showProperty && showPromoCode) {
     return {
-      borderRadius: isRounded ? "50%" : theme.spacing(1),
+      borderRadius: isRounded ? 30 : theme.spacing(1),
       gridTemplateColumns: "2fr 1fr 1fr auto",
       gridTemplateAreas: `"calendar guests promoCode search"`,
     };
   }
   return {
-    borderRadius: isRounded ? "50%" : theme.spacing(1),
+    borderRadius: isRounded ? 30 : theme.spacing(1),
     gridTemplateColumns: "2fr 1fr auto",
     gridTemplateAreas: `"calendar guests search"`,
   };

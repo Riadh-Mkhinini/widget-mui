@@ -16,7 +16,38 @@ export type Language =
   | "tr" // Turkish
   | "zhCN" // Chinese (Simplified)
   | "zhTW" // Chinese (Traditional - Taiwan)
-  | "zhHK"; // Chinese (Traditional - Hong Kong)
+  | "zhHK" // Chinese (Traditional - Hong Kong)
+  | "pt" // Portuguese (Portugal)
+  | "fi" // Finnish
+  | "sv" // Swedish
+  | "cs" // Czech
+  | "hu" // Hungarian
+  | "ro" // Romanian
+  | "pl" // Polish
+  | "bg" // Bulgarian
+  | "lv" // Latvian
+  | "uk" // Ukrainian
+  | "kk" // Kazakh
+  | "ka" // Georgian
+  | "hy" // Armenian
+  | "az" // Azerbaijani
+  | "el" // Greek
+  | "uz" // Uzbek
+  | "id" // Indonesian
+  | "ms" // Malay
+  | "th" // Thai
+  | "et" // Estonian
+  | "lt" // Lithuanian
+  | "sr" // Serbian (Cyrillic)
+  | "vi" // Vietnamese
+  | "fil" // Filipino
+  | "hi" // Hindi
+  | "mk" // Macedonian
+  | "si" // Sinhala
+  | "km" // Khmer
+  | "ne" // Nepali
+  | "sq" // Albanian
+  | "srLatn"; // Serbian (Latin)
 
 // Map your Language codes to available locale keys from date-fns
 const languageToLocaleMap: Partial<Record<Language, keyof typeof locales>> = {
@@ -34,7 +65,38 @@ const languageToLocaleMap: Partial<Record<Language, keyof typeof locales>> = {
   tr: "tr",
   zhCN: "zhCN",
   zhTW: "zhTW",
-  zhHK: "zhHK", // May not exist in date-fns; fallback will handle it
+  zhHK: "zhTW",
+  pt: "pt",
+  fi: "fi",
+  sv: "sv",
+  cs: "cs",
+  hu: "hu",
+  ro: "ro",
+  pl: "pl",
+  bg: "bg",
+  lv: "lv",
+  uk: "uk",
+  el: "el",
+  id: "id",
+  ms: "ms",
+  th: "th",
+  et: "et",
+  lt: "lt",
+  sr: "sr",
+  vi: "vi",
+  hi: "hi",
+  kk: "kk",
+  ka: "ka",
+  hy: "hy",
+  az: "az",
+  uz: "uz",
+  fil: "enUS",
+  mk: "mk",
+  si: "enUS",
+  km: "km",
+  ne: "enUS",
+  sq: "sq",
+  srLatn: "srLatn",
 };
 
 export const getLocale = (language?: Language): Locale => {

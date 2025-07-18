@@ -1,34 +1,32 @@
 import { type FC, useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { Typography, Fade, Divider, Stack } from "@mui/material";
+import { Typography, Divider, Stack, alpha, useTheme } from "@mui/material";
 //constants
 import { Svgs } from "@constants";
 //context
 import { useIBE } from "@contextAPI";
 //components
-import { Counter, Select } from "@/components/commons";
+import { Counter, Select, Accordion } from "@/components/commons";
+//helpers
+import { getMessageGuests } from "@helpers";
 //styles
-import {
-  Container,
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  IconButton,
-} from "./room.styles";
+import { Container, IconButton } from "./room.styles";
 //types
 import type { RoomProps } from "./room.types";
-import { getMessageGuests } from "@helpers";
 
 const Room: FC<RoomProps> = (props) => {
   const {
     title,
     room,
     showDeleteButton = true,
+    expanded,
     onClickDelete,
     onChangeAdults,
     onChangeChildren,
     onChangeChildValue,
+    onChangeExpanded,
   } = props;
+  const theme = useTheme();
   const { t } = useTranslation();
   const { engineConfig } = useIBE();
 
@@ -73,56 +71,63 @@ const Room: FC<RoomProps> = (props) => {
   };
   if (engineConfig?.guests?.mode === "accordion") {
     return (
-      <Accordion defaultExpanded disableGutters variant="outlined">
-        <AccordionSummary aria-controls="room-guests" id="room-guests-header">
-          <Typography flex={1} fontSize={14} fontWeight="600">
-            {title}
-          </Typography>
-          <Typography fontSize={14} fontWeight="400" color="grey.600">
-            {getMessageGuests({
-              t,
-              adults: room.adultsCount,
-              children: room.childCount,
-            })}
-          </Typography>
-          <Fade in={showDeleteButton} unmountOnExit mountOnEnter>
-            <Stack direction="row" alignItems="center">
-              <Divider
-                orientation="vertical"
-                sx={{ height: 22, ml: 1, mr: 1 }}
-              />
-              <Stack onClick={onClickDelete}>
-                <Svgs.IconTrash sx={{ fontSize: 16, color: "grey.600" }} />
-              </Stack>
+      <Accordion
+        expanded={expanded}
+        sxSummary={{ background: alpha(theme.palette.primary.main, 0.1) }}
+        onChange={onChangeExpanded}
+        summary={
+          <>
+            <Typography flex={1} fontSize={14} fontWeight="600">
+              {title}
+            </Typography>
+            <Stack
+              direction="row"
+              alignItems="center"
+              gap={2}
+              divider={<Divider orientation="vertical" />}
+            >
+              <Typography fontSize={14} fontWeight="400" color="grey.600">
+                {getMessageGuests({
+                  t,
+                  adults: room.adultsCount,
+                  children: room.childCount,
+                })}
+              </Typography>
+              {showDeleteButton && (
+                <Stack onClick={onClickDelete}>
+                  <Svgs.IconTrash sx={{ fontSize: 16, color: "grey.600" }} />
+                </Stack>
+              )}
             </Stack>
-          </Fade>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Stack gap={1}>
-            <Counter
-              min={1}
-              direction="row"
-              label={t("guests.pop_up_adults")}
-              caption={t("guests.pop_up_adults_caption")}
-              mode={engineConfig?.guests?.counterMode}
-              max={engineConfig?.guests?.maxAdults}
-              value={room.adultsCount}
-              onChange={onChangeAdults}
-            />
-            <Counter
-              direction="row"
-              label={t("guests.pop_up_children")}
-              caption={t("guests.pop_up_children_caption")}
-              mode={engineConfig?.guests?.counterMode}
-              max={engineConfig?.guests?.maxChildren}
-              value={room.childCount}
-              onChange={onChangeChildren}
-            />
+          </>
+        }
+        details={
+          <Stack gap={1} divider={<Divider />}>
+            <Stack gap={1}>
+              <Counter
+                min={1}
+                direction="row"
+                label={t("guests.pop_up_adults")}
+                caption={t("guests.pop_up_adults_caption")}
+                mode={engineConfig?.guests?.counterMode}
+                max={engineConfig?.guests?.maxAdults}
+                value={room.adultsCount}
+                onChange={onChangeAdults}
+              />
+              <Counter
+                direction="row"
+                label={t("guests.pop_up_children")}
+                caption={t("guests.pop_up_children_caption")}
+                mode={engineConfig?.guests?.counterMode}
+                max={engineConfig?.guests?.maxChildren}
+                value={room.childCount}
+                onChange={onChangeChildren}
+              />
+            </Stack>
+            {room.childs.length > 0 && <Stack>{renderItem()}</Stack>}
           </Stack>
-          {room.childs.length > 0 && <Divider />}
-          <Stack>{renderItem()}</Stack>
-        </AccordionDetails>
-      </Accordion>
+        }
+      />
     );
   }
   return (
@@ -131,11 +136,11 @@ const Room: FC<RoomProps> = (props) => {
         <Typography flex={1} fontSize={12} fontWeight="700">
           {title}
         </Typography>
-        <Fade in={showDeleteButton} unmountOnExit mountOnEnter>
+        {showDeleteButton && (
           <IconButton size="small" onClick={onClickDelete}>
             <Svgs.IconTrash sx={{ fontSize: 16, color: "grey.600" }} />
           </IconButton>
-        </Fade>
+        )}
       </Stack>
       <Stack direction="row" alignItems="center" justifyContent="space-between">
         <Counter

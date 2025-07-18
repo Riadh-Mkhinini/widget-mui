@@ -59,6 +59,15 @@ const createCustomTheme = (params?: {
         xl: 1536,
       },
     },
+    components: {
+      MuiButton: {
+        styleOverrides: {
+          root: {
+            borderRadius: 8,
+          },
+        },
+      },
+    },
   });
 };
 
