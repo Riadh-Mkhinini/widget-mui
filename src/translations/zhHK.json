@@ -1,42 +1,45 @@
 {
   "property": {
-    "preview_label": "Choose hotel",
-    "preview_placeholder": "Select your destination",
-    "pop_up_title": "Choose hotel",
-    "pop_up_sub_title": "Select your destination",
-    "pop_up_search_placeholder": "Search..."
+    "preview_label": "選擇酒店",
+    "preview_placeholder": "請選擇目的地",
+    "pop_up_title": "選擇酒店",
+    "pop_up_sub_title": "請選擇目的地",
+    "pop_up_search_placeholder": "搜尋..."
   },
   "guests": {
-    "preview_label": "Guests",
-    "pop_up_title": "Guests",
-    "pop_up_room": "Room {{value}}",
-    "pop_up_adults": "Adults",
-    "pop_up_adults_caption": "(13+ years)",
-    "pop_up_children": "Children",
-    "pop_up_children_caption": "Children",
-    "pop_up_age_child": "Age of {{value}} child",
-    "pop_up_button_add_room": "Add room",
-    "pop_up_button_done": "Confirm",
-    "pop_up_required_field": "This field is required",
-    "pop_up_age_child_placeholder": "Select",
-    "room": "1 room",
-    "rooms": "{{value}} rooms",
-    "adult": "1 adult",
-    "adults": "{{value}} adults",
-    "child": "1 child",
-    "children": "{{value}} children"
+    "preview_label": "客人",
+    "pop_up_title": "客人",
+    "pop_up_room": "房間 {{value}}",
+    "pop_up_adults": "成人",
+    "pop_up_adults_caption": "（13 歲或以上）",
+    "pop_up_children": "小童",
+    "pop_up_children_caption": "小童",
+    "pop_up_age_child": "{{value}} 號小童年齡",
+    "pop_up_button_add_room": "新增房間",
+    "pop_up_button_done": "確認",
+    "pop_up_required_field": "此欄位為必填",
+    "pop_up_age_child_placeholder": "請選擇",
+    "room": "1 間房",
+    "rooms": "{{value}} 間房",
+    "adult": "1 位成人",
+    "adults": "{{value}} 位成人",
+    "child": "1 位小童",
+    "children": "{{value}} 位小童"
   },
   "calendar": {
-    "preview_check_in_label": "Check in",
-    "preview_check_out_label": "Check out",
-    "preview_nights_label": "{{value}} nights",
-    "pop_up_required_field": "This field is required",
-    "pop_up_button_done": "Confirm"
+    "preview_check_in_label": "入住日期",
+    "preview_check_out_label": "退房日期",
+    "preview_nights_label": "{{value}} 晚",
+    "pop_up_required_field": "此欄位為必填",
+    "pop_up_start_end_date_nights": "{{start}} - {{end}}（{{nights}} 晚）",
+    "pop_up_note": "每位每晚最優惠房價",
+    "pop_up_sub_note": "房價可能受特別預訂條件影響",
+    "pop_up_button_done": "確認"
   },
   "promo_code": {
-    "preview_placeholder": "Promo code"
+    "preview_placeholder": "優惠碼"
   },
   "search": {
-    "search_label": "Search"
+    "search_label": "搜尋"
   }
 }
