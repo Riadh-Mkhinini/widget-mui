@@ -73,8 +73,8 @@ const CalendarRange: FC<CalendarRangeProps> = (props) => {
           popUpSubNote: t("calendar.pop_up_sub_note"),
           popUpStartEndDateNights: (start, end) =>
             t("calendar.pop_up_start_end_date_nights", {
-              start: format(start, "EEEEEE, dd MMM"),
-              end: format(end, "EEEEEE, dd MMM"),
+              start: format(start, "EEEEEE, dd MMM", { locale }),
+              end: format(end, "EEEEEE, dd MMM", { locale }),
               nights: getTotalOfDays(start, end),
             }),
         }}
