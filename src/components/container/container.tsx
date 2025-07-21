@@ -15,7 +15,7 @@ const Container: FC<ContainerProps> = (props) => {
     () =>
       typeof engineConfig?.global?.container?.padding === "number"
         ? engineConfig?.global?.container?.padding
-        : 1,
+        : 0,
     [engineConfig?.global?.container?.padding]
   );
   const borderRadius = useMemo(

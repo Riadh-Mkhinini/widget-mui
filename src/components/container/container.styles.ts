@@ -7,7 +7,14 @@ export const Main = styled("div")<{
   padding?: string | number;
   borderRadius?: number;
 }>(
-  ({ theme, background, backdropfilter, maxWidth, padding, borderRadius }) => ({
+  ({
+    theme,
+    background,
+    backdropfilter,
+    maxWidth,
+    padding = 0,
+    borderRadius,
+  }) => ({
     display: "flex",
     flexDirection: "column",
     maxWidth,
@@ -16,5 +23,6 @@ export const Main = styled("div")<{
     overflow: padding === 0 ? "initial" : "hidden",
     borderRadius: theme.spacing(borderRadius || 0),
     gap: theme.spacing(1),
+    padding: theme.spacing(padding),
   })
 );
