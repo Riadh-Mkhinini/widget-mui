@@ -14,16 +14,17 @@ import {
 import type { TableBodyProps } from "./tableBody.types";
 import type { DayProps } from "../../calendar.types";
 
-const TableBody: FC<TableBodyProps> = ({
-  startDate,
-  endDate,
-  daysOfMonth,
-  onClickDay,
-  onMouseEnter,
-  hoverList,
-  mode,
-  locale,
-}) => {
+const TableBody: FC<TableBodyProps> = (props) => {
+  const {
+    startDate,
+    endDate,
+    daysOfMonth,
+    onClickDay,
+    onMouseEnter,
+    hoverList,
+    mode = "default",
+    locale,
+  } = props;
   const theme = useTheme();
   const lang = useMemo(
     () => (locale?.code === "ar" ? "ar-EG" : undefined),

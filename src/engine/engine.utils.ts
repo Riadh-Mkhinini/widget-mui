@@ -56,6 +56,7 @@ export const initConfigEngine = (config?: EngineConfig): EngineConfig => {
         backgroundFilter: config?.global?.container?.backgroundFilter,
       },
       title: {
+        label: config?.global?.title?.label,
         fontSize: config?.global?.title?.fontSize,
         color: config?.global?.title?.color,
         fontWeight: config?.global?.title?.fontWeight,
