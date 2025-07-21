@@ -29,7 +29,6 @@ export const initConfigEngine = (config?: EngineConfig): EngineConfig => {
         contrastText: config?.colors?.secondary?.contrastText || "#FFFFFF",
       },
     },
-
     global: {
       layout: config?.global?.layout || "combined",
       preview: {

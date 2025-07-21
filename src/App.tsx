@@ -30,7 +30,26 @@ function App() {
   );
   return (
     <CacheProvider value={cache}>
-      <Engine idEngine="ENGINE-564654" language={language} />
+      <Engine
+        idEngine="ENGINE-564654"
+        language={language}
+        config={{
+          colors: {
+            primary: {
+              main: "#97BA68",
+              light: "#6B9C27",
+              dark: "#3C6E0E",
+              contrastText: "#000",
+            },
+            secondary: {
+              main: "#CFE2AF",
+              light: "#BAD68D",
+              dark: "#94BC5D",
+              contrastText: "#000",
+            },
+          },
+        }}
+      />
     </CacheProvider>
   );
 }

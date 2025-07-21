@@ -50,10 +50,14 @@ const Engine: FC<EngineProps> = (props) => {
   //useMemo
   const theme = useMemo(
     () =>
-      createCustomTheme({ direction: isRtlLanguage(language) ? "rtl" : "ltr" }),
-    [language]
+      createCustomTheme({
+        direction: isRtlLanguage(language) ? "rtl" : "ltr",
+        palette: config?.colors,
+      }),
+    [config?.colors, language]
   );
   const locale = useMemo(() => getLocale(language), [language]);
+
   const engineConfig = useMemo(() => initConfigEngine(config), [config]);
 
   //functions
