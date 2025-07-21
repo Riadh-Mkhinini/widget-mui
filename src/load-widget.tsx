@@ -177,10 +177,12 @@ async function initCalendar(containerId: string, params: InitCalendarParams) {
 type InitGuestsParams = {
   language?: Language;
   config?: Omit<GuestsConfig, "popUpMode">;
+  colors?: Palette;
 };
 async function initGuests(containerId: string, params: InitGuestsParams) {
-  const { language, config } = params;
+  const { language, config, colors } = params;
   const container = document.getElementById(containerId);
+
   if (!container || container.shadowRoot) return;
 
   const isRtl = isRtlLanguage(language);
@@ -217,13 +219,18 @@ async function initGuests(containerId: string, params: InitGuestsParams) {
 
   // ✅ Mount React component
   const root = ReactDOM.createRoot(mountNode);
-
+  const theme = createCustomTheme({
+    direction: direction,
+    palette: colors,
+  });
   root.render(
     <CacheProvider value={emotionCache}>
-      <GuestsRooms
-        rooms={[{ adultsCount: 2, childCount: 0, childs: [] }]}
-        config={config}
-      />
+      <ThemeProvider theme={theme}>
+        <GuestsRooms
+          rooms={[{ adultsCount: 2, childCount: 0, childs: [] }]}
+          config={config}
+        />
+      </ThemeProvider>
     </CacheProvider>
   );
 }
@@ -231,9 +238,10 @@ async function initGuests(containerId: string, params: InitGuestsParams) {
 type InitPropertyParams = {
   language?: Language;
   config?: Omit<PropertyConfig, "popUpMode" | "showProperty">;
+  colors?: Palette;
 };
 async function initProperty(containerId: string, params: InitPropertyParams) {
-  const { language, config } = params;
+  const { language, config, colors } = params;
   const container = document.getElementById(containerId);
   if (!container || container.shadowRoot) return;
 
@@ -271,37 +279,43 @@ async function initProperty(containerId: string, params: InitPropertyParams) {
 
   // ✅ Mount React component
   const root = ReactDOM.createRoot(mountNode);
-
+  const theme = createCustomTheme({
+    direction: direction,
+    palette: colors,
+  });
   root.render(
     <CacheProvider value={emotionCache}>
-      <ContentProperty
-        data={[
-          {
-            id: "8866",
-            name: "Hasdrubal Thalassa & Spa 1",
-            country: "tunisia",
-            city: "djerba",
-            image:
-              "https://media.istockphoto.com/id/104731717/photo/luxury-resort.jpg?s=612x612&w=0&k=20&c=cODMSPbYyrn1FHake1xYz9M8r15iOfGz9Aosy9Db7mI=",
-          },
-          {
-            id: "8876",
-            name: "Hasdrubal Thalassa & Spa 5",
-            country: "tunisia",
-            city: "djerba",
-            image: "https://thumbs.dreamstime.com/b/resort-night-12154190.jpg",
-          },
-          {
-            id: "5458",
-            name: "Hasdrubal Thalassa & Spa 2",
-            country: "tunisia",
-            city: "djerba",
-            image:
-              "https://cf.bstatic.com/xdata/images/hotel/max1024x768/4068449.jpg?k=84bdc933cd43edf87f74bae774f5beb45544d4cc1ba303231da151454bab07c0&o=&hp=1",
-          },
-        ]}
-        config={config}
-      />
+      <ThemeProvider theme={theme}>
+        <ContentProperty
+          data={[
+            {
+              id: "8866",
+              name: "Hasdrubal Thalassa & Spa 1",
+              country: "tunisia",
+              city: "djerba",
+              image:
+                "https://media.istockphoto.com/id/104731717/photo/luxury-resort.jpg?s=612x612&w=0&k=20&c=cODMSPbYyrn1FHake1xYz9M8r15iOfGz9Aosy9Db7mI=",
+            },
+            {
+              id: "8876",
+              name: "Hasdrubal Thalassa & Spa 5",
+              country: "tunisia",
+              city: "djerba",
+              image:
+                "https://thumbs.dreamstime.com/b/resort-night-12154190.jpg",
+            },
+            {
+              id: "5458",
+              name: "Hasdrubal Thalassa & Spa 2",
+              country: "tunisia",
+              city: "djerba",
+              image:
+                "https://cf.bstatic.com/xdata/images/hotel/max1024x768/4068449.jpg?k=84bdc933cd43edf87f74bae774f5beb45544d4cc1ba303231da151454bab07c0&o=&hp=1",
+            },
+          ]}
+          config={config}
+        />
+      </ThemeProvider>
     </CacheProvider>
   );
 }
