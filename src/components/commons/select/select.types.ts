@@ -21,7 +21,6 @@ export type SelectProps<T> = {
   error?: boolean;
   helperText?: string;
   sxPlaceholder?: SxProps<Theme>;
-  portalContainer?: Element | (() => Element | null) | null;
   renderValue?: (value: Array<string>) => React.ReactNode;
   getOptionValue?: (item: T) => string | number;
   getOptionLabel?: (item: T) => JSX.Element | string | number;

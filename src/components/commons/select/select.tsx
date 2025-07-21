@@ -36,9 +36,10 @@ function Select<T>(props: SelectProps<T>): JSX.Element {
     getOptionValue,
     getOptionLabel,
     getOptionDisabled,
-    portalContainer,
     onChange,
   } = props;
+  const portalContainer = (window as any)
+    .__BOOKINI_WIDGET_PORTAL_CONTAINER__ as HTMLElement | undefined;
 
   //render
   const renderItem = () => {
