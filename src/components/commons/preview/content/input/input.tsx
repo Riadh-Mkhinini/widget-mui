@@ -28,9 +28,13 @@ const Input: FC<InputProps> = (props) => {
         "& .MuiOutlinedInput-root": {
           background: "transparent",
           fontSize: params.fontSizeValue,
-          color: engineConfig?.global?.preview?.value || "grey.700",
+          color: engineConfig?.global?.preview?.value || "grey.900",
           padding: 0,
           "& fieldset": { border: "none" },
+          "& input::placeholder": {
+            color: engineConfig?.global?.preview?.placeholder || "grey.500", // change this to your desired color
+            opacity: 1, // ensure it's fully visible
+          },
         },
       }}
       onChange={onChange}
