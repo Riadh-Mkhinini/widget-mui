@@ -28,6 +28,9 @@ const Room: FC<RoomProps> = (props) => {
   const theme = useTheme();
   const { t } = useTranslation();
 
+  const portalContainer = (window as any)
+    .__BOOKINI_WIDGET_PORTAL_CONTAINER__ as HTMLElement | undefined;
+
   const dataChilds = useMemo(
     () =>
       new Array(config?.maxAgesChildren || 16)
@@ -56,6 +59,7 @@ const Room: FC<RoomProps> = (props) => {
             placeholder={t("guests.pop_up_age_child_placeholder")}
             getOptionLabel={(item) => item}
             getOptionValue={(item) => item}
+            portalContainer={portalContainer}
             sx={{ textAlign: "end" }}
             sxPlaceholder={{ textAlign: "end" }}
             IconComponent={Svgs.IconChevronDown}

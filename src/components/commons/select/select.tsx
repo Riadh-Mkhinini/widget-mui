@@ -36,17 +36,14 @@ function Select<T>(props: SelectProps<T>): JSX.Element {
     getOptionValue,
     getOptionLabel,
     getOptionDisabled,
+    portalContainer,
     onChange,
   } = props;
-
-  //functions
 
   //render
   const renderItem = () => {
     return data.map((item, index) => {
-      if (!getOptionValue || !getOptionLabel) {
-        return null;
-      }
+      if (!getOptionValue || !getOptionLabel) return null;
       return (
         <MenuItem
           key={index}
@@ -96,6 +93,7 @@ function Select<T>(props: SelectProps<T>): JSX.Element {
           MenuProps={{
             PaperProps: { sx: { maxHeight: heightPaper } },
             marginThreshold: 0,
+            container: portalContainer,
           }}
           sx={sx}
           {...customProps}
