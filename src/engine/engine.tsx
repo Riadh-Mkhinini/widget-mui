@@ -88,6 +88,7 @@ const Engine: FC<EngineProps> = (props) => {
     props.onClickSearch?.(params);
   };
   //render
+  console.log(theme);
 
   return (
     <ThemeProvider theme={theme}>
