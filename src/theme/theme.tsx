@@ -11,16 +11,16 @@ const createCustomTheme = (params?: {
     direction: direction,
     palette: {
       primary: {
-        main: palette?.primary?.main || "#97BA68",
-        light: palette?.primary?.light || "#6B9C27",
-        dark: palette?.primary?.dark || "#3C6E0E",
-        contrastText: palette?.primary?.contrastText || "#000",
+        main: palette?.primary?.main || "#2250DA",
+        light: palette?.primary?.light || "#82ACFE",
+        dark: palette?.primary?.dark || "#031B4D",
+        contrastText: palette?.primary?.contrastText || "#FFFFFF",
       },
       secondary: {
-        main: palette?.secondary?.main || "#CFE2AF",
-        light: palette?.secondary?.light || "#BAD68D",
-        dark: palette?.secondary?.dark || "#94BC5D",
-        contrastText: palette?.secondary?.contrastText || "#000",
+        main: palette?.secondary?.main || "#2250DA",
+        light: palette?.secondary?.light || "#82ACFE",
+        dark: palette?.secondary?.dark || "#031B4D",
+        contrastText: palette?.secondary?.contrastText || "#FFFFFF",
       },
       grey: {
         50: "#F9FAFB",
