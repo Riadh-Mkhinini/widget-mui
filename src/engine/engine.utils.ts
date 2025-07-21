@@ -17,16 +17,16 @@ export const initConfigEngine = (config?: EngineConfig): EngineConfig => {
     size: config?.size,
     colors: {
       primary: {
-        main: config?.colors?.primary?.main || "#2250DA",
-        light: config?.colors?.primary?.light || "#82ACFE",
-        dark: config?.colors?.primary?.dark || "#031B4D",
-        contrastText: config?.colors?.primary?.contrastText || "#FFFFFF",
+        main: config?.colors?.primary?.main || "#97BA68",
+        light: config?.colors?.primary?.light,
+        dark: config?.colors?.primary?.dark,
+        contrastText: config?.colors?.primary?.contrastText,
       },
       secondary: {
-        main: config?.colors?.secondary?.main || "#2250DA",
-        light: config?.colors?.secondary?.light || "#82ACFE",
-        dark: config?.colors?.secondary?.dark || "#031B4D",
-        contrastText: config?.colors?.secondary?.contrastText || "#FFFFFF",
+        main: config?.colors?.secondary?.main || "#CFE2AF",
+        light: config?.colors?.secondary?.light,
+        dark: config?.colors?.secondary?.dark,
+        contrastText: config?.colors?.secondary?.contrastText,
       },
     },
     global: {
