@@ -6,6 +6,7 @@ import createCache from "@emotion/cache";
 import { addDays, format } from "date-fns";
 import stylisRTLPlugin from "stylis-plugin-rtl";
 import i18n from "i18next";
+import { ThemeProvider } from "@mui/material";
 import "./i18n";
 import {
   getDayOfWeek,
@@ -20,8 +21,10 @@ import Engine, {
   type CalendarConfig,
   type GuestsConfig,
   type PropertyConfig,
+  type Palette,
 } from "./engine/engine";
 import { Calendar, ContentProperty, GuestsRooms } from "@components";
+import { createCustomTheme } from "@theme";
 
 type InitEngineParams = {
   idEngine: string;
@@ -97,10 +100,11 @@ async function initEngine(containerId: string, params: InitEngineParams) {
 type InitCalendarParams = {
   language?: Language;
   config?: Omit<CalendarConfig, "popUpMode">;
+  colors?: Palette;
 };
 
 async function initCalendar(containerId: string, params: InitCalendarParams) {
-  const { language, config } = params;
+  const { language, config, colors } = params;
   const container = document.getElementById(containerId);
   if (!container || container.shadowRoot) return;
 
@@ -139,28 +143,33 @@ async function initCalendar(containerId: string, params: InitCalendarParams) {
   // ✅ Mount React component
   const root = ReactDOM.createRoot(mountNode);
   const locale = getLocale(language);
-
+  const theme = createCustomTheme({
+    direction: direction,
+    palette: colors,
+  });
   root.render(
     <CacheProvider value={emotionCache}>
-      <Calendar
-        disablePortal
-        defaultStartDate={generateDayProps(new Date())}
-        defaultEndDate={generateDayProps(addDays(new Date(), 1))}
-        daysList={getDayOfWeek(locale)}
-        locale={locale}
-        calendarConfig={config}
-        texts={{
-          popUpButtonDone: "Confirm",
-          popUpNote: "The best booking prices for 1 person per night",
-          popUpSubNote: "Prices are subject to special booking conditions",
-          popUpStartEndDateNights: (start, end) =>
-            `${format(start, "EEEEEE, dd MMM", { locale })} - ${format(
-              end,
-              "EEEEEE, dd MMM",
-              { locale }
-            )} (${getTotalOfDays(start, end)} nights)`,
-        }}
-      />
+      <ThemeProvider theme={theme}>
+        <Calendar
+          disablePortal
+          defaultStartDate={generateDayProps(new Date())}
+          defaultEndDate={generateDayProps(addDays(new Date(), 1))}
+          daysList={getDayOfWeek(locale)}
+          locale={locale}
+          calendarConfig={config}
+          texts={{
+            popUpButtonDone: "Confirm",
+            popUpNote: "The best booking prices for 1 person per night",
+            popUpSubNote: "Prices are subject to special booking conditions",
+            popUpStartEndDateNights: (start, end) =>
+              `${format(start, "EEEEEE, dd MMM", { locale })} - ${format(
+                end,
+                "EEEEEE, dd MMM",
+                { locale }
+              )} (${getTotalOfDays(start, end)} nights)`,
+          }}
+        />
+      </ThemeProvider>
     </CacheProvider>
   );
 }

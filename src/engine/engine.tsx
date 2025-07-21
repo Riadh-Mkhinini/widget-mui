@@ -30,6 +30,7 @@ import type {
   PropertyConfig,
   CalendarConfig,
   GuestsConfig,
+  Palette,
 } from "./engine.types";
 
 const Engine: FC<EngineProps> = (props) => {
@@ -159,6 +160,7 @@ export {
   type PropertyConfig,
   type CalendarConfig,
   type GuestsConfig,
+  type Palette,
   generateDayProps,
 };
 export default Engine;
