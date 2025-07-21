@@ -30,13 +30,7 @@ function App() {
   );
   return (
     <CacheProvider value={cache}>
-      <Engine
-        idEngine="ENGINE-564654"
-        language={language}
-        config={{
-          promoCode: { showPromoCode: true },
-        }}
-      />
+      <Engine idEngine="ENGINE-564654" language={language} />
     </CacheProvider>
   );
 }
