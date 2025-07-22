@@ -7,6 +7,7 @@ export const Content = styled("div")(({ theme }) => {
     [theme.breakpoints.down("sm")]: {
       height: "calc(100vh - 70px)",
     },
+    position: "relative",
   };
 });
 
