@@ -92,7 +92,6 @@ function Default<T>(props: DataListProps<T>): JSX.Element {
             sx={{ m: theme.spacing(1, 0) }}
             value={valueSearch}
             fullWidth
-            autoFocus
             size="small"
             variant="outlined"
             placeholder={placeholderSearch}

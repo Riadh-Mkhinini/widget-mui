@@ -84,7 +84,6 @@ function PopUp<T>(props: DataListProps<T>): JSX.Element {
         {showSearch && (
           <TextField
             fullWidth
-            autoFocus
             size="small"
             variant="outlined"
             value={valueSearch}
