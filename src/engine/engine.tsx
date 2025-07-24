@@ -44,7 +44,7 @@ import type {
 const { getEngineById } = EngineServices;
 
 const Engine: FC<EngineProps> = (props) => {
-  const { language, config, idEngine } = props;
+  const { language, config, idEngine, demo } = props;
 
   const [property, setProperty] = useState<PropertyShortData | null>(null);
   const [startDate, setStartDate] = useState<DayProps | null>(
@@ -60,7 +60,7 @@ const Engine: FC<EngineProps> = (props) => {
 
   const { data, loading, error } = useFetch<PropertyEngineData | null>(
     () => getEngineById({ idEngine: idEngine }),
-    { skip: !idEngine, deps: [idEngine] }
+    { skip: !idEngine || demo, deps: [idEngine] }
   );
 
   //useMemo

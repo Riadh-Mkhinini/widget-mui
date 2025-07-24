@@ -10,6 +10,7 @@ export type ResultEngine = {
 };
 export type EngineProps = {
   idEngine: string;
+  demo?: boolean;
   language?: Language;
   config?: EngineConfig;
   onClickSearch?: (values: ResultEngine) => void;

@@ -34,13 +34,14 @@ import { dataProperties } from "./engine/engine.utils";
 
 type InitEngineParams = {
   idEngine: string;
+  demo?: boolean;
   language?: Language;
   config?: EngineConfig;
   onClickSearch?: (values: any) => void;
 };
 
 async function initEngine(containerId: string, params: InitEngineParams) {
-  const { idEngine, language, config, onClickSearch } = params;
+  const { idEngine, language, config, demo, onClickSearch } = params;
   const container = document.getElementById(containerId);
   if (!container || container.shadowRoot) return;
 
@@ -94,6 +95,7 @@ async function initEngine(containerId: string, params: InitEngineParams) {
   root.render(
     <CacheProvider value={emotionCache}>
       <Engine
+        demo={demo}
         idEngine={idEngine}
         language={language}
         config={config}
