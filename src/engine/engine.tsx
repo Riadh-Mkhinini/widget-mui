@@ -3,6 +3,8 @@ import { addDays } from "date-fns";
 import { ThemeProvider } from "@mui/material";
 //contextAPI
 import { IBEProvider } from "@contextAPI";
+//hooks
+import { useFetch } from "@hooks";
 //components
 import {
   CalendarRange,
@@ -26,6 +28,8 @@ import {
   generateDayProps,
   initConfigEngine,
 } from "./engine.utils";
+//api
+import { EngineServices, type PropertyEngineData } from "@api";
 //types
 import type {
   EngineConfig,
@@ -37,8 +41,10 @@ import type {
   Palette,
 } from "./engine.types";
 
+const { getEngineById } = EngineServices;
+
 const Engine: FC<EngineProps> = (props) => {
-  const { language, config } = props;
+  const { language, config, idEngine } = props;
 
   const [property, setProperty] = useState<PropertyShortData | null>(null);
   const [startDate, setStartDate] = useState<DayProps | null>(
@@ -52,18 +58,25 @@ const Engine: FC<EngineProps> = (props) => {
     { adultsCount: 2, childCount: 0, childs: [] },
   ]);
 
+  const { data, loading, error } = useFetch<PropertyEngineData | null>(
+    () => getEngineById({ idEngine: idEngine }),
+    { skip: !idEngine, deps: [idEngine] }
+  );
+
   //useMemo
+  const engineConfig = useMemo(
+    () => initConfigEngine(data?.settings || config),
+    [data?.settings, config]
+  );
   const theme = useMemo(
     () =>
       createCustomTheme({
         direction: isRtlLanguage(language) ? "rtl" : "ltr",
-        palette: config?.colors,
+        palette: engineConfig?.colors,
       }),
-    [config?.colors, language]
+    [engineConfig?.colors, language]
   );
   const locale = useMemo(() => getLocale(language), [language]);
-
-  const engineConfig = useMemo(() => initConfigEngine(config), [config]);
 
   //functions
   const onChangeProperty = (item: PropertyShortData) => {
@@ -96,7 +109,7 @@ const Engine: FC<EngineProps> = (props) => {
   return (
     <ThemeProvider theme={theme}>
       <IBEProvider size={engineConfig.size || "xl"} engineConfig={engineConfig}>
-        <Container>
+        <Container loading={loading} error={error}>
           <Header title={engineConfig.global?.title?.label} />
           <Layout>
             <GridItem

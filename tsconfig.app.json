@@ -28,6 +28,8 @@
       "@engine": ["src/engine/engine"],
       "@components": ["./src/components/index"],
       "@helpers": ["./src/helpers/index"],
+      "@hooks": ["./src/hooks/index"],
+      "@api": ["./src/api/index"],
       "@contextAPI": ["./src/ibeContext/index"],
       "@theme": ["./src/theme/theme"],
       "@/*": ["./src/*"]
