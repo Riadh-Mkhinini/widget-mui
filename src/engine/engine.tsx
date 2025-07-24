@@ -72,6 +72,8 @@ const Engine: FC<EngineProps> = (props) => {
     direction: isRtlLanguage(language) ? "rtl" : "ltr",
     palette: engineConfig?.colors,
   });
+  console.log(engineConfig);
+
   const locale = useMemo(() => getLocale(language), [language]);
 
   //functions
