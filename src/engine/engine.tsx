@@ -64,10 +64,7 @@ const Engine: FC<EngineProps> = (props) => {
   );
 
   //useMemo
-  const engineConfig = useMemo(
-    () => initConfigEngine(data?.settings || config),
-    [data?.settings, config]
-  );
+  const engineConfig = initConfigEngine(data?.settings || config);
   console.log({ settings: data?.settings, config });
 
   const theme = useMemo(
