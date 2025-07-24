@@ -33,7 +33,7 @@ import { createCustomTheme } from "@theme";
 import { dataProperties } from "./engine/engine.utils";
 
 type InitEngineParams = {
-  idEngine: string;
+  idEngine?: string;
   demo?: boolean;
   language?: Language;
   config?: EngineConfig;

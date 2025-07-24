@@ -9,7 +9,7 @@ export type ResultEngine = {
   rooms: Array<RoomData>;
 };
 export type EngineProps = {
-  idEngine: string;
+  idEngine?: string;
   demo?: boolean;
   language?: Language;
   config?: EngineConfig;

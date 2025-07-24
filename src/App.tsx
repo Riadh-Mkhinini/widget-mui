@@ -32,7 +32,7 @@ function App() {
   //BE-250724-33520148 multi
   return (
     <CacheProvider value={cache}>
-      <Engine idEngine="BE-250724-33450622" demo language={language} />
+      <Engine demo language={language} />
     </CacheProvider>
   );
 }

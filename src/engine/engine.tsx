@@ -59,7 +59,7 @@ const Engine: FC<EngineProps> = (props) => {
   ]);
 
   const { data, loading, error } = useFetch<PropertyEngineData | null>(
-    () => getEngineById({ idEngine: idEngine }),
+    () => getEngineById({ idEngine: idEngine as string }),
     { skip: !idEngine || demo, deps: [idEngine] }
   );
 
