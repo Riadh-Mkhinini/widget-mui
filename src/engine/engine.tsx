@@ -64,17 +64,14 @@ const Engine: FC<EngineProps> = (props) => {
   );
 
   //useMemo
-  const engineConfig = initConfigEngine(data?.settings || config);
-  console.log({ settings: data?.settings, config });
+  const engineConfig = demo
+    ? initConfigEngine(config)
+    : initConfigEngine(data?.settings);
 
-  const theme = useMemo(
-    () =>
-      createCustomTheme({
-        direction: isRtlLanguage(language) ? "rtl" : "ltr",
-        palette: engineConfig?.colors,
-      }),
-    [engineConfig?.colors, language]
-  );
+  const theme = createCustomTheme({
+    direction: isRtlLanguage(language) ? "rtl" : "ltr",
+    palette: engineConfig?.colors,
+  });
   const locale = useMemo(() => getLocale(language), [language]);
 
   //functions
