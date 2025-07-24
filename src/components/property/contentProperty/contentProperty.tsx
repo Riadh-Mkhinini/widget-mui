@@ -6,12 +6,12 @@ import CardGrouped from "./cardGrouped/cardGrouped";
 import CardProperty from "./cardProperty/cardProperty";
 import CardItem from "./cardItem/cardItem";
 //utils
-import { groupListPropertyBy } from "./contentProperty.utils";
+import { groupByCountryAndCity } from "./contentProperty.utils";
 //types
 import type {
   CityGrouped,
   CountryGrouped,
-  PropertyItem,
+  PropertyShortData,
 } from "../property.types";
 import type { ContentPropertyProps } from "./contentProperty.types";
 
@@ -19,7 +19,7 @@ const ContentProperty: FC<ContentPropertyProps> = (props) => {
   const { config, onChange } = props;
   const { t } = useTranslation();
   //
-  const [data, setData] = useState<Array<PropertyItem>>([]);
+  const [data, setData] = useState<Array<PropertyShortData>>([]);
   const [dataGrouped, setDataGrouped] = useState<Array<CountryGrouped>>([]);
   const [search, setSearch] = useState<string>("");
 
@@ -28,7 +28,7 @@ const ContentProperty: FC<ContentPropertyProps> = (props) => {
     return data.filter(
       (item) =>
         item.name.toLowerCase().includes(search.toLowerCase()) ||
-        item.id.toLowerCase().includes(search.toLowerCase())
+        item.propertyId.toLowerCase().includes(search.toLowerCase())
     );
   }, [data, search]);
 
@@ -41,7 +41,7 @@ const ContentProperty: FC<ContentPropertyProps> = (props) => {
             const filteredItems = cityGroup.data.filter(
               (item) =>
                 item.name.toLowerCase().includes(search.toLowerCase()) ||
-                item.id.toLowerCase().includes(search.toLowerCase())
+                item.propertyId.toLowerCase().includes(search.toLowerCase())
             );
             return filteredItems.length > 0
               ? { ...cityGroup, data: filteredItems }
@@ -59,7 +59,7 @@ const ContentProperty: FC<ContentPropertyProps> = (props) => {
   //useEffect
   useEffect(() => {
     if (config?.mode === "grouped") {
-      const grouped = groupListPropertyBy(props.data || []);
+      const grouped = groupByCountryAndCity(props.data || []);
       setDataGrouped(grouped);
     } else {
       setData(props.data || []);
@@ -71,7 +71,7 @@ const ContentProperty: FC<ContentPropertyProps> = (props) => {
   const onClose = () => {
     props.onClose?.();
   };
-  const onClickItem = (item: PropertyItem) => {
+  const onClickItem = (item: PropertyShortData) => {
     onChange?.(item);
     onClose();
   };
@@ -136,7 +136,7 @@ const ContentProperty: FC<ContentPropertyProps> = (props) => {
               : { minHeight: 58, borderRadius: 1 }
           }
           item={item}
-          getOptionLabel={(item) => `${item.id}- ${item.name}`}
+          getOptionLabel={(item) => item.name || ""}
           getAvatarLabel={(item) => item.name.substring(0, 2).toUpperCase()}
           onClick={onClickItem}
         />
@@ -147,4 +147,4 @@ const ContentProperty: FC<ContentPropertyProps> = (props) => {
   );
 };
 
-export { ContentProperty, type PropertyItem };
+export { ContentProperty };

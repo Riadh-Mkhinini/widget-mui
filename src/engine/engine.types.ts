@@ -1,8 +1,8 @@
-import type { DayProps, PropertyItem, RoomData } from "@components";
+import type { DayProps, PropertyShortData, RoomData } from "@components";
 import type { Language } from "@helpers";
 //*****************PROPS******************** */
 export type ResultEngine = {
-  property?: PropertyItem | null;
+  property?: PropertyShortData | null;
   startDate: DayProps | null;
   endDate: DayProps | null;
   promoCode?: string;

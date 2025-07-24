@@ -6,12 +6,12 @@ import { Svgs } from "@constants";
 import { Container, Avatar, Column, Row, Item } from "./cardGrouped.styles";
 //types
 import type { CardGroupedProps } from "./cardGrouped.types";
-import type { PropertyItem } from "../../property.types";
+import type { PropertyShortData } from "../../property.types";
 
 const CardGrouped: FC<CardGroupedProps> = (props) => {
   const { item, onClick } = props;
 
-  const onClickItem = (property: PropertyItem) => () => {
+  const onClickItem = (property: PropertyShortData) => () => {
     onClick?.(property);
   };
 
@@ -50,7 +50,7 @@ const CardGrouped: FC<CardGroupedProps> = (props) => {
                       </Typography>
                     </Avatar>
                     <Typography fontSize={14} fontWeight="500">
-                      ({property.id}) {property.name}
+                      {property.name}
                     </Typography>
                   </Item>
                 );

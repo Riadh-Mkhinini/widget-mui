@@ -10,7 +10,7 @@ import { ContentProperty } from "./contentProperty/contentProperty";
 //styles
 import { Container } from "./property.styles";
 //types
-import type { PropertyItem, PropertyProps } from "./property.types";
+import type { PropertyShortData, PropertyProps } from "./property.types";
 
 const Property: FC<PropertyProps> = (props) => {
   const { value, onChange } = props;
@@ -71,4 +71,4 @@ const Property: FC<PropertyProps> = (props) => {
   );
 };
 
-export { Property, type PropertyItem };
+export { Property, type PropertyShortData };

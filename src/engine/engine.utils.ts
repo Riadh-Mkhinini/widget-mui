@@ -1,5 +1,5 @@
 import { format } from "date-fns";
-import type { DayProps } from "@components";
+import type { DayProps, PropertyShortData } from "@components";
 import type { EngineConfig } from "@engine";
 
 export const generateDayProps = (day: Date): DayProps => {
@@ -93,3 +93,204 @@ export const initConfigEngine = (config?: EngineConfig): EngineConfig => {
     },
   };
 };
+
+export const dataProperties: Array<PropertyShortData> = [
+  {
+    propertyId: "6881a78d6a5f9ec143c9eff0",
+    location: {
+      country: {
+        id: 182,
+        iso2: "RU",
+        iso3: "RU",
+        name: "Russia",
+      },
+      city: {
+        id: 97620,
+        name: "Anapa",
+      },
+      region: {
+        id: 1891,
+        name: "Krasnodar Krai",
+      },
+    },
+    name: " Avdallini Hotel",
+    identifier: "6634572",
+    logoUrl: null,
+  },
+  {
+    propertyId: "6881b9de6a5f9ec143cf4cf1",
+    location: {
+      country: {
+        id: 182,
+        iso2: "RU",
+        iso3: "RU",
+        name: "Russia",
+      },
+      city: {
+        id: 110061,
+        name: "Muromskoye",
+      },
+      region: {
+        id: 4689,
+        name: "Autonomous Republic of Crimea",
+      },
+    },
+    name: " Boutique hotel Megapolis",
+    identifier: "8875059",
+    logoUrl: null,
+  },
+  {
+    propertyId: "687feb4934db74e45e08392c",
+    location: {
+      country: {
+        id: 107,
+        iso2: "IT",
+        iso3: "IT",
+        name: "Italy",
+      },
+      city: {
+        id: 138563,
+        name: "Florence",
+      },
+      region: {
+        id: 1664,
+        name: "Tuscany",
+      },
+    },
+    name: " Hotel Adler Cavalieri",
+    identifier: "7501617",
+    logoUrl: null,
+  },
+  {
+    propertyId: "6881f9ed6a5f9ec143e00b87",
+    location: {
+      country: {
+        id: 182,
+        iso2: "RU",
+        iso3: "RU",
+        name: "Russia",
+      },
+      city: {
+        id: 100465,
+        name: "Orenburg",
+      },
+      region: {
+        id: 1886,
+        name: "Orenburg Oblast",
+      },
+    },
+    name: " Villa de Idalgo",
+    identifier: "9082263",
+    logoUrl: null,
+  },
+  {
+    propertyId: "6881172d6a5f9ec143a0aa17",
+    location: {
+      country: {
+        id: 107,
+        iso2: "IT",
+        iso3: "IT",
+        name: "Italy",
+      },
+      city: {
+        id: 60649,
+        name: "Sciacca",
+      },
+      region: {
+        id: 1709,
+        name: "Sicily",
+      },
+    },
+    name: "!!! Sulla Spiaggia !!! - Montalbano House",
+    identifier: "10822251",
+    logoUrl: null,
+  },
+  {
+    propertyId: "6880a73534db74e45e3d98f4",
+    location: {
+      country: {
+        id: 182,
+        iso2: "RU",
+        iso3: "RU",
+        name: "Russia",
+      },
+      city: {
+        id: 99310,
+        name: "Krasnogorskoye",
+      },
+      region: {
+        id: 1913,
+        name: "Udmurt Republic",
+      },
+    },
+    name: '"Aravana" Hotel',
+    identifier: "8893309",
+    logoUrl: null,
+  },
+  {
+    propertyId: "6881dd7e6a5f9ec143d8c93e",
+    location: {
+      country: {
+        id: 142,
+        iso2: "MX",
+        iso3: "MX",
+        name: "Mexico",
+      },
+      city: {
+        id: 142808,
+        name: "Puerto Vallarta",
+      },
+      region: {
+        id: 4857,
+        name: "Jalisco",
+      },
+    },
+    name: '"Casa Luna Del Mar" W/Private Pool @Tres Mares Marina Vallarta',
+    identifier: "9885479",
+    logoUrl: null,
+  },
+  {
+    propertyId: "688195336a5f9ec143c55085",
+    location: {
+      country: {
+        id: 21,
+        iso2: "BY",
+        iso3: "BY",
+        name: "Belarus",
+      },
+      city: {
+        id: 15989,
+        name: "Minsk",
+      },
+      region: {
+        id: 2958,
+        name: "Minsk",
+      },
+    },
+    name: '"Gostinitsa" Hotel',
+    identifier: "8730928",
+    logoUrl: null,
+  },
+  {
+    propertyId: "688194b86a5f9ec143c527ca",
+    location: {
+      country: {
+        id: 182,
+        iso2: "RU",
+        iso3: "RU",
+        name: "Russia",
+      },
+      city: {
+        id: 99739,
+        name: "Magnitogorsk",
+      },
+      region: {
+        id: 1845,
+        name: "Chelyabinsk Oblast",
+      },
+    },
+    name: '"Klubnaya" Hotel',
+    identifier: "7748992",
+    logoUrl: null,
+  },
+];

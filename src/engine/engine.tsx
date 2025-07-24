@@ -15,13 +15,17 @@ import {
   Property,
   Search,
   type DayProps,
-  type PropertyItem,
+  type PropertyShortData,
   type RoomData,
 } from "@components";
 //utils
 import { getLocale, isRtlLanguage } from "@helpers";
 import { createCustomTheme } from "@theme";
-import { generateDayProps, initConfigEngine } from "./engine.utils";
+import {
+  dataProperties,
+  generateDayProps,
+  initConfigEngine,
+} from "./engine.utils";
 //types
 import type {
   EngineConfig,
@@ -36,7 +40,7 @@ import type {
 const Engine: FC<EngineProps> = (props) => {
   const { language, config } = props;
 
-  const [property, setProperty] = useState<PropertyItem | null>(null);
+  const [property, setProperty] = useState<PropertyShortData | null>(null);
   const [startDate, setStartDate] = useState<DayProps | null>(
     generateDayProps(new Date())
   );
@@ -62,7 +66,7 @@ const Engine: FC<EngineProps> = (props) => {
   const engineConfig = useMemo(() => initConfigEngine(config), [config]);
 
   //functions
-  const onChangeProperty = (item: PropertyItem) => {
+  const onChangeProperty = (item: PropertyShortData) => {
     setProperty(item);
   };
   const onChangePromoCode = (value: string) => {
@@ -100,32 +104,7 @@ const Engine: FC<EngineProps> = (props) => {
               isVisible={engineConfig.property?.showProperty}
             >
               <Property
-                data={[
-                  {
-                    id: "8866",
-                    name: "Hasdrubal Thalassa & Spa 1",
-                    country: "tunisia",
-                    city: "djerba",
-                    image:
-                      "https://media.istockphoto.com/id/104731717/photo/luxury-resort.jpg?s=612x612&w=0&k=20&c=cODMSPbYyrn1FHake1xYz9M8r15iOfGz9Aosy9Db7mI=",
-                  },
-                  {
-                    id: "8876",
-                    name: "Hasdrubal Thalassa & Spa 5",
-                    country: "tunisia",
-                    city: "djerba",
-                    image:
-                      "https://thumbs.dreamstime.com/b/resort-night-12154190.jpg",
-                  },
-                  {
-                    id: "5458",
-                    name: "Hasdrubal Thalassa & Spa 2",
-                    country: "tunisia",
-                    city: "djerba",
-                    image:
-                      "https://cf.bstatic.com/xdata/images/hotel/max1024x768/4068449.jpg?k=84bdc933cd43edf87f74bae774f5beb45544d4cc1ba303231da151454bab07c0&o=&hp=1",
-                  },
-                ]}
+                data={dataProperties}
                 value={property}
                 onChange={onChangeProperty}
               />

@@ -1,6 +1,6 @@
-import type { PropertyItem } from "../../property.types";
+import type { PropertyShortData } from "../../property.types";
 
 export type CardPropertyProps = {
-  item: PropertyItem;
+  item: PropertyShortData;
   onClick?: (item: any) => void;
 };

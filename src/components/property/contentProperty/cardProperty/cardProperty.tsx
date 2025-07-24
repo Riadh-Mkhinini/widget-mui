@@ -20,7 +20,7 @@ const CardProperty: FC<CardPropertyProps> = (props) => {
         alt={item.name}
         width={66}
         height={66}
-        src={item.image}
+        src={item.logoUrl || ""}
       >
         <Typography fontSize={20}>
           {item.name?.substring(0, 2).toUpperCase()}

@@ -1,24 +1,37 @@
-import { groupBy } from "@helpers";
-import type {
-  CityGrouped,
-  CountryGrouped,
-  PropertyItem,
-} from "../property.types";
+import type { CountryGrouped, PropertyShortData } from "../property.types";
 
-export const groupListPropertyBy = (data: Array<PropertyItem>) => {
-  const listGroupedByCountry = groupBy(data, "country");
-  const countrys: Array<CountryGrouped> = [];
-  Object.keys(listGroupedByCountry).forEach((keyCountry) => {
-    //@ts-ignore
-    const dataCountry: Array<PropertyItem> = listGroupedByCountry[keyCountry];
-    const listGroupedByCity = groupBy(dataCountry, "city");
-    const cities: Array<CityGrouped> = [];
-    Object.keys(listGroupedByCity).forEach((keyCity) => {
-      //@ts-ignore
-      const dataCities: Array<PropertyItem> = listGroupedByCity[keyCity];
-      cities.push({ city: keyCity, data: dataCities });
-    });
-    countrys.push({ country: keyCountry, data: cities });
-  });
-  return countrys;
+export const groupByCountryAndCity = (
+  properties: Array<PropertyShortData>
+): Array<CountryGrouped> => {
+  const countryMap = new Map<string, Map<string, PropertyShortData[]>>();
+
+  for (const property of properties) {
+    const country = property.location.country.name;
+    const city = property.location.city?.name ?? "Unknown";
+
+    if (!countryMap.has(country)) {
+      countryMap.set(country, new Map());
+    }
+
+    const cityMap = countryMap.get(country)!;
+
+    if (!cityMap.has(city)) {
+      cityMap.set(city, []);
+    }
+
+    cityMap.get(city)!.push(property);
+  }
+
+  const result: Array<CountryGrouped> = [];
+
+  for (const [country, cities] of countryMap.entries()) {
+    const cityData = Array.from(cities.entries()).map(([city, data]) => ({
+      city,
+      data,
+    }));
+
+    result.push({ country, data: cityData });
+  }
+
+  return result;
 };

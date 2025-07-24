@@ -1,6 +1,6 @@
-import type { CountryGrouped, PropertyItem } from "../../property.types";
+import type { CountryGrouped, PropertyShortData } from "../../property.types";
 
 export type CardGroupedProps = {
   item: CountryGrouped;
-  onClick?: (property: PropertyItem) => void;
+  onClick?: (property: PropertyShortData) => void;
 };

@@ -1,20 +1,39 @@
 export type PropertyProps = {
-  value?: PropertyItem | null;
-  data?: Array<PropertyItem>;
-  onChange?: (item: PropertyItem) => void;
+  value?: PropertyShortData | null;
+  data?: Array<PropertyShortData>;
+  onChange?: (item: PropertyShortData) => void;
 };
 
-export type PropertyItem = {
-  id: string;
+export type PropertyShortData = {
+  propertyId: string;
   name: string;
-  country: string;
-  city: string;
-  image?: string;
+  logoUrl?: string | null;
+  identifier?: string;
+  location: LocationData;
+};
+export type LocationData = {
+  country: CountryShortData;
+  region?: RegionShortData;
+  city?: CityShortData;
+};
+export type CountryShortData = {
+  id: number;
+  name: string;
+  iso2: string;
+  iso3: string;
+};
+export type RegionShortData = {
+  id: number;
+  name: string;
+};
+export type CityShortData = {
+  id: number;
+  name: string;
 };
 
 export type CityGrouped = {
   city: string;
-  data: Array<PropertyItem>;
+  data: Array<PropertyShortData>;
 };
 
 export type CountryGrouped = {
