@@ -23,7 +23,12 @@ import Engine, {
   type PropertyConfig,
   type Palette,
 } from "./engine/engine";
-import { Calendar, ContentProperty, GuestsRooms } from "@components";
+import {
+  Calendar,
+  ContentProperty,
+  GuestsRooms,
+  type PropertyShortData,
+} from "@components";
 import { createCustomTheme } from "@theme";
 import { dataProperties } from "./engine/engine.utils";
 
@@ -240,9 +245,10 @@ type InitPropertyParams = {
   language?: Language;
   config?: Omit<PropertyConfig, "popUpMode" | "showProperty">;
   colors?: Palette;
+  data?: Array<PropertyShortData>;
 };
 async function initProperty(containerId: string, params: InitPropertyParams) {
-  const { language, config, colors } = params;
+  const { language, config, colors, data } = params;
   const container = document.getElementById(containerId);
   if (!container || container.shadowRoot) return;
 
@@ -287,7 +293,7 @@ async function initProperty(containerId: string, params: InitPropertyParams) {
   root.render(
     <CacheProvider value={emotionCache}>
       <ThemeProvider theme={theme}>
-        <ContentProperty data={dataProperties} config={config} />
+        <ContentProperty data={data || dataProperties} config={config} />
       </ThemeProvider>
     </CacheProvider>
   );
