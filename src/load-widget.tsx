@@ -34,14 +34,12 @@ import { dataProperties } from "./engine/engine.utils";
 
 type InitEngineParams = {
   idEngine?: string;
-  demo?: boolean;
   language?: Language;
-  config?: EngineConfig;
   onClickSearch?: (values: any) => void;
 };
 
 async function initEngine(containerId: string, params: InitEngineParams) {
-  const { idEngine, language, config, demo, onClickSearch } = params;
+  const { idEngine, language, onClickSearch } = params;
   const container = document.getElementById(containerId);
   if (!container || container.shadowRoot) return;
 
@@ -95,7 +93,80 @@ async function initEngine(containerId: string, params: InitEngineParams) {
   root.render(
     <CacheProvider value={emotionCache}>
       <Engine
-        demo={demo}
+        idEngine={idEngine}
+        language={language}
+        onClickSearch={onClickSearch}
+      />
+    </CacheProvider>
+  );
+}
+
+type InitDemoEngineParams = {
+  idEngine?: string;
+  language?: Language;
+  config?: EngineConfig;
+  onClickSearch?: (values: any) => void;
+};
+
+async function initDemoEngine(
+  containerId: string,
+  params: InitDemoEngineParams
+) {
+  const { idEngine, language, config, onClickSearch } = params;
+  const container = document.getElementById(containerId);
+  if (!container || container.shadowRoot) return;
+
+  const isRtl = isRtlLanguage(language);
+  const direction = isRtl ? "rtl" : "ltr";
+
+  // ✅ Set direction for layout
+  container.setAttribute("dir", direction);
+
+  // ✅ Initialize i18n language
+  try {
+    const langToUse =
+      language && i18n.hasResourceBundle(language, "translation")
+        ? language
+        : "enUS";
+    await i18n.changeLanguage(langToUse);
+  } catch (error) {
+    console.warn(error);
+  }
+
+  // ✅ Create Shadow DOM
+  const shadowRoot = container.attachShadow({ mode: "open" });
+
+  // ✅ Create a container element for MUI portals (Popover, Dialog, etc.)
+  const portalContainer = document.createElement("div");
+
+  // ✅ Create the root mount node for React inside portalContainer
+  const mountNode = document.createElement("div");
+
+  // ✅ Set direction for layout
+  mountNode.setAttribute("dir", direction);
+
+  portalContainer.appendChild(mountNode);
+
+  // ✅ Append both to shadow DOM
+  shadowRoot.appendChild(portalContainer);
+
+  // ✅ Create Emotion cache in Shadow DOM
+  const emotionCache = createCache({
+    key: "engine-widget",
+    container: shadowRoot,
+    stylisPlugins: isRtl ? [stylisRTLPlugin] : undefined,
+  });
+
+  // ✅ Expose containers globally for Popover/Dialog use
+  (window as any).__BOOKINI_WIDGET_SHADOW__ = shadowRoot;
+  (window as any).__BOOKINI_WIDGET_PORTAL_CONTAINER__ = portalContainer;
+
+  // ✅ Mount React
+  const root = ReactDOM.createRoot(mountNode);
+  root.render(
+    <CacheProvider value={emotionCache}>
+      <Engine
+        demo
         idEngine={idEngine}
         language={language}
         config={config}
@@ -104,7 +175,6 @@ async function initEngine(containerId: string, params: InitEngineParams) {
     </CacheProvider>
   );
 }
-
 type InitCalendarParams = {
   language?: Language;
   config?: Omit<CalendarConfig, "popUpMode">;
@@ -306,6 +376,7 @@ declare global {
   export interface Window {
     BookiniWidget?: {
       initEngine: typeof initEngine;
+      initDemoEngine: typeof initDemoEngine;
       initCalendar: typeof initCalendar;
       initGuests: typeof initGuests;
       initProperty: typeof initProperty;
@@ -316,6 +387,7 @@ declare global {
 }
 window.BookiniWidget = {
   initEngine: initEngine,
+  initDemoEngine: initDemoEngine,
   initCalendar: initCalendar,
   initGuests: initGuests,
   initProperty: initProperty,
