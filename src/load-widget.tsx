@@ -32,6 +32,8 @@ import {
 import { createCustomTheme } from "@theme";
 import { dataProperties } from "./engine/engine.utils";
 
+const widgetRoots = new Map<string, ReactDOM.Root>();
+
 type InitEngineParams = {
   idEngine?: string;
   language?: Language;
@@ -90,6 +92,9 @@ async function initEngine(containerId: string, params: InitEngineParams) {
 
   // ✅ Mount React
   const root = ReactDOM.createRoot(mountNode);
+  if (!widgetRoots.has(containerId)) {
+    widgetRoots.set(containerId, root);
+  }
   root.render(
     <CacheProvider value={emotionCache}>
       <Engine
@@ -163,6 +168,9 @@ async function initDemoEngine(
 
   // ✅ Mount React
   const root = ReactDOM.createRoot(mountNode);
+  if (!widgetRoots.has(containerId)) {
+    widgetRoots.set(containerId, root);
+  }
   root.render(
     <CacheProvider value={emotionCache}>
       <Engine
@@ -220,6 +228,10 @@ async function initCalendar(containerId: string, params: InitCalendarParams) {
 
   // ✅ Mount React component
   const root = ReactDOM.createRoot(mountNode);
+  if (!widgetRoots.has(containerId)) {
+    widgetRoots.set(containerId, root);
+  }
+
   const locale = getLocale(language);
   const theme = createCustomTheme({
     direction: direction,
@@ -297,6 +309,9 @@ async function initGuests(containerId: string, params: InitGuestsParams) {
 
   // ✅ Mount React component
   const root = ReactDOM.createRoot(mountNode);
+  if (!widgetRoots.has(containerId)) {
+    widgetRoots.set(containerId, root);
+  }
   const theme = createCustomTheme({
     direction: direction,
     palette: colors,
@@ -358,6 +373,9 @@ async function initProperty(containerId: string, params: InitPropertyParams) {
 
   // ✅ Mount React component
   const root = ReactDOM.createRoot(mountNode);
+  if (!widgetRoots.has(containerId)) {
+    widgetRoots.set(containerId, root);
+  }
   const theme = createCustomTheme({
     direction: direction,
     palette: colors,
@@ -371,6 +389,22 @@ async function initProperty(containerId: string, params: InitPropertyParams) {
   );
 }
 
+function destroy(containerId: string) {
+  const container = document.getElementById(containerId);
+  if (!container || !container.shadowRoot) return;
+
+  const root = widgetRoots.get(containerId);
+  if (root) {
+    root.unmount();
+    widgetRoots.delete(containerId);
+  }
+
+  container.shadowRoot.innerHTML = "";
+  delete container.dataset.dir;
+
+  console.info(`BookiniWidget: destroyed widget in #${containerId}`);
+}
+
 // Expose the init method for script-based loading
 declare global {
   export interface Window {
@@ -380,6 +414,7 @@ declare global {
       initCalendar: typeof initCalendar;
       initGuests: typeof initGuests;
       initProperty: typeof initProperty;
+      destroy: typeof destroy;
     };
     __BOOKINI_WIDGET_SHADOW__?: ShadowRoot;
     __BOOKINI_WIDGET_PORTAL_CONTAINER__?: HTMLDivElement;
@@ -391,6 +426,7 @@ window.BookiniWidget = {
   initCalendar: initCalendar,
   initGuests: initGuests,
   initProperty: initProperty,
+  destroy: destroy,
 };
 
 // Optional auto-init block if you want script to self-start (commented out)
